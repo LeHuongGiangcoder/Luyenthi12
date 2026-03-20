@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, Check, X, Star, Calendar, Clock, Trophy, LineChart } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CountdownTimer from "@/components/ui/countdown-timer";
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
+import Navbar from "@/components/navbar";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,30 +17,8 @@ export default function LandingPage() {
 
   return (
     <main className="flex min-h-screen flex-col bg-white overflow-x-hidden">
-      {/* Navbar */}
-      <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-gray-100 bg-white/80 px-4 py-3 backdrop-blur-md md:px-12">
-        <div className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0e56fa] text-white">
-            <ArrowRight className="h-6 w-6" />
-          </div>
-          <span className="text-xl font-bold font-montserrat tracking-tight">Navi</span>
-        </div>
-        
-        <div className="hidden items-center gap-8 md:flex">
-          <a href="#" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Thi thử</a>
-          <a href="#" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Luyện tập</a>
-          <a href="#" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Sprint 60</a>
-          <button className="rounded-xl bg-[#0e56fa] px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200">
-            Kiểm tra điểm yếu — miễn phí
-          </button>
-        </div>
-        
-        <button className="md:hidden">
-          <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-          </svg>
-        </button>
-      </nav>
+      {/* Navbar moved to Navbar component */}
+      <Navbar />
 
       {/* Hero Section */}
       <section ref={heroRef} className="hero-content relative flex flex-col items-center px-4 pt-32 pb-16 md:px-12 md:pb-24 overflow-hidden">
@@ -78,9 +57,9 @@ export default function LandingPage() {
           </p>
           
           <div className="mt-12 flex flex-col items-center gap-6">
-            <button className="rounded-2xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 hover:bg-blue-700">
+            <Link href="/thi-thu" className="rounded-2xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 hover:bg-blue-700">
               Kiểm tra điểm yếu ngay — miễn phí
-            </button>
+            </Link>
             <div className="flex flex-col items-center gap-1.5 grayscale opacity-70">
               <span className="text-sm font-medium text-gray-600">
                 ⚡️ Không cần đăng ký · Trả kết quả ngay lập tức
@@ -278,9 +257,9 @@ export default function LandingPage() {
             <p className="mt-4 leading-relaxed text-blue-50">
               40 câu · Sát cấu trúc đề TN THPT · Phân tích chính xác bạn đang mất điểm ở dạng Toán nào
             </p>
-            <button className="mt-8 flex w-fit items-center gap-2 rounded-xl bg-white/20 px-6 py-3 font-bold transition-all hover:bg-white/30">
+            <Link href="/thi-thu" className="mt-8 flex w-fit items-center gap-2 rounded-xl bg-white/20 px-6 py-3 font-bold transition-all hover:bg-white/30">
               Vào thi ngay <ArrowRight className="h-4 w-4" />
-            </button>
+            </Link>
           </div>
 
           <div className="flex flex-col rounded-2xl bg-white p-10 shadow-sm border border-gray-100 transition-all hover:shadow-lg">
@@ -364,9 +343,9 @@ export default function LandingPage() {
             Thi thử 40 câu miễn phí — hệ thống chỉ ra ngay bạn đang mất điểm ở đâu và có thể gỡ thêm bao nhiêu điểm nếu tập trung đúng chỗ.
           </p>
           
-          <button className="mt-10 rounded-xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 hover:bg-blue-700">
+          <Link href="/thi-thu" className="mt-10 rounded-xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 hover:bg-blue-700 text-center">
             Kiểm tra ngay — miễn phí
-          </button>
+          </Link>
         </div>
       </section>
     </main>
