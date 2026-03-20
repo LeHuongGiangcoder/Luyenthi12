@@ -17,13 +17,13 @@ export default function DeepAnalysis() {
       <div className="mx-auto w-full max-w-6xl px-4 md:px-12 py-10">
         {/* Header Navigation */}
         <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
-           <div className="flex flex-col items-center md:items-start">
+           <div className="flex flex-col items-center md:items-start text-left">
               <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">ĐÁNH GIÁ CHUYÊN ĐỀ — HÀM SỐ</span>
               <h1 className="text-3xl md:text-4xl font-black font-montserrat text-gray-900 tracking-tight">
                 Đo chính xác bạn đang yếu ở dạng nào
               </h1>
            </div>
-           <div className="bg-gray-50 px-6 py-3 rounded-2xl border border-gray-100">
+           <div className="bg-gray-50 px-6 py-3 rounded-2xl border border-gray-100 shrink-0">
               <span className="text-lg font-black font-montserrat text-gray-900 leading-none block">Câu {currentIdx} / {totalQuestions}</span>
            </div>
         </div>
@@ -58,7 +58,7 @@ export default function DeepAnalysis() {
         <div className="flex flex-col lg:flex-row gap-10">
           {/* Question Column (Left) */}
           <div className="flex-1 flex flex-col gap-8">
-             <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-gray-200/20 relative overflow-hidden">
+             <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-gray-200/20 relative overflow-hidden text-left">
                 <div className="mb-10">
                    <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-amber-50 text-amber-600 text-[10px] font-black uppercase tracking-widest mb-5 border border-amber-100">
                       Vận dụng · Khoảng đơn điệu
@@ -96,14 +96,16 @@ export default function DeepAnalysis() {
                 </div>
              </div>
 
-             <button className="w-full md:w-fit px-12 py-5 bg-gray-900 text-white font-black rounded-2xl shadow-xl shadow-gray-200 transition-all hover:bg-black hover:scale-[1.02] active:scale-95 self-center md:self-start">
-                Câu tiếp theo →
-             </button>
+             <div className="flex flex-col md:flex-row gap-4 self-center md:self-start">
+               <Link href="/thi-thu/deep-analysis/results" className="w-full md:w-fit px-12 py-5 bg-gray-900 text-white font-black rounded-2xl shadow-xl shadow-gray-200 transition-all hover:bg-black hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3">
+                  Hoàn thành đánh giá →
+               </Link>
+             </div>
           </div>
 
-          {/* AI Metrics Sidebar (Right) */}
+          {/* Metrics Sidebar (Right) */}
           <aside className="w-full lg:w-[380px]">
-             <div className="bg-gray-50/80 backdrop-blur-sm p-8 rounded-[2.5rem] border border-gray-100 flex flex-col gap-10">
+             <div className="bg-gray-50/80 backdrop-blur-sm p-8 rounded-[2.5rem] border border-gray-100 flex flex-col gap-10 text-left">
                 
                 <div className="flex flex-col gap-6">
                   <h3 className="text-xs font-black text-gray-900 font-montserrat tracking-tight uppercase flex items-center gap-2">
@@ -139,10 +141,10 @@ export default function DeepAnalysis() {
                       "Câu hỏi tiếp theo sẽ được chọn dựa trên câu trả lời của bạn. Hệ thống đang xác định chính xác bạn đang vững đến mức nào."
                    </p>
                    <div className="flex items-center gap-4 p-5 bg-white rounded-2xl border border-indigo-50 shadow-sm shadow-indigo-50/50">
-                      <div className="p-2 bg-indigo-50 rounded-lg text-indigo-500">
+                      <div className="p-2 bg-indigo-100 rounded-lg text-indigo-500">
                          <Info className="h-4 w-4" />
                       </div>
-                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-tight">AI đang ưu tiên: <span className="text-indigo-600">Khoảng đơn điệu</span></span>
+                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">HỆ THỐNG ĐANG ƯU TIÊN: <span className="text-indigo-600">KHOẢNG ĐƠN ĐIỆU</span></span>
                    </div>
                 </div>
              </div>

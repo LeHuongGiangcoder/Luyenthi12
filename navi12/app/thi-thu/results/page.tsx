@@ -13,7 +13,7 @@ export default function ExamResults() {
       <div className="mx-auto w-full max-w-5xl px-4 md:px-12">
         {/* Top Header Section */}
         <div className="flex flex-col md:flex-row items-end justify-between mb-10 gap-6">
-           <div>
+           <div className="text-left">
              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">ĐỀ SỐ 1 · 19/3/2026</span>
              <h1 className="text-4xl md:text-5xl font-black font-montserrat tracking-tight text-gray-900">Kết quả của bạn</h1>
            </div>
@@ -63,14 +63,14 @@ export default function ExamResults() {
            </div>
 
            {/* Rank Card */}
-           <div className="bg-white/50 backdrop-blur-sm p-8 rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center group hover:bg-white transition-all">
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Xếp hạng</span>
+           <div className="bg-white/50 backdrop-blur-sm p-8 rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center group hover:bg-white transition-all text-left">
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 block">Xếp hạng</span>
               <div className="flex items-baseline gap-2 mb-2">
                  <span className="text-6xl font-black font-montserrat text-gray-900 tracking-tighter">#312</span>
                  <span className="text-gray-400 font-bold text-sm">/ 1.840</span>
               </div>
               <p className="text-xs font-bold text-gray-400 mb-6 tracking-wide">trong số 1.840 học sinh thi</p>
-              <div className="px-6 py-2 rounded-full bg-blue-100 text-[#0e56fa] text-xs font-black uppercase tracking-widest shadow-lg shadow-blue-100/50">
+              <div className="px-6 py-2 rounded-full bg-blue-100 text-[#0e56fa] text-xs font-black uppercase tracking-widest shadow-lg shadow-blue-100/50 self-center">
                  Top 17%
               </div>
            </div>
@@ -146,7 +146,7 @@ export default function ExamResults() {
                <div className="p-8 md:p-10 flex flex-col gap-6">
                   {/* Top Row: Title, Badge, and Score */}
                   <div className="flex items-start justify-between">
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2 text-left">
                        {item.isCritical && (
                           <span className="inline-flex items-center gap-1.5 w-fit px-3 py-1 bg-red-500 text-white rounded-lg text-[10px] font-black uppercase tracking-widest mb-1">
                              <Zap className="h-3 w-3 fill-white" />
@@ -165,26 +165,26 @@ export default function ExamResults() {
                   </div>
 
                   {/* Progress Bar Area */}
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-3 text-left">
                     <div className="h-2.5 w-full bg-gray-50 rounded-full overflow-hidden">
                       <div 
                         className={cn("h-full transition-all duration-700", item.color)} 
                         style={{ width: `${item.progress}%` }} 
                       />
                     </div>
-                    <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-[0.1em] text-gray-400">
+                    <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-[0.1em] text-gray-400">
                       <span>Mức thành thạo hiện tại ~{item.progress}%</span>
                       <span className={cn("font-black", item.isCritical ? "text-red-500" : "text-gray-900")}>— {item.status}</span>
                     </div>
                   </div>
 
-                  {/* Enhanced CTA Button for Critical Weakness */}
+                  {/* Enhanced CTA Link for Critical Weakness */}
                   {item.cta && (
                     <div className="pt-4 flex flex-col items-center gap-4">
-                       <button className="w-full flex items-center justify-center gap-3 py-5 bg-[#0e56fa] text-white font-black rounded-3xl shadow-xl shadow-blue-200 transition-all hover:bg-blue-700 hover:scale-[1.01] active:scale-95 text-base md:text-lg">
+                       <Link href="/thi-thu/deep-analysis" className="w-full flex items-center justify-center gap-3 py-5 bg-[#0e56fa] text-white font-black rounded-3xl shadow-xl shadow-blue-200 transition-all hover:bg-blue-700 hover:scale-[1.01] active:scale-95 text-base md:text-lg">
                           {item.cta}
                           <ArrowRight className="h-6 w-6" />
-                       </button>
+                       </Link>
                        <p className="text-[10px] font-bold text-blue-300 uppercase tracking-[0.2em] opacity-80">
                           12 CÂU — 8 PHÚT · TỰ ĐỘNG CHỈ RA LỖ HỔNG KIẾN THỨC
                        </p>
@@ -201,11 +201,11 @@ export default function ExamResults() {
            <h2 className="text-2xl font-extrabold font-montserrat text-gray-900 mb-6">
               Và đây chỉ là những gì <span className="text-[#0e56fa]">bài thi này lộ ra được</span>
            </h2>
-           <p className="text-gray-500 font-medium leading-relaxed mb-8 max-w-2xl">
+           <p className="text-gray-500 font-medium leading-relaxed mb-8 max-w-2xl text-left">
               Một đề 40 câu không thể kiểm tra hết toàn bộ chương trình. Trong chính chuyên đề Hàm số — còn 3 dạng khác bạn chưa gặp hôm nay. Và các chuyên đề như Tích phân, Mũ logarit, Số phức chỉ xuất hiện 1—2 câu — chưa đủ để biết bạn thực sự nắm hay chỉ may mắn làm đúng.
            </p>
 
-           <div className="bg-gray-50/50 rounded-2xl p-8 border border-gray-100 space-y-6">
+           <div className="bg-gray-50/50 rounded-2xl p-8 border border-gray-100 space-y-6 text-left">
               <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">DẠNG CHƯA ĐƯỢC KIỂM TRA ĐỦ:</span>
               <div className="flex flex-wrap gap-2">
                  {['Tích phân ứng dụng (1 câu)', 'Số phức (1 câu)', 'Mũ logarit VDC (2 câu)'].map(tag => (
@@ -221,16 +221,16 @@ export default function ExamResults() {
         </div>
 
         {/* Final Roadmap CTA */}
-        <div className="bg-[#0e56fa] p-10 rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-8 mb-8 shadow-2xl shadow-blue-200">
+        <div className="bg-[#0e56fa] p-10 rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-8 mb-8 shadow-2xl shadow-blue-200 text-left">
            <div className="text-white text-left">
               <h3 className="text-2xl font-extrabold font-montserrat mb-3">Xem lộ trình gỡ điểm Sprint 60</h3>
               <p className="text-blue-100 text-xs font-bold opacity-80 max-w-md leading-relaxed">
                 Cá nhân hóa theo đúng điểm yếu của bạn · 15 phút mỗi ngày · Cải thiện hiệu quả ngay sau 4 tuần ôn tập.
               </p>
            </div>
-           <button className="whitespace-nowrap px-10 py-5 bg-white text-blue-600 font-black rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95">
+           <Link href="/pricing" className="whitespace-nowrap px-10 py-5 bg-white text-blue-600 font-black rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center">
               Khám phá ngay →
-           </button>
+           </Link>
         </div>
       </div>
     </main>
