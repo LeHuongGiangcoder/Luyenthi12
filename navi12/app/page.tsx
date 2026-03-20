@@ -129,7 +129,11 @@ export default function LandingPage() {
           <span className="text-xs font-black uppercase tracking-[0.3em] text-red-500/60 mb-4 block">CẢNH BÁO GIAI ĐOẠN CUỐI</span>
           <h2 className="text-4xl font-extrabold md:text-6xl font-montserrat tracking-tight">
             4 cái bẫy khiến điểm <br className="hidden md:block" />
-            <span className="text-red-500 italic">đ�        <div className="mx-auto max-w-3xl">
+            <span className="text-red-500 italic">dậm chân tại chỗ</span>
+          </h2>
+        </div>
+
+        <div className="mx-auto max-w-3xl">
           {[
             {
               id: "01",
@@ -194,19 +198,6 @@ export default function LandingPage() {
                     </span>
                     <span>TRAP {card.id}</span>
                   </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-}
-                  </p>
-                </div>
-                <div className="mt-12 h-1.5 w-24 rounded-full bg-gray-100 overflow-hidden">
-                   <div 
-                     className="h-full bg-blue-500" 
-                     style={{ width: `${(idx + 1) * 25}%` }}
-                   />
                 </div>
               </div>
             </div>
@@ -344,7 +335,7 @@ export default function LandingPage() {
                 {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />)}
               </div>
               <p className="mb-8 text-sm leading-relaxed text-gray-700">
-                “{item.text.split('dạng').map((part, index) => index > 0 ? <><span className="font-bold not-italic">{part.includes('.') ? part.split('.')[0] : part}</span>{part.includes('.') ? part.substring(part.split('.')[0].length) : ''}</> : part)}”
+                “{item.text.split('dạng').map((part, index) => index > 0 ? <span key={index}><span className="font-bold not-italic">{part.includes('.') ? part.split('.')[0] : part}</span>{part.includes('.') ? part.substring(part.split('.')[0].length) : ''}</span> : part)}”
               </p>
               <div className="flex items-center gap-3 not-italic">
                 <div className={`h-10 w-10 flex items-center justify-center rounded-full ${item.color} text-xs font-bold uppercase`}>
