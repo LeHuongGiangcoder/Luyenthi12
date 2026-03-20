@@ -4,6 +4,12 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ArrowRight, Check, X, Star, Calendar, Clock, Trophy, LineChart } from "lucide-react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CountdownTimer from "@/components/ui/countdown-timer";
+import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
+import { cn } from "@/lib/utils";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function LandingPage() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -66,48 +72,73 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section ref={heroRef} className="hero-content relative flex flex-col items-center px-4 pt-32 pb-16 md:px-12 md:pb-24">
-        <div className="mb-6 flex items-center gap-2 rounded-full bg-pink-50 px-4 py-1.5 text-xs font-semibold text-pink-500 border border-pink-100/50">
-          <span className="h-1.5 w-1.5 rounded-full bg-pink-500 animate-pulse" />
-          Kỳ thi TN THPT 2026 — còn 89 ngày
-        </div>
+      <section ref={heroRef} className="hero-content relative flex flex-col items-center px-4 pt-32 pb-16 md:px-12 md:pb-24 overflow-hidden">
+        <AnimatedGridPattern
+          numSquares={35}
+          maxOpacity={0.12}
+          duration={3}
+          repeatDelay={1}
+          className={cn(
+            "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
+            "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
+          )}
+        />
         
-        <h1 className="max-w-4xl text-center text-4xl font-extrabold leading-[1.1] md:text-7xl font-montserrat">
-          Giai đoạn nước rút — <br/>
-          mỗi điểm Toán <br/>
-          <span className="text-[#0e56fa] italic font-medium">đều phải có lý do</span>
-        </h1>
-        
-        <p className="mt-8 max-w-2xl text-center text-lg leading-relaxed text-gray-600">
-          Không còn thời gian để ôn dàn trải. Navi giúp bạn biết chính xác <span className="font-bold text-gray-900 surface-emphasis">đang mất điểm ở dạng Toán nào</span>, rồi tập trung luyện đúng chỗ đó — tối đa hóa từng điểm số còn có thể gỡ được trong 89 ngày còn lại.
-        </p>
-        
-        <div className="mt-10 flex flex-col items-center gap-4 md:flex-row">
-          <button className="rounded-xl bg-[#0e56fa] px-8 py-4 text-lg font-bold text-white shadow-xl shadow-blue-200 transition-all hover:scale-105 hover:bg-blue-700">
-            Kiểm tra điểm yếu ngay — miễn phí
-          </button>
-          <span className="text-sm text-gray-500">
-            Không cần đăng ký · Biết ngay đang mất điểm ở đâu
-          </span>
-        </div>
-        
-        {/* Stats */}
-        <div className="stats-container mt-20 grid w-full max-w-6xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-gray-100 bg-gray-100 md:grid-cols-4 shadow-sm">
-          <div className="stat-card flex flex-col items-center bg-white p-8 transition-colors hover:bg-blue-50/30">
-            <span className="text-3xl font-extrabold text-blue-900 font-montserrat">1.840</span>
-            <span className="mt-2 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">học sinh đã thi thử</span>
+        <div className="relative z-10 flex flex-col items-center w-full">
+          <div className="mb-6 flex items-center gap-4 rounded-full bg-pink-50/50 px-5 py-2 text-xs font-semibold text-pink-500 border border-pink-100/50 backdrop-blur-sm">
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-pink-500 animate-pulse" />
+              <span>Kỳ thi TN THPT 2026</span>
+            </div>
+            <div className="h-4 w-px bg-pink-200 mx-1" />
+            <div className="flex items-center gap-2">
+              <span className="text-pink-400 font-medium">Còn:</span>
+              <CountdownTimer />
+            </div>
           </div>
-          <div className="stat-card flex flex-col items-center bg-white p-8 transition-colors hover:bg-blue-50/30">
-            <span className="text-3xl font-extrabold text-blue-900 font-montserrat">+1.4đ</span>
-            <span className="mt-2 text-xs font-medium text-gray-500 uppercase tracking-wider text-center px-4">tăng điểm TB sau 4 tuần luyện đúng chỗ</span>
+          
+          <h1 className="max-w-4xl text-center text-4xl font-extrabold leading-[1.1] md:text-7xl font-montserrat">
+            Giai đoạn nước rút — <br/>
+            mỗi điểm Toán <br/>
+            <span className="text-[#0e56fa] italic font-medium">đều phải có lý do</span>
+          </h1>
+          
+          <p className="mt-8 max-w-2xl text-center text-lg leading-relaxed text-gray-600">
+            Không còn thời gian để ôn dàn trải. Navi giúp bạn biết chính xác <span className="font-bold text-gray-900 surface-emphasis">đang mất điểm ở dạng Toán nào</span>, rồi tập trung luyện đúng chỗ đó — tối đa hóa từng điểm số còn có thể gỡ được trong 89 ngày còn lại.
+          </p>
+          
+          <div className="mt-12 flex flex-col items-center gap-6">
+            <button className="rounded-2xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 hover:bg-blue-700">
+              Kiểm tra điểm yếu ngay — miễn phí
+            </button>
+            <div className="flex flex-col items-center gap-1.5 grayscale opacity-70">
+              <span className="text-sm font-medium text-gray-600">
+                ⚡️ Không cần đăng ký · Trả kết quả ngay lập tức
+              </span>
+              <span className="text-[11px] font-bold text-blue-600 uppercase tracking-widest">
+                CHUẨN CẤU TRÚC THPT QUỐC GIA 2026
+              </span>
+            </div>
           </div>
-          <div className="stat-card flex flex-col items-center bg-white p-8 transition-colors hover:bg-blue-50/30">
-            <span className="text-3xl font-extrabold text-blue-900 font-montserrat">89%</span>
-            <span className="mt-2 text-xs font-medium text-gray-500 uppercase tracking-wider text-center px-4">học sinh phát hiện điểm yếu mình không ngờ tới</span>
-          </div>
-          <div className="stat-card flex flex-col items-center bg-white p-8 transition-colors hover:bg-blue-50/30">
-            <span className="text-3xl font-extrabold text-blue-900 font-montserrat">4.9★</span>
-            <span className="mt-2 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">312 đánh giá sau khi sử dụng</span>
+          
+          {/* Stats */}
+          <div className="stats-container mt-20 grid w-full max-w-6xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-gray-100 bg-gray-100 md:grid-cols-4 shadow-sm">
+            <div className="stat-card flex flex-col items-center bg-white p-8 transition-colors hover:bg-blue-50/30">
+              <span className="text-3xl font-extrabold text-blue-900 font-montserrat">1.840</span>
+              <span className="mt-2 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">học sinh đã thi thử</span>
+            </div>
+            <div className="stat-card flex flex-col items-center bg-white p-8 transition-colors hover:bg-blue-50/30">
+              <span className="text-3xl font-extrabold text-blue-900 font-montserrat">+1.4đ</span>
+              <span className="mt-2 text-xs font-medium text-gray-500 uppercase tracking-wider text-center px-4">tăng điểm TB sau 4 tuần luyện đúng chỗ</span>
+            </div>
+            <div className="stat-card flex flex-col items-center bg-white p-8 transition-colors hover:bg-blue-50/30">
+              <span className="text-3xl font-extrabold text-blue-900 font-montserrat">89%</span>
+              <span className="mt-2 text-xs font-medium text-gray-500 uppercase tracking-wider text-center px-4">học sinh phát hiện điểm yếu mình không ngờ tới</span>
+            </div>
+            <div className="stat-card flex flex-col items-center bg-white p-8 transition-colors hover:bg-blue-50/30">
+              <span className="text-3xl font-extrabold text-blue-900 font-montserrat">4.9★</span>
+              <span className="mt-2 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">312 đánh giá sau khi sử dụng</span>
+            </div>
           </div>
         </div>
       </section>
