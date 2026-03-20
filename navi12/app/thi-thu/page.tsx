@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import Link from "next/link";
 import Navbar from "@/components/navbar";
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
@@ -169,10 +170,10 @@ export default function MockTestRoom() {
               </div>
 
               {test.active ? (
-                <button className="w-full rounded-2xl bg-[#0e56fa] py-5 text-lg font-bold text-white shadow-xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
+                <Link href="/thi-thu/room" className="w-full rounded-2xl bg-[#0e56fa] py-5 text-lg font-bold text-white shadow-xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
                   <Play className="h-5 w-5 fill-white" />
                   {test.buttonText}
-                </button>
+                </Link>
               ) : (
                 <button className="text-blue-600 font-bold flex items-center gap-2 group-hover:translate-x-2 transition-transform">
                   {test.linkText}

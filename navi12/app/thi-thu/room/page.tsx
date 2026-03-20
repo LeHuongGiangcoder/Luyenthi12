@@ -4,17 +4,15 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/navbar";
 import { ChevronLeft, ChevronRight, Send, Pause, Flag } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { mockQuestions } from "@/lib/mock-data";
 
 export default function ExamRoom() {
-  const [currentIdx, setCurrentIdx] = useState(1); // Starting from 1 for display
+  const [currentIdx, setCurrentIdx] = useState(22); // Start at 22 like in the image
   const [marked, setMarked] = useState<number[]>([]);
   const [answered, setAnswered] = useState<Record<number, any>>({
-    1: 0, 3: 0, 4: 0, 6: 0, 7: 0, 9: 0, 11: 0 // Mock some answers
+    1: 0, 3: 0, 4: 0, 6: 0, 7: 0, 9: 0, 11: 0 
   });
-  const [timeLeft, setTimeLeft] = useState(5400 - 1666); // 90 min - some time
+  const [timeLeft, setTimeLeft] = useState(5400 - 1666); 
   
-  // Format seconds to mm:ss
   const formatTime = (seconds: number) => {
     const mm = Math.floor(seconds / 60);
     const ss = seconds % 60;
@@ -28,174 +26,179 @@ export default function ExamRoom() {
     return () => clearInterval(timer);
   }, []);
 
-  const totalQuestions = 40;
+  const totalQuestions = 22;
   
   const getStatusColor = (num: number) => {
-    if (num === currentIdx) return "bg-blue-600 text-white shadow-lg shadow-blue-200";
-    if (marked.includes(num)) return "bg-orange-100 text-orange-600 border border-orange-200";
-    if (answered[num] !== undefined) {
-       // Mock some correct/incorrect colors like in the image
-       if ([1, 4, 6, 7, 9, 11].includes(num)) return "bg-green-500 text-white";
-       if (num === 3) return "bg-red-500 text-white";
-       return "bg-blue-100 text-blue-600";
-    }
-    return "bg-white text-gray-400 border border-gray-100 hover:border-gray-200";
+    if (num === currentIdx) return "bg-blue-600 text-white shadow-lg shadow-blue-200 border-blue-600";
+    if (marked.includes(num)) return "bg-orange-100 text-orange-600 border-orange-200";
+    if (answered[num] !== undefined) return "bg-blue-50 text-blue-600 border-blue-200";
+    return "bg-white text-gray-400 border-gray-100 hover:border-gray-200";
   };
 
   return (
-    <main className="flex min-h-screen flex-col bg-gray-50/30 overflow-x-hidden pt-20">
+    <main className="flex min-h-screen flex-col bg-gray-50/30 overflow-x-hidden pt-16">
       <Navbar />
       
-      <div className="mx-auto w-full max-w-5xl px-4 py-8 flex flex-col gap-6">
-        {/* Exam Header */}
-        <div className="flex flex-col gap-4 bg-white/50 backdrop-blur-sm p-6 rounded-[2rem] border border-gray-100 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div className="flex flex-col">
-              <span className="text-sm font-black text-gray-900 font-montserrat tracking-tight">Câu {currentIdx} / {totalQuestions}</span>
-              <div className="mt-2 h-1.5 w-64 rounded-full bg-gray-100 overflow-hidden">
-                <div 
-                  className="h-full bg-blue-500 transition-all duration-500" 
-                  style={{ width: `${(currentIdx / totalQuestions) * 100}%` }} 
-                />
-              </div>
-            </div>
-            
-            <div className="flex flex-col items-center">
-               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">ĐỀ SỐ 2 - THI THỬ</span>
-               <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-2xl border border-blue-100">
-                    <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-                    <span className="text-xl font-black font-montserrat text-blue-900 tracking-tighter">
-                      {formatTime(timeLeft)}
-                    </span>
+      <div className="mx-auto w-full max-w-7xl px-4 md:px-10 py-6">
+        <div className="flex flex-col lg:flex-row gap-6 items-start">
+          
+          {/* Main Content (Left) */}
+          <div className="flex-1 flex flex-col gap-4 w-full lg:w-2/3">
+            {/* Optimized Progress Header - More Compact */}
+            <div className="bg-white/50 backdrop-blur-sm p-5 md:p-6 rounded-3xl border border-gray-100 shadow-sm flex items-center justify-between">
+               <div className="flex items-center gap-6">
+                  <div className="flex flex-col">
+                    <span className="text-xl font-black font-montserrat text-blue-600 leading-none">{currentIdx} / {totalQuestions}</span>
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Câu hỏi</span>
                   </div>
-                  <button className="flex items-center gap-2 px-4 py-2 border border-gray-100 hover:bg-gray-50 rounded-2xl text-sm font-bold text-gray-500 transition-colors">
-                    <Pause className="h-4 w-4" />
-                    Tạm dừng
-                  </button>
+                  <div className="h-2 w-32 md:w-48 rounded-full bg-gray-100 overflow-hidden">
+                    <div 
+                      className="h-full bg-blue-500 transition-all duration-500" 
+                      style={{ width: `${(currentIdx / totalQuestions) * 100}%` }} 
+                    />
+                  </div>
+               </div>
+               <div className="hidden md:block">
+                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block text-right">Đang thi: Đề số 2 - Thi thử</span>
                </div>
             </div>
-          </div>
-        </div>
 
-        {/* Question Navigation */}
-        <div className="bg-white/50 backdrop-blur-sm p-8 rounded-[2.5rem] border border-gray-100 shadow-sm">
-           <div className="grid grid-cols-7 md:grid-cols-10 gap-3">
-              {Array.from({ length: 14 }).map((_, i) => (
-                <button 
-                   key={i + 1}
-                   onClick={() => setCurrentIdx(i + 1)}
-                   className={cn(
-                     "h-10 w-10 md:h-12 md:w-12 rounded-xl flex items-center justify-center text-sm font-black transition-all",
-                     getStatusColor(i + 1)
-                   )}
-                >
-                   {i + 1}
-                </button>
-              ))}
-              <div className="h-12 w-12 flex items-center justify-center text-gray-300 font-black tracking-widest">
-                ...
-              </div>
-           </div>
-           
-           <div className="mt-8 flex flex-wrap items-center gap-6 border-t border-gray-50 pt-6">
-              <div className="flex items-center gap-2">
-                 <div className="h-3 w-3 rounded-full bg-green-500" />
-                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Đúng</span>
-              </div>
-              <div className="flex items-center gap-2">
-                 <div className="h-3 w-3 rounded-full bg-red-500" />
-                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Sai / Bỏ qua</span>
-              </div>
-              <div className="flex items-center gap-2">
-                 <div className="h-3 w-3 rounded-full bg-orange-400" />
-                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Đánh dấu xem lại</span>
-              </div>
-              <div className="flex items-center gap-2">
-                 <div className="h-3 w-3 rounded-full bg-blue-500" />
-                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Câu đang làm</span>
-              </div>
-           </div>
-        </div>
-
-        {/* Question Card */}
-        <div className="flex flex-col gap-6 animate-fade-in">
-           <div className="bg-white p-10 md:p-12 rounded-[2.5rem] border border-gray-100 shadow-2xl shadow-gray-200/50 relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-8">
+            {/* Question Card - Reduced Padding and More Compact */}
+            <div className="bg-white p-6 md:p-10 rounded-[2.5rem] border border-gray-100 shadow-2xl shadow-gray-200/50 relative overflow-hidden min-h-[450px]">
+              <div className="mb-8 flex items-start justify-between">
+                 <div>
+                   <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-orange-100 text-orange-600 text-[10px] font-black uppercase tracking-widest mb-3">
+                     Hàm số — Vận dụng cao
+                   </span>
+                   <h2 className="text-xl md:text-2xl font-bold font-montserrat text-gray-900 leading-tight md:leading-relaxed max-w-2xl">
+                     Cho hàm số <span className="italic">y = x³ - 3x + 2</span>. Số điểm cực trị của hàm số là:
+                   </h2>
+                 </div>
                  <button 
                    onClick={() => {
                      setMarked(prev => prev.includes(currentIdx) ? prev.filter(n => n !== currentIdx) : [...prev, currentIdx]);
                    }}
                    className={cn(
-                     "flex items-center gap-2 px-4 py-2 rounded-xl border transition-all text-xs font-bold",
+                     "flex items-center gap-2 px-3 py-1.5 rounded-xl border transition-all text-[10px] font-bold shrink-0 mt-1",
                      marked.includes(currentIdx) 
-                       ? "bg-orange-50 border-orange-200 text-orange-600 shadow-lg shadow-orange-100" 
+                       ? "bg-orange-50 border-orange-200 text-orange-600" 
                        : "bg-white border-gray-100 text-gray-400 hover:border-gray-200"
                    )}
                  >
-                    <Flag className={cn("h-4 w-4", marked.includes(currentIdx) && "fill-orange-600")} />
-                    {marked.includes(currentIdx) ? "Đã đánh dấu" : "Đánh dấu"}
+                    <Flag className={cn("h-3.5 w-3.5", marked.includes(currentIdx) && "fill-orange-600")} />
+                    <span className="hidden sm:inline">{marked.includes(currentIdx) ? "Đã đánh dấu" : "Đánh dấu"}</span>
                  </button>
               </div>
-              
-              <div className="mb-8">
-                 <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-orange-100 text-orange-600 text-[10px] font-black uppercase tracking-widest mb-4">
-                   Hàm số — Vận dụng cao
-                 </span>
-                 <h2 className="text-xl md:text-2xl font-bold font-montserrat text-gray-900 leading-relaxed">
-                   Cho hàm số <span className="italic">y = x³ - 3x + 2</span>. Số điểm cực trị của hàm số là:
-                 </h2>
-              </div>
 
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3">
                  {['Không có điểm cực trị', 'Có 1 điểm cực trị', 'Có 2 điểm cực trị', 'Có 3 điểm cực trị'].map((option, i) => (
                    <button 
                      key={i}
                      onClick={() => setAnswered(prev => ({...prev, [currentIdx]: i}))}
                      className={cn(
-                       "flex items-center gap-4 w-full p-6 h-18 text-left rounded-3xl border transition-all duration-200 group",
+                       "flex items-center gap-4 w-full p-4 md:p-5 text-left rounded-2xl border transition-all duration-200 group",
                        answered[currentIdx] === i 
-                         ? "bg-blue-600 border-blue-600 text-white shadow-xl shadow-blue-200 ring-4 ring-blue-50" 
-                         : "bg-white border-gray-100 text-gray-600 hover:border-blue-200 hover:bg-blue-50/30"
+                         ? "bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-200 ring-4 ring-blue-50" 
+                         : "bg-white border-gray-100 text-gray-600 hover:border-blue-200 hover:bg-blue-50/10"
                      )}
                    >
                      <div className={cn(
-                       "h-8 w-8 min-w-[2rem] rounded-full border-2 flex items-center justify-center text-xs font-black",
+                       "h-7 w-7 min-w-[1.75rem] rounded-full border-2 flex items-center justify-center text-[10px] font-black",
                        answered[currentIdx] === i 
                          ? "bg-white border-white text-blue-600" 
                          : "border-gray-100 text-gray-300 group-hover:border-blue-300 group-hover:text-blue-400"
                      )}>
                        {String.fromCharCode(65 + i)}
                      </div>
-                     <span className="font-bold">{option}</span>
+                     <span className="font-bold text-sm md:text-base">{option}</span>
                    </button>
                  ))}
               </div>
-           </div>
-        </div>
+            </div>
 
-        {/* Footer Navigation */}
-        <div className="flex items-center justify-between mt-4 pb-12">
-           <button 
-             onClick={() => setCurrentIdx(prev => Math.max(1, prev - 1))}
-             className="flex items-center gap-2 px-8 py-5 border border-gray-100 rounded-[1.5rem] bg-white text-gray-400 font-bold transition-all hover:bg-gray-50 hover:border-gray-200 active:scale-95"
-           >
-              <ChevronLeft className="h-5 w-5" />
-              Câu trước
-           </button>
-           
-           <button 
-             onClick={() => setCurrentIdx(prev => Math.min(totalQuestions, prev + 1))}
-             className="flex-1 max-w-sm flex items-center justify-center gap-3 px-10 py-5 bg-gray-400 rounded-[1.5rem] text-white font-black text-lg shadow-xl shadow-gray-200 transition-all hover:bg-gray-500 hover:scale-[1.02] active:scale-95 mx-4"
-           >
-              Câu tiếp theo
-              <ChevronRight className="h-6 w-6" />
-           </button>
-           
-           <button className="flex items-center gap-2 px-8 py-5 border border-red-100 rounded-[1.5rem] bg-red-50 text-red-500 font-black transition-all hover:bg-red-100 active:scale-95">
-              Nộp bài
-              <Send className="h-5 w-5" />
-           </button>
+            {/* Pagination Controls - More Compact */}
+            <div className="flex items-center justify-between gap-4 mt-2 mb-8">
+               <button 
+                 onClick={() => setCurrentIdx(prev => Math.max(1, prev - 1))}
+                 className="flex items-center gap-2 px-6 py-4 border border-gray-100 rounded-2xl bg-white text-gray-400 font-bold transition-all hover:bg-gray-50 active:scale-95 text-sm"
+               >
+                  <ChevronLeft className="h-4 w-4" />
+                  <span className="hidden sm:inline">Câu trước</span>
+               </button>
+               
+               <button 
+                 onClick={() => setCurrentIdx(prev => Math.min(totalQuestions, prev + 1))}
+                 className="flex-1 max-w-sm flex items-center justify-center gap-2 px-8 py-5 bg-[#0e56fa] rounded-2xl text-white font-black text-base shadow-xl shadow-blue-100 transition-all hover:bg-blue-700 hover:scale-[1.01] active:scale-95"
+               >
+                  Tiếp theo
+                  <ChevronRight className="h-5 w-5" />
+               </button>
+               
+               <button className="flex items-center gap-2 px-6 py-4 border border-pink-100 rounded-2xl bg-pink-50 text-pink-500 font-black transition-all hover:bg-pink-100 active:scale-95 text-sm">
+                  <span className="hidden sm:inline">Nộp bài</span>
+                  <Send className="h-4 w-4" />
+               </button>
+            </div>
+          </div>
+
+          {/* Sidebar (Right) - Sticky and Compact */}
+          <aside className="w-full lg:w-[320px] flex flex-col gap-5 sticky top-20 h-fit">
+             {/* Timer Card */}
+             <div className="bg-white/50 backdrop-blur-sm p-5 rounded-3xl border border-gray-100 shadow-sm flex items-center justify-between">
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Thời gian còn lại</span>
+                  <div className="flex items-center gap-2">
+                    <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+                    <span className="text-2xl font-black font-montserrat text-blue-900 tracking-tighter">
+                      {formatTime(timeLeft)}
+                    </span>
+                  </div>
+                </div>
+                <button className="p-3 bg-gray-50 rounded-xl text-gray-300 hover:bg-gray-100 transition-colors">
+                  <Pause className="h-4 w-4" />
+                </button>
+             </div>
+
+             {/* Navigation Card */}
+             <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/50 flex flex-col gap-5">
+                <span className="text-xs font-black text-gray-900 font-montserrat tracking-tight uppercase">Danh sách câu hỏi</span>
+                
+                <div className="grid grid-cols-5 gap-2 max-h-[250px] overflow-y-auto pr-1">
+                  {Array.from({ length: totalQuestions }).map((_, i) => (
+                    <button 
+                       key={i + 1}
+                       onClick={() => setCurrentIdx(i + 1)}
+                       className={cn(
+                         "h-9 w-full rounded-lg flex items-center justify-center text-[10px] font-black border transition-all",
+                         getStatusColor(i + 1)
+                       )}
+                    >
+                       {i + 1}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="pt-5 border-t border-gray-50 grid grid-cols-2 gap-y-2">
+                  <div className="flex items-center gap-2">
+                     <div className="h-2.5 w-2.5 rounded-full bg-blue-50 border border-blue-200" />
+                     <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Đã làm</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                     <div className="h-2.5 w-2.5 rounded-full bg-orange-100 border border-orange-200" />
+                     <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Đánh dấu</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                     <div className="h-2.5 w-2.5 rounded-full bg-blue-600" />
+                     <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Đang làm</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                     <div className="h-2.5 w-2.5 rounded-full bg-white border border-gray-100" />
+                     <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Chưa làm</span>
+                  </div>
+                </div>
+             </div>
+          </aside>
+
         </div>
       </div>
     </main>
