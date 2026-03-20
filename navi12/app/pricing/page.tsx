@@ -7,11 +7,28 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { DynamicDayCounter } from "@/components/ui/dynamic-day-counter";
 
+interface PlanFeature {
+  label: string;
+  bold?: boolean;
+  disabled?: boolean;
+  highlight?: boolean;
+}
+
 export default function Pricing() {
   const [openFaq, setOpenFaq] = useState<number | null>(4);
   const [selectedPlan, setSelectedPlan] = useState<number>(1); // Default to Sprint 60
 
-  const plans = [
+  const plans: Array<{
+    name: string;
+    price: string;
+    originalPrice?: string;
+    sub: string;
+    badge?: string;
+    tag?: string;
+    features: PlanFeature[];
+    color: string;
+    cta: string;
+  }> = [
     {
       name: "Sprint Free",
       price: "0đ",
