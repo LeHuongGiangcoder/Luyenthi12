@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Navbar from "@/components/navbar";
 import { ChevronLeft, ChevronRight, Send, Pause, Flag } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function ExamRoom() {
-  const [currentIdx, setCurrentIdx] = useState(22); // Start at 22 like in the image
+  const [currentIdx, setCurrentIdx] = useState(22); 
   const [marked, setMarked] = useState<number[]>([]);
   const [answered, setAnswered] = useState<Record<number, any>>({
     1: 0, 3: 0, 4: 0, 6: 0, 7: 0, 9: 0, 11: 0 
@@ -134,10 +135,10 @@ export default function ExamRoom() {
                   <ChevronRight className="h-5 w-5" />
                </button>
                
-               <button className="flex items-center gap-2 px-6 py-4 border border-pink-100 rounded-2xl bg-pink-50 text-pink-500 font-black transition-all hover:bg-pink-100 active:scale-95 text-sm">
+               <Link href="/thi-thu/results" className="flex items-center gap-2 px-6 py-4 border border-pink-100 rounded-2xl bg-pink-50 text-pink-500 font-black transition-all hover:bg-pink-100 active:scale-95 text-sm">
                   <span className="hidden sm:inline">Nộp bài</span>
                   <Send className="h-4 w-4" />
-               </button>
+               </Link>
             </div>
           </div>
 
