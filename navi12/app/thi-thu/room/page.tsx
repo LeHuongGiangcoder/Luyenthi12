@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Navbar from "@/components/navbar";
 import { ChevronLeft, ChevronRight, Send, Pause, Flag } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -38,7 +37,6 @@ export default function ExamRoom() {
 
   return (
     <main className="flex min-h-screen flex-col bg-gray-50/30 overflow-x-hidden pt-16">
-      <Navbar />
       
       <div className="mx-auto w-full max-w-7xl px-4 md:px-10 py-6">
         <div className="flex flex-col lg:flex-row gap-6 items-start">

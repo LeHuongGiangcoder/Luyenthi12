@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "@/components/navbar";
 import { Check, X, ChevronDown, ChevronUp, Star, Users, TrendingUp, Zap, ShieldCheck, Timer, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -95,8 +94,7 @@ export default function Pricing() {
   ];
 
   return (
-    <main className="flex min-h-screen flex-col bg-white overflow-x-hidden pt-24 pb-20">
-      <Navbar />
+    <main className="flex min-h-screen flex-col bg-white overflow-x-hidden pt-8 pb-20">
       
       {/* Hero Section - SYNCED WITH LANDING PAGE FOR CONSISTENCY */}
       <section className="mx-auto w-full max-w-5xl px-4 md:px-12 text-center mt-12 mb-24 flex flex-col items-center">
@@ -114,7 +112,7 @@ export default function Pricing() {
 
       {/* How it Works (1-2-3) */}
       <section className="mx-auto w-full max-w-6xl px-4 md:px-12 mb-40">
-         <div className="text-center mb-20 text-left">
+         <div className="text-center mb-20">
             <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em]">LUYỆN THÔNG MINH VỚI SPRINT 60 — HOẠT ĐỘNG NHƯ THẾ NÀO</span>
          </div>
          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">

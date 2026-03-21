@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "@/components/navbar";
 import { Check, ArrowRight, ChevronRight, Info, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -11,8 +10,7 @@ export default function DeepAnalysis() {
   const totalQuestions = 12;
 
   return (
-    <main className="flex min-h-screen flex-col bg-white overflow-x-hidden pt-20">
-      <Navbar />
+    <main className="flex min-h-screen flex-col bg-white overflow-x-hidden pt-8 pb-20">
       
       <div className="mx-auto w-full max-w-6xl px-4 md:px-12 py-10">
         {/* Header Navigation */}

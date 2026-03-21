@@ -8,8 +8,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CountdownTimer from "@/components/ui/countdown-timer";
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
-import Navbar from "@/components/navbar";
-
 gsap.registerPlugin(ScrollTrigger);
 
 export default function LandingPage() {
@@ -67,7 +65,6 @@ export default function LandingPage() {
 
   return (
     <main className="flex min-h-screen flex-col bg-white overflow-x-hidden">
-      <Navbar />
 
       {/* Hero Section */}
       <section ref={heroRef} className="hero-content relative flex flex-col items-center px-4 pt-32 pb-16 md:px-12 md:pb-32 overflow-hidden">

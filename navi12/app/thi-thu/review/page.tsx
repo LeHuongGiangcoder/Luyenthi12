@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Navbar from "@/components/navbar";
 import { ChevronLeft, ChevronRight, ArrowLeft, Check, X, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -33,8 +32,7 @@ export default function ExamReview() {
   const currentResult = results[currentIdx as keyof typeof results] || { correct: true, userChoice: 2, correctChoice: 2 };
 
   return (
-    <main className="flex min-h-screen flex-col bg-gray-50/30 overflow-x-hidden pt-16 pb-20">
-      <Navbar />
+    <main className="flex min-h-screen flex-col bg-gray-50/30 overflow-x-hidden pt-8 pb-20">
       
       <div className="mx-auto w-full max-w-7xl px-4 md:px-10 py-6">
         {/* Review Header */}

@@ -2,7 +2,6 @@
 
 import { useRef, useEffect } from "react";
 import Link from "next/link";
-import Navbar from "@/components/navbar";
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
 import { Play } from "lucide-react";
@@ -34,7 +33,6 @@ interface LeaderboardRow {
   isUser?: boolean;
   isDivider?: boolean;
 }
-
 export default function MockTestRoom() {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -86,8 +84,7 @@ export default function MockTestRoom() {
   ];
 
   return (
-    <main className="flex min-h-screen flex-col bg-white overflow-x-hidden pt-24 pb-20" ref={containerRef}>
-      <Navbar />
+    <main className="flex min-h-screen flex-col bg-white overflow-x-hidden pt-8 pb-20" ref={containerRef}>
       
       <AnimatedGridPattern
         numSquares={30}

@@ -1,14 +1,12 @@
 "use client";
 
-import Navbar from "@/components/navbar";
 import { Check, ArrowRight, Zap, Star, Users, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 export default function DeepAnalysisResults() {
   return (
-    <main className="flex min-h-screen flex-col bg-gray-50/20 overflow-x-hidden pt-24 pb-20">
-      <Navbar />
+    <main className="flex min-h-screen flex-col bg-gray-50/20 overflow-x-hidden pt-8 pb-20">
       
       <div className="mx-auto w-full max-w-7xl px-4 md:px-12">
         {/* Header Section */}

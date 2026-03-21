@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import MainLayout from "@/components/layout/main-layout";
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -31,7 +32,9 @@ export default function RootLayout({
   return (
     <html lang="vi" className={cn("font-sans", geist.variable)}>
       <body className={`${inter.variable} ${montserrat.variable} antialiased font-sans`}>
-        {children}
+        <MainLayout>
+          {children}
+        </MainLayout>
       </body>
     </html>
   );

@@ -1,14 +1,12 @@
 "use client";
 
-import Navbar from "@/components/navbar";
 import { ArrowLeft, ArrowRight, ChevronRight, Check, AlertTriangle, ShieldCheck, ClipboardCheck, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 export default function ExamResults() {
   return (
-    <main className="flex min-h-screen flex-col bg-gray-50/30 overflow-x-hidden pt-24 pb-20">
-      <Navbar />
+    <main className="flex min-h-screen flex-col bg-gray-50/30 overflow-x-hidden pt-8 pb-20">
       
       <div className="mx-auto w-full max-w-5xl px-4 md:px-12">
         {/* Top Header Section */}
