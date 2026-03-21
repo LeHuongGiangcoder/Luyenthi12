@@ -111,7 +111,7 @@ export default function ExamResults() {
               status: "YẾU NHẤT - CẦN ƯU TIÊN KHẮC PHỤC",
               color: "bg-red-500",
               isCritical: true,
-              cta: "Đánh giá sâu chuyên đề Hàm số — Miễn phí"
+              cta: "Bắt đầu đánh giá sâu — Miễn phí"
             },
             {
               title: "Hình học không gian",
@@ -176,12 +176,12 @@ export default function ExamResults() {
                     </div>
                   </div>
 
-                  {/* Enhanced CTA Link for Critical Weakness */}
+                  {/* Refined CTA Link for Critical Weakness */}
                   {item.cta && (
-                    <div className="pt-4 flex flex-col items-center gap-4">
-                       <Link href="/thi-thu/deep-analysis" className="w-full flex items-center justify-center gap-3 py-5 bg-[#0e56fa] text-white font-black rounded-3xl shadow-xl shadow-blue-200 transition-all hover:bg-blue-700 hover:scale-[1.01] active:scale-95 text-base md:text-lg">
+                    <div className="pt-2 flex flex-col items-center gap-4">
+                       <Link href="/thi-thu/deep-analysis" className="inline-flex items-center justify-center gap-2 px-10 py-3.5 bg-[#0e56fa] text-white font-black rounded-2xl shadow-xl shadow-blue-100 hover:bg-blue-700 hover:shadow-blue-200 transition-all hover:scale-105 active:scale-95 text-sm md:text-base">
                           {item.cta}
-                          <ArrowRight className="h-6 w-6" />
+                          <ArrowRight className="h-5 w-5" />
                        </Link>
                        <p className="text-[10px] font-bold text-blue-300 uppercase tracking-[0.2em] opacity-80">
                           12 CÂU — 8 PHÚT · TỰ ĐỘNG CHỈ RA LỖ HỔNG KIẾN THỨC
