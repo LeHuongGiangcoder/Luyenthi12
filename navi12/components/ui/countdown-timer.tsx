@@ -2,8 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useAnimate } from "framer-motion";
-
-const COUNTDOWN_FROM = "2026-06-17T00:00:00";
+import { EXAM_DATE } from "@/lib/exam-date";
 
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
@@ -61,7 +60,7 @@ function useTimer(unit: string) {
   }, []);
 
   const handleCountdown = async () => {
-    const end = new Date(COUNTDOWN_FROM);
+    const end = new Date(EXAM_DATE);
     const now = new Date();
     const distance = end.getTime() - now.getTime();
 

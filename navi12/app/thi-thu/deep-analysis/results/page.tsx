@@ -3,8 +3,10 @@
 import { Check, ArrowRight, Zap, Star, Users, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { getDaysRemaining } from "@/lib/exam-date";
 
 export default function DeepAnalysisResults() {
+  const daysRemaining = getDaysRemaining();
   return (
     <main className="flex min-h-screen flex-col bg-gray-50/20 overflow-x-hidden pt-8 pb-20">
       
@@ -95,7 +97,7 @@ export default function DeepAnalysisResults() {
 
                 <div className="p-6 md:p-8 bg-gray-50/50 rounded-3xl border border-gray-100">
                    <p className="text-sm font-medium text-gray-600 leading-relaxed text-left">
-                     <span className="font-black text-gray-900 leading-relaxed italic block mb-2 underline decoration-gray-200 decoration-4">Kết luận:</span> Bạn đang nắm tốt phần cơ bản (Nhận biết + Thông hiểu). Điểm số <span className="text-red-500 font-bold underline decoration-red-100 italic">đang bị kéo xuống bởi dạng Vận dụng cao</span> — chính xác đây là tầng quyết định điểm 8—9—10 và là nơi bạn có thể gỡ lại nhiều điểm nhất trong 89 ngày còn lại.
+                     <span className="font-black text-gray-900 leading-relaxed italic block mb-2 underline decoration-gray-200 decoration-4">Kết luận:</span> Bạn đang nắm tốt phần cơ bản (Nhận biết + Thông hiểu). Điểm số <span className="text-red-500 font-bold underline decoration-red-100 italic">đang bị kéo xuống bởi dạng Vận dụng cao</span> — chính xác đây là tầng quyết định điểm 8—9—10 và là nơi bạn có thể gỡ lại nhiều điểm nhất trong {daysRemaining} ngày còn lại.
                    </p>
                 </div>
              </div>
@@ -136,7 +138,7 @@ export default function DeepAnalysisResults() {
                 </div>
                 
                 <h2 className="text-2xl font-black font-montserrat text-gray-900 leading-tight mb-4 relative">
-                  Luyện đúng chỗ — tối đa hóa điểm số trong 89 ngày còn lại
+                  Luyện đúng chỗ — tối đa hóa điểm số trong {daysRemaining} ngày còn lại
                 </h2>
                 <p className="text-xs font-bold text-gray-400 mb-8">
                    Cá nhân hóa theo đúng điểm yếu của bạn · Dùng đến 30/6/2026

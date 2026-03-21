@@ -10,7 +10,10 @@ import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
 gsap.registerPlugin(ScrollTrigger);
 
+import { getDaysRemaining } from "@/lib/exam-date";
+
 export default function LandingPage() {
+  const daysRemaining = getDaysRemaining();
   const heroRef = useRef<HTMLDivElement>(null);
   const trapSectionRef = useRef<HTMLDivElement>(null);
   const trapContainerRef = useRef<HTMLDivElement>(null);
@@ -504,7 +507,7 @@ export default function LandingPage() {
           </div>
           <div className="mb-10 inline-flex items-center gap-2 rounded-full bg-white/20 px-5 py-2 text-[10px] font-black text-white uppercase tracking-widest backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
-            89 ngày còn lại — đủ để tăng điểm nếu luyện đúng chỗ
+            {daysRemaining} ngày còn lại — đủ để tăng điểm nếu luyện đúng chỗ
           </div>
 
           <h2 className="text-4xl md:text-6xl font-extrabold font-montserrat text-white leading-tight mb-8">

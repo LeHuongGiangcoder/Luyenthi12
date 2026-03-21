@@ -120,7 +120,7 @@ export default function Pricing() {
               { 
                 step: 1, 
                 title: "Thi thử → Biết ngay mất điểm ở đâu", 
-                desc: "40 câu sát đề thật. Hệ thống phân tích từng câu sai — chỉ ra đúng dạng Toán, kỹ năng nào đang kéo điểm xuống và chiếm bao nhiêu điểm trong đề."
+                desc: "22 câu sát đề thật. Hệ thống phân tích từng câu sai — chỉ ra đúng dạng Toán, kỹ năng nào đang kéo điểm xuống và chiếm bao nhiêu điểm trong đề."
               },
               { 
                 step: 2, 

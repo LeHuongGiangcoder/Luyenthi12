@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const COUNTDOWN_FROM = "2026-06-17T00:00:00";
+import { EXAM_DATE } from "@/lib/exam-date";
 const DAY = 1000 * 60 * 60 * 24;
 
 export function DynamicDayCounter() {
@@ -12,7 +12,7 @@ export function DynamicDayCounter() {
 
   useEffect(() => {
     const calculateDays = () => {
-      const end = new Date(COUNTDOWN_FROM);
+      const end = new Date(EXAM_DATE);
       const now = new Date();
       const distance = end.getTime() - now.getTime();
       const newDays = Math.max(0, Math.floor(distance / DAY));
@@ -27,7 +27,7 @@ export function DynamicDayCounter() {
     };
   }, []);
 
-  if (days === null) return <span>89</span>; // Fallback
+  if (days === null) return <span>-</span>; // Fallback
 
   return (
     <AnimatePresence mode="wait">
