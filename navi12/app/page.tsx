@@ -146,7 +146,7 @@ export default function LandingPage() {
         <div className="absolute top-20 left-0 w-full text-center px-4 pt-10">
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-red-500 mb-4 block">CẢNH BÁO GIAI ĐOẠN CUỐI</span>
           <h2 className="text-4xl font-extrabold md:text-5xl font-montserrat tracking-tight text-gray-900">
-            4 cái bẫy khiến điểm <span className="text-red-500 italic">dậm chân tại chỗ</span>
+            4 cái bẫy khiến điểm <span className="text-red-500">dậm chân tại chỗ</span>
           </h2>
         </div>
 
@@ -227,7 +227,7 @@ export default function LandingPage() {
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black text-blue-600 border border-blue-100 uppercase tracking-widest">
                GIẢI PHÁP ĐỘT PHÁ CỦA NAVIEDU
             </div>
-            <h2 className="text-4xl font-extrabold md:text-7xl font-montserrat tracking-tight text-gray-900 mb-8 leading-[1.1]">
+            <h2 className="text-4xl font-extrabold md:text-5xl font-montserrat tracking-tight text-gray-900 mb-8 leading-[1.1]">
               Cách NaviEdu <br />
               <span className="text-[#0e56fa]">mở khóa tiềm năng</span> của bạn
             </h2>
@@ -326,7 +326,7 @@ export default function LandingPage() {
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black text-blue-600 border border-blue-100 uppercase tracking-widest">
                KẾT QUẢ THỰC TẾ
             </div>
-            <h2 className="text-4xl md:text-6xl font-extrabold font-montserrat tracking-tight text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-extrabold font-montserrat tracking-tight text-gray-900 mb-6">
               Học sinh NaviEdu <br />
               <span className="text-[#0e56fa]">vượt ngưỡng</span> điểm số
             </h2>
