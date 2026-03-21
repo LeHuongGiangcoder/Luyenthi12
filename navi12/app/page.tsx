@@ -314,7 +314,189 @@ export default function LandingPage() {
       </section>
 
 
-      {/* Final CTA Section Refined */}
+      {/* Testimonials Section - High Impact Results */}
+      <section className="relative bg-[#fafbff] py-24 md:py-32 overflow-hidden border-t border-gray-100">
+        {/* Abstract Background Decoration */}
+        <div className="absolute top-0 right-0 p-32 opacity-10 pointer-events-none grayscale"><TrendingUp className="h-64 w-64" /></div>
+        <div className="absolute -bottom-24 -left-24 h-96 w-96 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 md:px-12 relative z-10">
+          {/* Section Header */}
+          <div className="flex flex-col items-center text-center mx-auto max-w-3xl mb-16 md:mb-24">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black text-blue-600 border border-blue-100 uppercase tracking-widest">
+               KẾT QUẢ THỰC TẾ
+            </div>
+            <h2 className="text-4xl md:text-6xl font-extrabold font-montserrat tracking-tight text-gray-900 mb-6">
+              Học sinh NaviEdu <br />
+              <span className="text-[#0e56fa]">vượt ngưỡng</span> điểm số
+            </h2>
+            <p className="text-lg text-gray-500 font-medium leading-relaxed font-primary">
+              Không còn học "mò", đây là cách các bạn ấy đã bứt phá khi giải quyết đúng 20% vấn đề then chốt.
+            </p>
+          </div>
+
+          <div className="relative mt-8 overflow-hidden py-10">
+            {/* Gradient Overlays for smooth edges */}
+            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#fafbff] to-transparent z-20" />
+            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#fafbff] to-transparent z-20" />
+            
+            <div className="animate-marquee flex gap-8 w-max">
+              {[
+                {
+                  name: "Lê Hoàng Nam",
+                  school: "THPT Chuyên Hà Nội - Amsterdam",
+                  gap: "Lỗ hổng: Hình học & VDC",
+                  result: "+1.6đ",
+                  metric: "7.2 → 8.8",
+                  quote: "Navi chỉ ra tôi mất 1.5đ ở đúng 2 dạng bài này. Thay vì làm 10 đề, mình chỉ cần học 15p là đủ.",
+                  color: "text-blue-600 bg-blue-50"
+                },
+                {
+                  name: "Nguyễn Minh Thư",
+                  school: "THPT Lê Quý Đôn, TP.HCM",
+                  gap: "Lỗ hổng: Sai ngu & Xác suất",
+                  result: "+1.7đ",
+                  metric: "6.5 → 8.2",
+                  quote: "Mình từng học rất dàn trải. Navi bắt đúng bệnh 'sai ngu' và giúp mình lấy lại sự tự tin cực nhanh.",
+                  color: "text-purple-600 bg-purple-50"
+                },
+                {
+                  name: "Trần Đức Anh",
+                  school: "THPT Phan Châu Trinh, Đà Nẵng",
+                  gap: "Lỗ hổng: Hàm số & Tích phân",
+                  result: "+1.4đ",
+                  metric: "8.0 → 9.4",
+                  quote: "NaviEdu giúp mình giải quyết thứ mình đang kẹt nhất. Phương pháp học 15p thực sự hiệu quả.",
+                  color: "text-green-600 bg-green-50"
+                },
+                {
+                  name: "Hồ Bảo Khánh",
+                  school: "THPT Chuyên Lý Tự Trọng, Cần Thơ",
+                  gap: "Lỗ hổng: Tiệm cận & Mũ log",
+                  result: "+1.2đ",
+                  metric: "6.8 → 8.0",
+                  quote: "Không còn cảm giác bế tắc khi giải đề. Navi định hướng cực tốt cho mình.",
+                  color: "text-orange-600 bg-orange-50"
+                },
+                {
+                  name: "Đặng Hà My",
+                  school: "THPT Chuyên Phan Bội Châu, Nghệ An",
+                  gap: "Lỗ hổng: Oxyz & Số phức",
+                  result: "+1.5đ",
+                  metric: "7.5 → 9.0",
+                  quote: "15 phút mỗi ngày nhưng hiệu quả hơn 3 tiếng học lan man. Mình đã đạt mục tiêu 9+.",
+                  color: "text-pink-600 bg-pink-50"
+                },
+                {
+                  name: "Vũ Gia Huy",
+                  school: "THPT Thái Phiên, Hải Phòng",
+                  gap: "Lỗ hổng: Bài toán thực tế",
+                  result: "+1.3đ",
+                  metric: "6.0 → 7.3",
+                  quote: "Kết quả thật, nỗ lực thật. NaviEdu thực sự là người đồng hành tin cậy cho kỳ thi 2026.",
+                  color: "text-cyan-600 bg-cyan-50"
+                }
+              ].concat([
+                {
+                  name: "Lê Hoàng Nam",
+                  school: "THPT Chuyên Hà Nội - Amsterdam",
+                  gap: "Lỗ hổng: Hình học & VDC",
+                  result: "+1.6đ",
+                  metric: "7.2 → 8.8",
+                  quote: "Navi chỉ ra tôi mất 1.5đ ở đúng 2 dạng bài này. Thay vì làm 10 đề, mình chỉ cần học 15p là đủ.",
+                  color: "text-blue-600 bg-blue-50"
+                },
+                {
+                  name: "Nguyễn Minh Thư",
+                  school: "THPT Lê Quý Đôn, TP.HCM",
+                  gap: "Lỗ hổng: Sai ngu & Xác suất",
+                  result: "+1.7đ",
+                  metric: "6.5 → 8.2",
+                  quote: "Mình từng học rất dàn trải. Navi bắt đúng bệnh 'sai ngu' và giúp mình lấy lại sự tự tin cực nhanh.",
+                  color: "text-purple-600 bg-purple-50"
+                },
+                {
+                  name: "Trần Đức Anh",
+                  school: "THPT Phan Châu Trinh, Đà Nẵng",
+                  gap: "Lỗ hổng: Hàm số & Tích phân",
+                  result: "+1.4đ",
+                  metric: "8.0 → 9.4",
+                  quote: "NaviEdu giúp mình giải quyết thứ mình đang kẹt nhất. Phương pháp học 15p thực sự hiệu quả.",
+                  color: "text-green-600 bg-green-50"
+                },
+                {
+                  name: "Hồ Bảo Khánh",
+                  school: "THPT Chuyên Lý Tự Trọng, Cần Thơ",
+                  gap: "Lỗ hổng: Tiệm cận & Mũ log",
+                  result: "+1.2đ",
+                  metric: "6.8 → 8.0",
+                  quote: "Không còn cảm giác bế tắc khi giải đề. Navi định hướng cực tốt cho mình.",
+                  color: "text-orange-600 bg-orange-50"
+                },
+                {
+                  name: "Đặng Hà My",
+                  school: "THPT Chuyên Phan Bội Châu, Nghệ An",
+                  gap: "Lỗ hổng: Oxyz & Số phức",
+                  result: "+1.5đ",
+                  metric: "7.5 → 9.0",
+                  quote: "15 phút mỗi ngày nhưng hiệu quả hơn 3 tiếng học lan man. Mình đã đạt mục tiêu 9+.",
+                  color: "text-pink-600 bg-pink-50"
+                },
+                {
+                  name: "Vũ Gia Huy",
+                  school: "THPT Thái Phiên, Hải Phòng",
+                  gap: "Lỗ hổng: Bài toán thực tế",
+                  result: "+1.3đ",
+                  metric: "6.0 → 7.3",
+                  quote: "Kết quả thật, nỗ lực thật. NaviEdu thực sự là người đồng hành tin cậy cho kỳ thi 2026.",
+                  color: "text-cyan-600 bg-cyan-50"
+                }
+              ]).map((t, idx) => (
+                <div key={idx} className="flex flex-col justify-between bg-white rounded-[2.5rem] p-10 shadow-xl shadow-gray-200/50 border border-gray-100 w-[420px] shrink-0 transition-transform active:scale-95">
+                  <div>
+                    <div className="flex items-center justify-between mb-8">
+                       <div className={cn("px-4 py-2 rounded-2xl font-black text-sm shadow-sm", t.color)}>
+                          {t.result}
+                       </div>
+                       <Star className="h-6 w-6 text-yellow-400 fill-current" />
+                    </div>
+                    
+                    <div className="mb-6 space-y-4">
+                      <div className="text-xs font-black uppercase tracking-widest text-gray-400">{t.gap}</div>
+                      <div className="text-2xl font-black font-montserrat text-gray-900">{t.metric}</div>
+                    </div>
+  
+                    <p className="text-gray-500 font-medium leading-relaxed italic mb-10 relative">
+                      <span className="text-4xl text-blue-100 absolute -top-4 -left-4 font-serif">“</span>
+                      {t.quote}
+                    </p>
+                  </div>
+  
+                  <div className="flex items-center gap-4 pt-8 border-t border-gray-50">
+                     <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-400 shadow-inner">
+                        {t.name.charAt(0)}
+                     </div>
+                     <div className="flex flex-col">
+                        <span className="text-sm font-black text-gray-900">{t.name}</span>
+                        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">{t.school}</span>
+                     </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Trust Badge */}
+          <div className="mt-16 flex flex-col items-center gap-4 opacity-50 grayscale">
+             <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  {[1,2,3,4].map(i => <div key={i} className="h-6 w-6 rounded-full border-2 border-white bg-gray-200" />)}
+                </div>
+                <span className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Được tin dùng bởi 15k+ học sinh 2k8</span>
+             </div>
+          </div>
+        </div>
+      </section>
       <section className="px-4 py-32 flex flex-col items-center bg-gray-50/50">
         <div className="w-full max-w-5xl rounded-[3rem] bg-[#0e56fa] p-16 md:p-24 text-center flex flex-col items-center shadow-2xl shadow-blue-200 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
