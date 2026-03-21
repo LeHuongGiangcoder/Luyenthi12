@@ -17,9 +17,12 @@ export default function Navbar() {
         <Link href="/thi-thu" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Thi thử</Link>
         <Link href="#" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Luyện tập</Link>
         <Link href="#" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Sprint 60</Link>
-        <button className="rounded-xl bg-[#0e56fa] px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200">
-          Kiểm tra điểm yếu — miễn phí
-        </button>
+        <Link href="/login" className="text-sm font-bold text-gray-700 hover:text-[#0e56fa] transition-colors">
+          Đăng nhập
+        </Link>
+        <Link href="/register" className="rounded-xl bg-[#0e56fa] px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-200">
+          Mở tài khoản — Miễn phí
+        </Link>
       </div>
       
       <button className="md:hidden">

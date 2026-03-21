@@ -348,7 +348,7 @@ export default function LandingPage() {
                   gap: "Lỗ hổng: Hình học & VDC",
                   result: "+1.6đ",
                   metric: "7.2 → 8.8",
-                  quote: "Navi chỉ ra tôi mất 1.5đ ở đúng 2 dạng bài này. Thay vì làm 10 đề, mình chỉ cần học 15p là đủ.",
+                  quote: "Navi chỉ ra mình mất 1.5đ ở đúng 2 dạng bài. Thay vì cày liên tục, mình chỉ cần luyện sâu 2 chuyên đề đó là đủ.",
                   color: "text-blue-600 bg-blue-50"
                 },
                 {
@@ -357,7 +357,7 @@ export default function LandingPage() {
                   gap: "Lỗ hổng: Sai ngu & Xác suất",
                   result: "+1.7đ",
                   metric: "6.5 → 8.2",
-                  quote: "Mình từng học rất dàn trải. Navi bắt đúng bệnh 'sai ngu' và giúp mình lấy lại sự tự tin cực nhanh.",
+                  quote: "Mình từng học rất nhiều nhưng không lên. Navi bắt đúng bệnh chỗ mình mất điểm ngu và giúp mình cải thiện trong 1 tháng.",
                   color: "text-purple-600 bg-purple-50"
                 },
                 {
@@ -366,7 +366,7 @@ export default function LandingPage() {
                   gap: "Lỗ hổng: Hàm số & Tích phân",
                   result: "+1.4đ",
                   metric: "8.0 → 9.4",
-                  quote: "NaviEdu giúp mình giải quyết thứ mình đang kẹt nhất. Phương pháp học 15p thực sự hiệu quả.",
+                  quote: "NaviEdu giúp mình giải quyết thứ mình đang kẹt nhất. Nếu có thời gian thì mình luyện mỗi ngày, bận quá thì 1 tuần 2-3 lần là thấy chắc hơn rồi.",
                   color: "text-green-600 bg-green-50"
                 },
                 {
@@ -375,7 +375,7 @@ export default function LandingPage() {
                   gap: "Lỗ hổng: Tiệm cận & Mũ log",
                   result: "+1.2đ",
                   metric: "6.8 → 8.0",
-                  quote: "Không còn cảm giác bế tắc khi giải đề. Navi định hướng cực tốt cho mình.",
+                  quote: "Lần đầu mình có tự tin khi tự ôn luyện như thế",
                   color: "text-orange-600 bg-orange-50"
                 },
                 {
@@ -384,7 +384,7 @@ export default function LandingPage() {
                   gap: "Lỗ hổng: Oxyz & Số phức",
                   result: "+1.5đ",
                   metric: "7.5 → 9.0",
-                  quote: "15 phút mỗi ngày nhưng hiệu quả hơn 3 tiếng học lan man. Mình đã đạt mục tiêu 9+.",
+                  quote: "15 phút mỗi ngày nhưng hiệu quả hơn 3 tiếng mình tự cày đề. Mình đã đạt mục tiêu 9+.",
                   color: "text-pink-600 bg-pink-50"
                 },
                 {
@@ -393,7 +393,7 @@ export default function LandingPage() {
                   gap: "Lỗ hổng: Bài toán thực tế",
                   result: "+1.3đ",
                   metric: "6.0 → 7.3",
-                  quote: "Kết quả thật, nỗ lực thật. NaviEdu thực sự là người đồng hành tin cậy cho kỳ thi 2026.",
+                  quote: "Điểm mình lên sau 1 tháng chỉ làm bài trên lớp và ôn luyện trên Navi",
                   color: "text-cyan-600 bg-cyan-50"
                 }
               ].concat([
@@ -403,7 +403,7 @@ export default function LandingPage() {
                   gap: "Lỗ hổng: Hình học & VDC",
                   result: "+1.6đ",
                   metric: "7.2 → 8.8",
-                  quote: "Navi chỉ ra tôi mất 1.5đ ở đúng 2 dạng bài này. Thay vì làm 10 đề, mình chỉ cần học 15p là đủ.",
+                  quote: "Navi chỉ ra mình mất 1.5đ ở đúng 2 dạng bài này. Thay vì làm 10 đề, mình chỉ cần học 15p là đủ.",
                   color: "text-blue-600 bg-blue-50"
                 },
                 {
