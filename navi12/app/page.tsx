@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check, X, Star, Calendar, Clock, Trophy, LineChart } from "lucide-react";
+import { ArrowRight, Check, X, Star, Calendar, Clock, Trophy, LineChart, Zap, TrendingUp } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CountdownTimer from "@/components/ui/countdown-timer";
@@ -14,6 +14,8 @@ export default function LandingPage() {
   const heroRef = useRef<HTMLDivElement>(null);
   const trapSectionRef = useRef<HTMLDivElement>(null);
   const trapContainerRef = useRef<HTMLDivElement>(null);
+  const solutionSectionRef = useRef<HTMLDivElement>(null);
+  const solutionStickyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -22,49 +24,62 @@ export default function LandingPage() {
         const cards = gsap.utils.toArray(".trap-card");
         if (cards.length === 0) return;
 
+        const getScrollDistance = () => {
+          const container = trapContainerRef.current;
+          if (!container) return 0;
+          return container.scrollWidth - window.innerWidth + (window.innerWidth * 0.2);
+        };
+
         const mainTl = gsap.timeline({
           scrollTrigger: {
             trigger: trapSectionRef.current,
             pin: true,
             scrub: 1,
             start: "top top",
-            end: () => `+=${trapContainerRef.current?.offsetWidth || 1000}`,
+            end: () => `+=${getScrollDistance()}`,
             invalidateOnRefresh: true,
           }
         });
 
+        // Horizontal scroll
         mainTl.to(trapContainerRef.current, {
-          x: () => {
-            const container = trapContainerRef.current;
-            if (!container) return 0;
-            return -(container.scrollWidth - window.innerWidth + window.innerWidth * 0.2);
-          },
+          x: () => -getScrollDistance(),
           ease: "none",
         });
 
-        // Individual card animations - Using containerAnimation correctly
-        cards.forEach((card: any) => {
-          gsap.from(card, {
+        // Cards appearance staggered along the scroll
+        mainTl.from(".trap-card", {
+          y: 40,
+          opacity: 0,
+          scale: 0.9,
+          stagger: 0.05,
+          duration: 0.2,
+          ease: "power2.out",
+        }, 0); 
+      }
+
+      // Simple Entrance Animations for Solution Steps
+      if (solutionSectionRef.current) {
+        gsap.utils.toArray(".solution-item-row").forEach((row: any) => {
+          gsap.from(row, {
             y: 50,
             opacity: 0,
-            scale: 0.95,
             duration: 1,
             scrollTrigger: {
-              trigger: card,
-              containerAnimation: mainTl,
-              start: "left center+=30%",
+              trigger: row,
+              start: "top 80%",
               toggleActions: "play none none reverse",
             }
           });
         });
       }
-    }, trapSectionRef);
+    }, [trapSectionRef, solutionSectionRef]);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col bg-white overflow-x-hidden">
+    <main className="min-h-screen bg-white overflow-x-hidden block">
 
       {/* Hero Section */}
       <section ref={heroRef} className="hero-content relative flex flex-col items-center px-4 pt-32 pb-16 md:px-12 md:pb-32 overflow-hidden">
@@ -99,7 +114,7 @@ export default function LandingPage() {
           </h1>
 
           <p className="mt-8 max-w-2xl text-center text-lg leading-relaxed text-gray-600 px-4">
-            Không còn thời gian để ôn dàn trải. Navi giúp bạn biết chính xác <span className="font-bold text-gray-900 surface-emphasis">đang mất điểm ở dạng Toán nào</span> để tối đa hóa từng điểm số cho kỳ thi.
+            Không còn thời gian để ôn dàn trải. Navi giúp bạn <span className="font-bold text-gray-900 surface-emphasis">giỏi cái bạn đang yếu nhất</span> để tối đa hóa từng điểm số cho kỳ thi.
           </p>
 
           <div className="mt-12 flex flex-col items-center gap-6">
@@ -204,53 +219,100 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Solution Section */}
-      <section className="px-4 py-32 md:px-12 flex flex-col items-center bg-white">
-        <h2 className="text-center text-3xl font-black md:text-5xl font-montserrat tracking-tight mb-4">
-          Luyện nhiều chưa đủ <br className="md:hidden" /> — phải luyện đúng chỗ
-        </h2>
-        <p className="max-w-xl text-center text-gray-500 font-medium mb-16 px-4">
-          Giai đoạn nước rút, điểm số đến từ việc <span className="text-[#0e56fa] font-bold">khắc phục đúng dạng Toán yếu nhất</span> — không phải từ việc ôn thêm nhiều hơn.
-        </p>
-
-        <div className="grid w-full max-w-6xl gap-8 md:grid-cols-2">
-          {/* Old way */}
-          <div className="rounded-[2.5rem] bg-white p-10 md:p-12 border border-gray-100 shadow-sm">
-            <h3 className="mb-10 text-[10px] font-black uppercase tracking-[0.3em] text-gray-400">ÔN THI DÀN TRẢI</h3>
-            <ul className="space-y-8">
-              {[
-                "Làm hàng trăm câu mỗi ngày → tốn sức nhưng không rõ đang tiến bộ ở đâu",
-                "Thi thử → xem điểm → không biết điểm mất ở dạng nào, kỹ năng nào",
-                "Mất thời gian ôn chỗ đã vững, bỏ sót chỗ đang yếu",
-                "Đến ngày thi vẫn lo vì không biết chắc mình đã vá hết lỗ hổng chưa"
-              ].map((text, i) => (
-                <li key={i} className="flex gap-4 text-sm font-medium text-gray-500">
-                  <X className="h-5 w-5 shrink-0 text-red-300" />
-                  <span>{text}</span>
-                </li>
-              ))}
-            </ul>
+      <section ref={solutionSectionRef} className="relative bg-white py-24 md:py-32 overflow-hidden font-montserrat">
+        <div className="max-w-7xl mx-auto px-4 md:px-12 flex flex-col gap-24 md:gap-32">
+          
+          {/* Main Header - Centered & Consistent */}
+          <div className="flex flex-col items-center text-center mx-auto max-w-4xl mb-12">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black text-blue-600 border border-blue-100 uppercase tracking-widest">
+               GIẢI PHÁP ĐỘT PHÁ CỦA NAVIEDU
+            </div>
+            <h2 className="text-4xl font-extrabold md:text-7xl font-montserrat tracking-tight text-gray-900 mb-8 leading-[1.1]">
+              Cách NaviEdu <br />
+              <span className="text-[#0e56fa]">mở khóa tiềm năng</span> của bạn
+            </h2>
+            <p className="text-xl text-gray-500 font-medium leading-relaxed font-primary max-w-2xl">
+              Chúng tôi không dạy bạn mọi thứ. Chúng tôi chỉ giúp bạn giỏi thứ bạn đang yếu nhất để tăng điểm nhanh nhất.
+            </p>
           </div>
 
-          {/* New way */}
-          <div className="rounded-[2.5rem] bg-[#f0f4ff] p-10 md:p-12 border-2 border-blue-100 shadow-xl shadow-blue-50">
-            <h3 className="mb-10 text-[10px] font-black uppercase tracking-[0.3em] text-blue-600">LUYỆN THÔNG MINH VỚI NAVI</h3>
-            <ul className="space-y-8">
-              {[
-                { t: "Xác định đúng dạng Toán đang mất điểm", d: "biết ngay cần tập trung vào đâu" },
-                { t: "Chỉ luyện đúng chỗ còn yếu", d: "không lãng phí thời gian ôn chỗ đã nắm" },
-                { t: "15 phút mỗi ngày, đúng trọng tâm", d: "hiệu quả hơn làm 100 câu ngẫu nhiên" },
-                { t: "Thấy điểm số tăng lên từng tuần", d: "biết mình đang cải thiện đúng chỗ" }
-              ].map((item, i) => (
-                <li key={i} className="flex gap-4 text-sm">
-                  <Check className="h-5 w-5 shrink-0 text-green-500" />
-                  <span className="text-gray-900"><span className="font-bold">{item.t}</span> — {item.d}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {[
+            {
+              tag: "Giai đoạn 1",
+              title: "Chụp X-Quang lỗ hổng kiến thức",
+              desc: "NaviEdu phân tích bài thi qua 5 cấp độ tư duy: Nhận biết, Thông hiểu, Vận dụng, Vận dụng cao. Phát hiện ngay tầng kiến thức nào đang 'âm thầm' kéo điểm số của bạn xuống.",
+              features: ["Phân tích 5 cấp độ nhận thức", "Báo cáo radar điểm mạnh/yếu", "Kết luận lộ trình ngay lập tức"],
+              image: "/pic1.png",
+              color: "bg-blue-500"
+            },
+            {
+              tag: "Giai đoạn 2",
+              title: "Xác định rõ 'kẻ trộm điểm số'",
+              desc: "Không chỉ biết sai ở đâu, NaviEdu lượng hóa tầm quan trọng của lỗi sai: Nếu sửa dạng Hàm số này, bạn gỡ lại ngay +1.5đ thâm hụt so với mục tiêu.",
+              features: ["Lượng hóa điểm số bị mất", "Ưu tiên chuyên đề yếu nhất", "Dự báo mức tăng điểm tiềm năng"],
+              image: "/pic2.png",
+              reverse: true,
+              color: "bg-red-500"
+            },
+            {
+              tag: "Giai đoạn 3",
+              title: "Luyện tập 15 phút đúng trọng tâm",
+              desc: "Mọi đề luyện đều được cá nhân hóa. Hệ thống tự động bỏ qua 80% câu hỏi thừa, bạn dành trọn 100% sức lực vào nơi tạo ra sự thay đổi điểm số.",
+              features: ["Tự động bỏ qua phần đã vững", "Cá nhân hóa 100% đề thi", "Tăng 1.4đ sau 4 tuần luyện tập"],
+              image: "/pic3.png",
+              color: "bg-green-500"
+            }
+          ].map((item, i) => (
+            <div key={i} className={cn(
+              "solution-item-row grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center",
+              item.reverse ? "lg:flex-row-reverse" : ""
+            )}>
+              {/* Text Content */}
+              <div className={cn("order-2 lg:order-none", item.reverse ? "lg:order-2" : "lg:order-1")}>
+                <div className="mb-6 inline-flex items-center gap-2 text-xs font-black text-blue-600 uppercase tracking-widest">
+                   {item.tag}
+                </div>
+                <h3 className="text-3xl md:text-5xl font-black tracking-tight text-gray-900 mb-8 leading-tight">
+                  {item.title}
+                </h3>
+                <p className="text-lg text-gray-500 font-medium leading-relaxed mb-10 font-primary">
+                  {item.desc}
+                </p>
+                <div className="grid gap-4">
+                  {item.features.map((f, j) => (
+                    <div key={j} className="flex items-center gap-4 text-gray-900 font-bold">
+                      <div className="h-6 w-6 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                        <Check className="h-4 w-4 stroke-[3]" />
+                      </div>
+                      {f}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Image Mockup */}
+              <div className={cn("order-1 lg:order-none relative h-full flex items-center justify-center", item.reverse ? "lg:order-1" : "lg:order-2")}>
+                <div className="relative w-full max-w-[600px] aspect-[4/3] rounded-[3rem] bg-white p-4 shadow-2xl border-4 border-white overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
+                  <div className="absolute inset-0 opacity-10"><AnimatedGridPattern /></div>
+                  
+                  <div className="relative h-full w-full rounded-[2.2rem] overflow-hidden bg-gray-50 flex items-center justify-center border border-gray-100">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-contain p-4 md:p-8"
+                    />
+                  </div>
+
+                  <div className={cn("absolute top-8 right-8 h-14 w-14 rounded-[1.2rem] flex items-center justify-center text-white shadow-xl animate-pulse", item.color)}>
+                    <Zap className="h-8 w-8 fill-current" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
+
 
       {/* Final CTA Section Refined */}
       <section className="px-4 py-32 flex flex-col items-center bg-gray-50/50">
