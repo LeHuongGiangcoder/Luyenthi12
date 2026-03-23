@@ -21,7 +21,7 @@ export default function Navbar() {
           Đăng nhập
         </Link>
         <Link href="/register" className="rounded-xl bg-[#0e56fa] px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-200">
-          Mở tài khoản — Miễn phí
+          Mở tài khoản
         </Link>
       </div>
       

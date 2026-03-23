@@ -109,7 +109,7 @@ export default function LandingPage() {
 
           <div className="mt-12 flex flex-col items-center gap-6">
             <Link href="/thi-thu" className="rounded-2xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 hover:bg-blue-700">
-              Kiểm tra điểm yếu ngay — miễn phí
+              Kiểm tra điểm yếu ngay
             </Link>
             <div className="flex flex-col items-center gap-1.5 grayscale opacity-70">
               <span className="text-sm font-medium text-gray-600">
@@ -132,16 +132,16 @@ export default function LandingPage() {
       </section>
 
       {/* Trap Section - SMOOTH HORIZONTAL STICKY SCROLL */}
-      <section ref={trapSectionRef} className="relative bg-[#fafbff] overflow-hidden min-h-screen flex items-center">
-        <div className="absolute top-20 left-0 w-full text-center px-4 pt-10">
+      <section ref={trapSectionRef} className="relative bg-[#fafbff] overflow-hidden min-h-screen flex flex-col justify-center py-20">
+        <div className="relative z-10 w-full text-center px-4 mb-12">
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-red-500 mb-4 block">CẢNH BÁO GIAI ĐOẠN CUỐI</span>
           <h2 className="text-4xl md:text-6xl font-extrabold font-montserrat tracking-tight text-gray-900">
             4 cái bẫy khiến điểm <span className="text-red-500">đứng im</span>
           </h2>
         </div>
 
-        <div className="flex h-full items-center">
-          <div ref={trapContainerRef} className="flex gap-8 px-[10vw] pt-20">
+        <div className="flex items-center">
+          <div ref={trapContainerRef} className="flex gap-8 px-[10vw]">
             {[
               {
                 id: "01",
@@ -448,28 +448,60 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-      <section className="px-4 py-32 flex flex-col items-center bg-gray-50/50">
-        <div className="w-full max-w-5xl rounded-[3rem] bg-[#0e56fa] p-16 md:p-24 text-center flex flex-col items-center shadow-2xl shadow-blue-200 relative overflow-hidden">
+      <section className="px-4 py-32 flex flex-col items-center bg-gray-50/50 overflow-hidden">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95, y: 30 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full max-w-5xl rounded-[3rem] bg-[#0e56fa] p-16 md:p-24 text-center flex flex-col items-center shadow-2xl shadow-blue-200 relative overflow-hidden"
+        >
           <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
             <AnimatedGridPattern />
           </div>
-          <div className="mb-10 inline-flex items-center gap-2 rounded-full bg-white/20 px-5 py-2 text-[10px] font-black text-white uppercase tracking-widest backdrop-blur-md">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-10 inline-flex items-center gap-2 rounded-full bg-white/20 px-5 py-2 text-[10px] font-black text-white uppercase tracking-widest backdrop-blur-md"
+          >
             <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
             {daysRemaining} ngày còn lại — đủ để tăng điểm nếu luyện đúng chỗ
-          </div>
+          </motion.div>
 
-          <h2 className="text-4xl md:text-6xl font-extrabold font-montserrat text-white leading-tight mb-8">
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-4xl md:text-6xl font-extrabold font-montserrat text-white leading-tight mb-8"
+          >
             Bạn đang mất điểm <br /> ở dạng Toán nào?
-          </h2>
-          <p className="max-w-2xl text-lg md:text-xl text-blue-100 font-medium mb-12">
+          </motion.h2>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="max-w-2xl text-lg md:text-xl text-blue-100 font-medium mb-12"
+          >
             Thi thử 22 câu miễn phí — hệ thống chỉ ra ngay bạn đang mất điểm ở đâu và có thể gỡ thêm bao nhiêu điểm nếu tập trung đúng tâm.
-          </p>
+          </motion.p>
 
-          <Link href="/thi-thu" className="rounded-2xl bg-white px-12 py-6 text-xl font-black text-[#0e56fa] shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center gap-3">
-            Kiểm tra ngay — Miễn phí
-            <ArrowRight className="h-6 w-6" />
-          </Link>
-        </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.5, type: "spring", stiffness: 200 }}
+          >
+            <Link href="/thi-thu" className="rounded-2xl bg-white px-12 py-6 text-xl font-black text-[#0e56fa] shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center gap-3">
+              Kiểm tra ngay
+              <ArrowRight className="h-6 w-6" />
+            </Link>
+          </motion.div>
+        </motion.div>
       </section>
     </main>
   );
