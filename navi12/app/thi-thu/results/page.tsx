@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, ChevronRight, Check, AlertTriangle, ShieldCheck, ClipboardCheck, Zap, Target } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronRight, Check, AlertTriangle, ShieldCheck, ClipboardCheck, Zap, Target, Sparkles, Brain } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -202,29 +202,39 @@ function ExamResultsContent() {
           ))}
         </div>
 
-        {/* Insights Alert Section - Simplified & Cleaner */}
-        <div className="bg-white p-10 md:p-12 rounded-[2.5rem] border border-gray-100 shadow-sm mb-12 relative overflow-hidden text-left">
-           <div className="absolute top-0 left-0 w-1.5 h-full bg-blue-500" />
-           <h2 className="text-2xl font-extrabold font-montserrat text-gray-900 mb-6">
-              Và đây chỉ là những gì <span className="text-[#0e56fa]">bài thi này lộ ra được</span>
-           </h2>
-           <p className="text-gray-500 font-medium leading-relaxed mb-8 max-w-2xl text-left">
-              Một đề 22 câu không thể kiểm tra hết toàn bộ chương trình. Trong chính chuyên đề Hàm số — còn 3 dạng khác bạn chưa gặp hôm nay. Và các chuyên đề như Tích phân, Mũ logarit, Số phức chỉ xuất hiện 1—2 câu — chưa đủ để biết bạn thực sự nắm hay chỉ may mắn làm đúng.
-           </p>
+        {/* Insights Alert Section - UNIFIED STYLE */}
+        <div className="mb-20 px-2 text-left border-l-4 border-amber-400 pl-6">
+          <span className="text-xs font-black uppercase tracking-[0.3em] text-amber-500 mb-4 block">CẢNH BÁO TỪ HỆ THỐNG</span>
+          <h2 className="text-3xl md:text-5xl font-black font-montserrat text-gray-900 mb-6 tracking-tight leading-tight">
+             Và đây chỉ là những gì <span className="text-[#0e56fa]">bài thi này lộ ra được</span>
+          </h2>
+          <p className="text-gray-500 text-lg md:text-xl font-medium leading-relaxed mb-10 max-w-3xl">
+            Một đề 22 câu không thể kiểm tra hết toàn bộ chương trình. Trong chính chuyên đề Hàm số — còn 3 dạng khác bạn chưa gặp hôm nay. Và các chuyên đề như Tích phân, Mũ logarit, Số phức chỉ xuất hiện 1—2 câu — chưa đủ để biết bạn thực sự nắm hay chỉ may mắn làm đúng.
+          </p>
 
-           <div className="bg-gray-50/50 rounded-2xl p-8 border border-gray-100 space-y-6 text-left">
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">DẠNG CHƯA ĐƯỢC KIỂM TRA ĐỦ:</span>
-              <div className="flex flex-wrap gap-2">
-                 {['Tích phân ứng dụng (1 câu)', 'Số phức (1 câu)', 'Mũ logarit VDC (2 câu)'].map(tag => (
-                   <span key={tag} className="px-4 py-2 rounded-xl bg-white border border-gray-100 text-[10px] font-bold text-gray-700 shadow-sm">
-                     {tag}
-                   </span>
-                 ))}
-                 <span className="px-4 py-2 rounded-xl bg-white border border-red-100 text-[10px] font-bold text-red-500 shadow-sm">
-                    Xác suất nâng cao (0 câu)
-                 </span>
-              </div>
-           </div>
+          <div className="bg-white p-6 md:p-8 rounded-[2.5rem] border border-gray-100 shadow-sm relative overflow-hidden">
+             <div className="bg-gray-50/50 rounded-3xl p-6 md:p-10 border border-gray-100 space-y-8">
+                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest block text-center md:text-left">DẠNG CHƯA ĐƯỢC KIỂM TRA ĐỦ:</span>
+                <div className="flex flex-wrap gap-4">
+                   {[
+                     { name: 'Tích phân ứng dụng', count: 1 },
+                     { name: 'Số phức', count: 1 },
+                     { name: 'Mũ logarit VDC', count: 2 }
+                   ].map(item => (
+                     <div key={item.name} className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-white border border-gray-100 text-sm font-bold text-gray-700 shadow-sm transition-transform hover:scale-[1.02]">
+                       <span>{item.name}</span>
+                       <span className="px-2 py-0.5 rounded-lg bg-gray-50 text-[10px] font-black text-gray-400">({item.count} câu)</span>
+                     </div>
+                   ))}
+                   
+                   <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-red-50 border border-red-100 text-sm font-bold text-red-600 shadow-sm transition-transform hover:scale-[1.02]">
+                      <AlertTriangle className="h-4 w-4" />
+                      <span>Xác suất nâng cao</span>
+                      <span className="px-2 py-0.5 rounded-lg bg-red-600 text-[10px] font-black text-white">(0 câu)</span>
+                   </div>
+                </div>
+             </div>
+          </div>
         </div>
 
         {/* Final Roadmap CTA */}
