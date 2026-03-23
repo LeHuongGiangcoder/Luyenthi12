@@ -1,26 +1,30 @@
 "use client";
 
-import { Check, ArrowRight, Zap, Star, Users, TrendingUp } from "lucide-react";
+import { Check, ArrowRight, Zap, Star, Users, TrendingUp, Target, ShieldAlert, Award, ChevronRight, LayoutList } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { getDaysRemaining } from "@/lib/exam-date";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-export default function DeepAnalysisResults() {
+function DeepAnalysisResultsContent() {
   const daysRemaining = getDaysRemaining();
+  const searchParams = useSearchParams();
+  const targetScore = searchParams.get("target") || "8.0";
+
   return (
     <main className="flex min-h-screen flex-col bg-gray-50/20 overflow-x-hidden pt-8 pb-20">
       
       <div className="mx-auto w-full max-w-7xl px-4 md:px-12">
-        {/* Header Section */}
-        <div className="mb-12 text-left">
-           <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">KẾT QUẢ ĐÁNH GIÁ — HÀM SỐ</span>
-           <h1 className="text-4xl md:text-5xl font-black font-montserrat tracking-tight text-gray-900 mb-4 leading-tight">
-             Đây là bức tranh điểm số của bạn
-           </h1>
-           <p className="max-w-3xl text-gray-500 font-medium leading-relaxed">
-             Hệ thống đã xác định chính xác bạn đang vững ở đâu và đang để mất điểm ở dạng nào — dựa trên 12 câu hỏi được chọn có chủ đích.
-           </p>
-        </div>
+         <div className="mb-12 text-left border-l-4 border-blue-600 pl-8">
+            <span className="text-xs font-black text-blue-600 uppercase tracking-widest mb-4 block">PHÂN TÍCH CHUYÊN SÂU — MỤC TIÊU {targetScore} ĐIỂM</span>
+            <h1 className="text-4xl md:text-5xl font-black font-montserrat tracking-tight text-gray-900 mb-6 leading-tight max-w-4xl">
+              Bạn có thể "ăn trọn" <span className="text-[#0e56fa]">1.5 điểm nữa</span> từ chuyên đề Hàm số
+            </h1>
+            <p className="max-w-2xl text-lg text-gray-500 font-medium leading-relaxed">
+              Dựa trên 12 câu hỏi chắt lọc, Navi xác định bạn chỉ cần đạt đến <span className="text-gray-900 font-black underline decoration-blue-100 underline-offset-4">Level 4/5</span> để giành lại toàn bộ phần điểm đang bị hụt mất.
+            </p>
+         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Analysis Column (Left) */}
@@ -79,7 +83,7 @@ export default function DeepAnalysisResults() {
                         <div key={i} className="flex flex-col gap-2.5">
                            <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
                               <div className="flex items-center gap-2.5 text-left">
-                                 <div className={cn("h-2.5 w-2.5 rounded-full", metric.color)} />
+                                 <div className="h-2.5 w-2.5 rounded-full" />
                                  <span className="text-gray-500">{metric.label}</span>
                               </div>
                               <span className={metric.text}>{metric.val}</span>
@@ -95,11 +99,13 @@ export default function DeepAnalysisResults() {
                    </div>
                 </div>
 
-                <div className="p-6 md:p-8 bg-gray-50/50 rounded-3xl border border-gray-100">
-                   <p className="text-sm font-medium text-gray-600 leading-relaxed text-left">
-                     <span className="font-black text-gray-900 leading-relaxed italic block mb-2 underline decoration-gray-200 decoration-4">Kết luận:</span> Bạn đang nắm tốt phần cơ bản (Nhận biết + Thông hiểu). Điểm số <span className="text-red-500 font-bold underline decoration-red-100 italic">đang bị kéo xuống bởi dạng Vận dụng cao</span> — chính xác đây là tầng quyết định điểm 8—9—10 và là nơi bạn có thể gỡ lại nhiều điểm nhất trong {daysRemaining} ngày còn lại.
-                   </p>
-                </div>
+                 <div className="p-6 md:p-8 bg-gray-50/50 rounded-3xl border border-gray-100 group hover:border-blue-100 transition-colors">
+                    <p className="text-base font-medium text-gray-600 leading-relaxed text-left">
+                      <span className="font-black text-gray-900 leading-relaxed italic block mb-3 underline decoration-blue-100 decoration-4">Kết luận mục tiêu {targetScore}:</span> 
+                      Kỹ năng cơ bản của bạn đã ổn, nhưng con đường chạm mốc {targetScore} đang bị chặn bởi <span className="text-red-500 font-bold underline decoration-red-100 italic">Level 4 & 5 của Hàm số.</span> 
+                      Dưới đây là lộ trình giúp bạn lấy lại <span className="font-black text-blue-600">1.5 điểm</span> còn thiếu ngay hôm nay.
+                    </p>
+                 </div>
              </div>
 
              {/* Other Topics Card */}
@@ -107,10 +113,10 @@ export default function DeepAnalysisResults() {
                 <div className="absolute top-0 right-0 p-8 opacity-5">
                    <TrendingUp className="h-24 w-24 text-amber-600" />
                 </div>
-                <h3 className="text-lg font-black font-montserrat text-gray-900 mb-4">Và đây mới chỉ là chuyên đề Hàm số</h3>
-                <p className="text-xs font-medium text-gray-500 leading-relaxed mb-8 max-w-xl text-left">
-                  Hình học không gian và Xác suất của bạn chưa được đo đủ. Rất có thể còn những dạng Toán khác đang âm thầm kéo điểm xuống mà bạn không biết — vì chưa có ai kiểm tra đúng cách. Sprint 60 sẽ quét toàn bộ, tìm và giúp bạn gỡ từng điểm một.
-                </p>
+                 <h3 className="text-xl font-black font-montserrat text-gray-900 mb-4">Các chuyên đề gây mất điểm còn lại</h3>
+                 <p className="text-sm font-medium text-gray-500 leading-relaxed mb-8 max-w-xl text-left">
+                  Số điểm bạn đang bị mất còn lại (khoảng 1.5đ nữa) đang nằm ở những chuyên đề Navi chưa có đủ dữ liệu để đo đạc. Rất có thể Hình học không gian và Xác suất là những "lỗ hổng" âm thầm chưa được bạn kiểm tra đúng cách.
+                 </p>
 
                 <div className="flex flex-wrap gap-2">
                    {[
@@ -128,86 +134,85 @@ export default function DeepAnalysisResults() {
              </div>
           </div>
 
-          {/* Promo Column (Right) - Sprint 60 */}
+          {/* Roadmap Column (Right) - Sprint 60 */}
           <aside className="w-full lg:w-[420px]">
-             <div className="bg-white rounded-[2.5rem] border-2 border-indigo-100 shadow-2xl shadow-indigo-100 p-8 md:p-10 text-left relative overflow-hidden">
+             <div className="bg-white rounded-[2.5rem] border-2 border-indigo-100 shadow-2xl shadow-indigo-100 p-8 md:p-10 text-left relative overflow-hidden flex flex-col h-full transition-all hover:shadow-indigo-200">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-3xl opacity-50 -mr-16 -mt-16" />
                 
-                <div className="inline-flex px-4 py-1.5 bg-indigo-600 text-white rounded-full text-[10px] font-black uppercase tracking-widest mb-6 relative">
-                   Sprint 60 - Gỡ điểm thông minh
+                <div className="inline-flex px-4 py-1.5 bg-indigo-600 text-white rounded-full text-[10px] font-black uppercase tracking-widest mb-6 relative w-fit">
+                   Lộ trình cá nhân hóa - Sprint 60
                 </div>
                 
                 <h2 className="text-2xl font-black font-montserrat text-gray-900 leading-tight mb-4 relative">
-                  Luyện đúng chỗ — tối đa hóa điểm số trong {daysRemaining} ngày còn lại
+                  Gỡ trọn 1.5 điểm Hàm số & Chinh phục mốc {targetScore}
                 </h2>
-                <p className="text-xs font-bold text-gray-400 mb-8">
-                   Cá nhân hóa theo đúng điểm yếu của bạn · Dùng đến 30/6/2026
+                <p className="text-xs font-bold text-gray-400 mb-10">
+                   Thiết kế riêng cho lỗ hổng "Vận dụng cao" của bạn.
                 </p>
 
-                <div className="flex items-center gap-4 mb-8">
-                   <div className="flex flex-col">
-                      <span className="text-4xl font-black font-montserrat text-gray-900">299k</span>
-                      <div className="flex items-center gap-2">
-                         <span className="text-sm text-gray-400 line-through">499k</span>
-                         <span className="text-xs font-black text-red-500 uppercase">-40%</span>
-                      </div>
-                   </div>
-                   <div className="ml-auto flex items-center gap-1.5 text-amber-500 px-4 py-1.5 bg-amber-50 rounded-xl">
-                      <Star className="h-4 w-4 fill-current" />
-                      <span className="text-xs font-black">4.9*</span>
-                   </div>
-                </div>
-
-                <div className="space-y-5 mb-10 text-left">
+                <div className="space-y-6 mb-12 flex-1">
                    {[
-                     "Phân tích điểm yếu toàn bộ chuyên đề Toán THPT — không chỉ Hàm số",
-                     "Luyện đúng dạng Toán đang yếu — không lãng phí thời gian ôn chỗ đã vững",
-                     "15 phút/ngày đúng trọng tâm — hiệu quả hơn làm trăm câu ngẫu nhiên",
-                     "5 đợt thi thử VIP Chủ nhật — theo dõi điểm tăng từng tuần",
-                     "Kho 10.000+ câu phân loại theo dạng — luyện thêm bất cứ lúc nào"
+                     { 
+                       step: "01", 
+                       title: "Lấp lỗ hổng Level 3", 
+                       desc: "Củng cố các dạng tiệm cận, cực trị hàm ẩn căn bản.",
+                       icon: <LayoutList className="h-5 w-5" />
+                     },
+                     { 
+                       step: "02", 
+                       title: "Chuyên sâu Level 4", 
+                       desc: "Luyện 50 câu VDC tương tác có giải thích từng bước.",
+                       icon: <Award className="h-5 w-5" />
+                     },
+                     { 
+                       step: "03", 
+                       title: "Chinh phục mốc 9+", 
+                       desc: "Mẹo giải nhanh các câu đồ thị phức tạp & tham số.",
+                       icon: <TrendingUp className="h-5 w-5" />
+                     }
                    ].map((item, i) => (
-                     <div key={i} className="flex gap-4 items-start">
-                        <div className="mt-0.5 h-4.5 w-4.5 shrink-0 rounded-full bg-green-50 text-green-600 flex items-center justify-center">
-                           <Check className="h-3 w-3 stroke-[3.5]" />
+                     <div key={i} className="flex gap-5 items-start group">
+                        <div className="h-12 w-12 shrink-0 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 font-black text-sm group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                           {item.icon}
                         </div>
-                        <span className="text-[11.5px] font-medium text-gray-600 leading-relaxed">
-                           {item}
-                        </span>
+                        <div className="flex flex-col gap-1 text-left">
+                           <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">{item.step} — STAGE</span>
+                           <h4 className="text-sm font-black text-gray-900 font-montserrat">{item.title}</h4>
+                           <span className="text-xs font-medium text-gray-500 leading-relaxed text-left">
+                              {item.desc}
+                           </span>
+                        </div>
                      </div>
                    ))}
                 </div>
 
-                <Link href="/pricing" className="w-full py-5 bg-[#0e56fa] text-white font-black rounded-2xl shadow-xl shadow-blue-200 transition-all hover:bg-blue-700 hover:scale-[1.01] active:scale-95 text-lg mb-6 flex items-center justify-center gap-3">
-                   Bắt đầu Sprint 60
-                   <ArrowRight className="h-5 w-5" />
-                </Link>
-
-                <div className="text-center">
-                   <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-6">
-                      Thanh toán 1 lần · Dùng đến 30/6 · Hoàn tiền 7 ngày
-                   </p>
-                   
-                   <div className="grid grid-cols-2 gap-4 pt-8 border-t border-gray-100">
-                      <div className="flex flex-col gap-1.5">
-                         <div className="flex items-center justify-center gap-1.5 text-gray-400">
-                            <Users className="h-3.5 w-3.5" />
-                            <span className="text-[10.5px] font-black uppercase tracking-tight">312</span>
-                         </div>
-                         <span className="text-[9.5px] font-bold text-gray-400 uppercase tracking-wide">đã mua</span>
-                      </div>
-                      <div className="flex flex-col gap-1.5 border-l border-gray-100">
-                         <div className="flex items-center justify-center gap-1.5 text-green-600">
-                            <TrendingUp className="h-3.5 w-3.5" />
-                            <span className="text-[10.5px] font-black uppercase tracking-tight">+1.4đ</span>
-                         </div>
-                         <span className="text-[9.5px] font-bold text-gray-400 uppercase tracking-wide">tăng / 4 tuần</span>
-                      </div>
+                <div className="mb-8 pt-6 border-t border-gray-50">
+                   <div className="flex items-center gap-3 mb-4">
+                      <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                      <span className="text-[10px] font-black text-green-600 uppercase tracking-[0.2em]">Khả quan để gỡ 1.5đ trong 2 tuần</span>
+                   </div>
+                   <div className="flex items-center gap-4 text-left">
+                      <Users className="h-8 w-8 text-indigo-100" />
+                      <p className="text-[10px] font-medium text-gray-400">Đã có hơn 312 học sinh cùng mục tiêu {targetScore} đang tham gia lộ trình này.</p>
                    </div>
                 </div>
+
+                <Link href="/pricing" className="w-full py-5 bg-[#0e56fa] text-white font-black rounded-2xl shadow-xl shadow-blue-200 transition-all hover:bg-blue-700 hover:scale-[1.01] active:scale-95 text-lg flex items-center justify-center gap-3">
+                   Xem chi tiết lộ trình
+                   <ChevronRight className="h-5 w-5" />
+                </Link>
              </div>
           </aside>
         </div>
       </div>
     </main>
+  );
+}
+
+export default function DeepAnalysisResults() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center font-black animate-pulse text-gray-300 uppercase tracking-widest">Đang tải phân tích chuyên sâu...</div>}>
+      <DeepAnalysisResultsContent />
+    </Suspense>
   );
 }

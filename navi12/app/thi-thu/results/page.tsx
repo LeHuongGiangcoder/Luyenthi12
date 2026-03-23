@@ -188,7 +188,7 @@ function ExamResultsContent() {
                   {/* Refined CTA Link for Critical Weakness */}
                   {item.cta && (
                     <div className="pt-2 flex flex-col items-center gap-4">
-                       <Link href="/thi-thu/deep-analysis" className="inline-flex items-center justify-center gap-2 px-10 py-3.5 bg-[#0e56fa] text-white font-black rounded-2xl shadow-xl shadow-blue-100 hover:bg-blue-700 hover:shadow-blue-200 transition-all hover:scale-105 active:scale-95 text-sm md:text-base">
+                       <Link href={`/thi-thu/deep-analysis?target=${targetScore}`} className="inline-flex items-center justify-center gap-2 px-10 py-3.5 bg-[#0e56fa] text-white font-black rounded-2xl shadow-xl shadow-blue-100 hover:bg-blue-700 hover:shadow-blue-200 transition-all hover:scale-105 active:scale-95 text-sm md:text-base">
                           {item.cta}
                           <ArrowRight className="h-5 w-5" />
                        </Link>
