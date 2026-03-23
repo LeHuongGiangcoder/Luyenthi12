@@ -1,17 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Send, Pause, Flag } from "lucide-react";
+import { ChevronLeft, ChevronRight, Send, Pause, Flag, Target, Sparkles, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ExamRoom() {
-  const [currentIdx, setCurrentIdx] = useState(22); 
+  const [isStarted, setIsStarted] = useState(false);
+  const [targetScore, setTargetScore] = useState<number | null>(null);
+  const [currentIdx, setCurrentIdx] = useState(1); 
   const [marked, setMarked] = useState<number[]>([]);
-  const [answered, setAnswered] = useState<Record<number, any>>({
-    1: 0, 3: 0, 4: 0, 6: 0, 7: 0, 9: 0, 11: 0 
-  });
-  const [timeLeft, setTimeLeft] = useState(5400 - 1666); 
+  const [answered, setAnswered] = useState<Record<number, any>>({});
+  const [timeLeft, setTimeLeft] = useState(5400); 
   
   const formatTime = (seconds: number) => {
     const mm = Math.floor(seconds / 60);
@@ -20,13 +21,104 @@ export default function ExamRoom() {
   };
 
   useEffect(() => {
+    if (!isStarted) return;
     const timer = setInterval(() => {
       setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [isStarted]);
 
   const totalQuestions = 22;
+
+  if (!isStarted) {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-center bg-[#fafbff] p-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-2xl bg-white rounded-[3rem] border border-gray-100 shadow-2xl p-8 md:p-16 text-center"
+        >
+          
+          <h1 className="text-3xl md:text-4xl font-black font-montserrat text-gray-900 mb-4">
+            Mục tiêu của bạn là bao nhiêu điểm?
+          </h1>
+          <p className="text-gray-500 font-medium mb-12 max-w-md mx-auto">
+            Navi sẽ dựa trên mục tiêu này để đề xuất các cấp độ câu hỏi phù hợp nhất giúp bạn "ăn điểm" tối ưu.
+          </p>
+
+          <div className="flex flex-col items-center gap-6 mb-12">
+            <div className="flex items-center gap-6">
+              <button 
+                onClick={() => setTargetScore(prev => Math.max(0, (prev || 0) - 0.2))}
+                className="h-14 w-14 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition-all active:scale-90"
+              >
+                <ChevronLeft className="h-6 w-6 stroke-[3]" />
+              </button>
+              
+              <div className="relative">
+                <input 
+                  type="number" 
+                  step="0.2"
+                  min="0"
+                  max="10"
+                  value={targetScore === null ? "" : targetScore}
+                  onChange={(e) => {
+                    const val = parseFloat(e.target.value);
+                    if (isNaN(val)) setTargetScore(null);
+                    else setTargetScore(Math.min(10, Math.max(0, val)));
+                  }}
+                  placeholder="0.0"
+                  className="w-40 text-center text-6xl font-black font-montserrat text-blue-600 bg-transparent border-none outline-none focus:ring-0 placeholder:text-gray-100"
+                />
+                <div className="text-[10px] font-black text-gray-300 uppercase tracking-[0.3em] mt-2">Điểm số mục tiêu</div>
+              </div>
+
+              <button 
+                onClick={() => setTargetScore(prev => Math.min(10, (prev || 0) + 0.2))}
+                className="h-14 w-14 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition-all active:scale-90"
+              >
+                <ChevronRight className="h-6 w-6 stroke-[3]" />
+              </button>
+            </div>
+
+            <div className="flex gap-2">
+              {[8.0, 9.0, 9.6].map(val => (
+                <button 
+                  key={val}
+                  onClick={() => setTargetScore(val)}
+                  className="px-4 py-2 rounded-xl bg-gray-50 text-[10px] font-black text-gray-400 uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                >
+                  {val.toFixed(1)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <button
+              disabled={!targetScore}
+              onClick={() => setIsStarted(true)}
+              className={cn(
+                "w-full py-6 rounded-3xl font-black text-xl flex items-center justify-center gap-3 transition-all",
+                targetScore 
+                  ? "bg-[#0e56fa] text-white shadow-2xl shadow-blue-200 hover:bg-blue-700 active:scale-95"
+                  : "bg-gray-100 text-gray-300 cursor-not-allowed"
+              )}
+            >
+              Bắt đầu làm bài
+            </button>
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+              Đề thi gồm 22 câu hỏi · Thời gian 90 phút
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Decorative elements */}
+        <div className="fixed top-1/4 -left-20 h-64 w-64 rounded-full bg-blue-100/30 blur-3xl pointer-events-none" />
+        <div className="fixed bottom-1/4 -right-20 h-64 w-64 rounded-full bg-pink-100/30 blur-3xl pointer-events-none" />
+      </main>
+    );
+  }
   
   const getStatusColor = (num: number) => {
     if (num === currentIdx) return "bg-blue-600 text-white shadow-lg shadow-blue-200 border-blue-600";
@@ -50,6 +142,11 @@ export default function ExamRoom() {
                     <span className="text-xl font-black font-montserrat text-blue-600 leading-none">{currentIdx} / {totalQuestions}</span>
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Câu hỏi</span>
                   </div>
+                  <div className="h-10 w-[1px] bg-gray-100 hidden md:block" />
+                  <div className="hidden md:flex flex-col">
+                    <span className="text-xl font-black font-montserrat text-gray-900 leading-none">{targetScore?.toFixed(1)}</span>
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Mục tiêu</span>
+                  </div>
                   <div className="h-2 w-32 md:w-48 rounded-full bg-gray-100 overflow-hidden">
                     <div 
                       className="h-full bg-blue-500 transition-all duration-500" 
@@ -58,7 +155,7 @@ export default function ExamRoom() {
                   </div>
                </div>
                <div className="hidden md:block">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block text-right">Đang thi: Đề số 2 - Thi thử</span>
+                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block text-right">Đề số 2 - Thi thử THPTQG</span>
                </div>
             </div>
 
