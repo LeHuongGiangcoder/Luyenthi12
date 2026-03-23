@@ -184,7 +184,7 @@ function DeepAnalysisResultsContent() {
                   </div>
 
                   <div className="border-l-4 border-amber-400 pl-6 mb-10">
-                     <span className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-500 mb-3 block">TIẾP TỤC ĐO ĐẠC</span>
+                     <span className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-500 mb-3 block">TIẾP TỤC ĐÁNH GIÁ</span>
                      <h3 className="text-3xl font-black font-montserrat text-gray-900 leading-tight">Các chuyên đề gây mất điểm còn lại</h3>
                   </div>
 
