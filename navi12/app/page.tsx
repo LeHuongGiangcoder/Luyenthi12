@@ -103,7 +103,7 @@ export default function LandingPage() {
           </h1>
 
           <p className="mt-8 max-w-2xl text-center text-lg leading-relaxed text-gray-600 px-4">
-            Bạn đang mất điểm ở các dạng bài lặp lại. Navi chỉ ra chính xác điểm yếu <span className="font-bold text-gray-900 surface-emphasis">và cách bạn lấy lại từng điểm</span>.
+            Bạn đang mất điểm ở các dạng bài lặp lại. Na chỉ ra chính xác điểm yếu <span className="font-bold text-gray-900 surface-emphasis">và cách bạn lấy lại từng điểm</span>.
           </p>
 
           <div className="mt-12 flex flex-col items-center gap-6">
