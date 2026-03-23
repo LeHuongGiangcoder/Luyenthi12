@@ -1,10 +1,15 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, ChevronRight, Check, AlertTriangle, ShieldCheck, ClipboardCheck, Zap } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronRight, Check, AlertTriangle, ShieldCheck, ClipboardCheck, Zap, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-export default function ExamResults() {
+function ExamResultsContent() {
+  const searchParams = useSearchParams();
+  const targetScore = searchParams.get("target") || "8.0";
+
   return (
     <main className="flex min-h-screen flex-col bg-gray-50/30 overflow-x-hidden pt-8 pb-20">
       
@@ -92,11 +97,15 @@ export default function ExamResults() {
           </Link>
         </div>
 
-        {/* Weak Points Section - CLEAN & PROFESSIONAL */}
-        <div className="mb-6 px-2 text-left">
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-3 block">ĐÂY LÀ ĐIỂM SỐ BẠN ĐANG ĐỂ MẤT</span>
-          <p className="max-w-xl text-gray-500 font-medium leading-relaxed">
-            Hệ thống phân tích thấy 3 dạng Toán dưới đây chiếm 3 điểm trong bài thi của bạn. Hãy ưu tiên khắc phục <span className="text-red-500 font-bold underline decoration-red-100">chuyên đề yếu nhất</span> trước.
+        {/* Analysis Heading Section - HIGH ATTENTION */}
+        <div className="mb-12 px-2 text-left border-l-4 border-blue-600 pl-6">
+          <span className="text-xs font-black uppercase tracking-[0.3em] text-[#0e56fa] mb-4 block">PHÂN TÍCH MỤC TIÊU {targetScore} ĐIỂM</span>
+          <h2 className="text-3xl md:text-5xl font-black font-montserrat text-gray-900 mb-6 tracking-tight leading-tight">
+            Bạn cần thêm <span className="text-red-500">{(parseFloat(targetScore) - 7.0).toFixed(1)} điểm</span> nữa
+          </h2>
+          <p className="max-w-2xl text-lg md:text-xl text-gray-500 font-medium leading-relaxed">
+            Hệ thống đánh giá năng lực hiện tại của bạn đang đạt <span className="font-black text-gray-900">7.0 điểm</span>. 
+            Để chạm tới mục tiêu <span className="text-[#0e56fa] font-black">{targetScore}</span>, đây là lộ trình khắc phục các lỗ hổng đang làm mất nhiều điểm nhất của bạn:
           </p>
         </div>
 
@@ -200,7 +209,7 @@ export default function ExamResults() {
               Và đây chỉ là những gì <span className="text-[#0e56fa]">bài thi này lộ ra được</span>
            </h2>
            <p className="text-gray-500 font-medium leading-relaxed mb-8 max-w-2xl text-left">
-              Một đề 40 câu không thể kiểm tra hết toàn bộ chương trình. Trong chính chuyên đề Hàm số — còn 3 dạng khác bạn chưa gặp hôm nay. Và các chuyên đề như Tích phân, Mũ logarit, Số phức chỉ xuất hiện 1—2 câu — chưa đủ để biết bạn thực sự nắm hay chỉ may mắn làm đúng.
+              Một đề 22 câu không thể kiểm tra hết toàn bộ chương trình. Trong chính chuyên đề Hàm số — còn 3 dạng khác bạn chưa gặp hôm nay. Và các chuyên đề như Tích phân, Mũ logarit, Số phức chỉ xuất hiện 1—2 câu — chưa đủ để biết bạn thực sự nắm hay chỉ may mắn làm đúng.
            </p>
 
            <div className="bg-gray-50/50 rounded-2xl p-8 border border-gray-100 space-y-6 text-left">
@@ -232,5 +241,13 @@ export default function ExamResults() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function ExamResults() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center font-black animate-pulse text-gray-300 uppercase tracking-widest">Đang tải kết quả...</div>}>
+      <ExamResultsContent />
+    </Suspense>
   );
 }

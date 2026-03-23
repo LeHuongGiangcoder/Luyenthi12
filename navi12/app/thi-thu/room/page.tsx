@@ -230,7 +230,7 @@ export default function ExamRoom() {
                   <ChevronRight className="h-5 w-5" />
                </button>
                
-               <Link href="/thi-thu/results" className="flex items-center gap-2 px-6 py-4 border border-pink-100 rounded-2xl bg-pink-50 text-pink-500 font-black transition-all hover:bg-pink-100 active:scale-95 text-sm">
+               <Link href={`/thi-thu/results?target=${targetScore}`} className="flex items-center gap-2 px-6 py-4 border border-pink-100 rounded-2xl bg-pink-50 text-pink-500 font-black transition-all hover:bg-pink-100 active:scale-95 text-sm">
                   <span className="hidden sm:inline">Nộp bài</span>
                   <Send className="h-4 w-4" />
                </Link>
