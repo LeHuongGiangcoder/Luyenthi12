@@ -109,7 +109,7 @@ export default function LandingPage() {
 
           <div className="mt-12 flex flex-col items-center gap-6">
             <InteractiveButton href="/thi-thu" className="rounded-2xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 hover:bg-blue-700">
-              Kiểm tra điểm yếu ngay
+              Tăng được mấy điểm
             </InteractiveButton>
             <div className="flex flex-col items-center gap-1.5 grayscale opacity-70">
               <span className="text-sm font-medium text-gray-600">

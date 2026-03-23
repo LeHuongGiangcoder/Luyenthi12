@@ -227,62 +227,91 @@ export default function LuyenTap() {
             const isStarted = topic.mastery > 0;
             const isAnalyzed = isHamSo && !isStarted; // Mock state: analyzed but not practiced yet
 
-            // Dynamic Styling based on state
+            // Dynamic Styling based on state initialized to default
             let cardBg = "bg-white";
             let cardBorder = "border-gray-100";
-            let statusBadge = null;
+            let hoverShadow = "hover:shadow-gray-200/40";
             let actionText = "Vào Luyện";
             let actionHref = `/luyen-tap/${topic.id}`;
             let buttonColor = "bg-[#0e56fa]";
             let glowColor = "bg-blue-50/50";
 
             if (isAnalyzed) {
-               cardBg = "bg-emerald-50/20";
+               cardBg = "bg-white";
                cardBorder = "border-emerald-200 border-2";
-               statusBadge = (
-                  <div className="px-3 py-1 bg-emerald-100 rounded-full flex items-center gap-1.5 border border-emerald-200">
-                    <Sparkles className="h-2.5 w-2.5 text-emerald-600" />
-                    <span className="text-[9px] font-black text-emerald-700 uppercase tracking-widest">Lộ trình sẵn sàng</span>
-                  </div>
-               );
+               hoverShadow = "hover:shadow-emerald-200/30";
                actionText = "Lộ Trình";
                actionHref = "/thi-thu/deep-analysis/results";
                buttonColor = "bg-emerald-600 hover:bg-emerald-700";
                glowColor = "hidden";
             } else if (isStarted) {
-               cardBorder = "border-2 border-blue-500/30 shadow-blue-50/30";
-               statusBadge = (
-                  <div className="px-3 py-1 bg-blue-50 rounded-full flex items-center gap-1.5 border border-blue-200">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                    <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest">Đang luyện tập</span>
-                  </div>
-               );
+               cardBorder = "border-2 border-blue-500/30";
+               hoverShadow = "hover:shadow-blue-500/10";
                actionText = "Tiếp Tục";
                glowColor = "bg-blue-50/50";
             } else {
+               const isTrig = topic.id === "luong-giac";
                cardBorder = "border border-dashed border-gray-200 opacity-80";
-               statusBadge = (
-                  <div className="px-3 py-1 bg-gray-50 rounded-full flex items-center gap-1.5 border border-gray-100">
-                    <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Chưa bắt đầu</span>
-                  </div>
-               );
+               hoverShadow = "hover:shadow-gray-200/30";
                actionText = "Bắt Đầu";
+               actionHref = isTrig ? "/luyen-tap/luong-giac/deep-analysis" : `/luyen-tap/${topic.id}`;
                buttonColor = "bg-gray-900";
                glowColor = "bg-gray-100/50";
             }
+
+            // Dynamic title hover color
+            let titleHoverColor = "group-hover:text-[#0e56fa]";
+            if (isAnalyzed) titleHoverColor = "group-hover:text-emerald-600";
+            else if (!isStarted) titleHoverColor = "group-hover:text-gray-900";
+
+            // Minimalist Status Indicator Logic
+            const StatusIndicator = () => {
+              const [isExpanded, setIsExpanded] = useState(false);
+              
+              const statusData = isAnalyzed 
+                ? { label: "Lộ trình sẵn sàng", color: "bg-emerald-500", text: "text-emerald-700", bg: "bg-emerald-100/50" }
+                : isStarted 
+                  ? { label: "Đang luyện tập", color: "bg-blue-500", text: "text-blue-700", bg: "bg-blue-100/50", pulse: true }
+                  : { label: "Chưa bắt đầu", color: "bg-gray-400", text: "text-gray-600", bg: "bg-gray-100/50" };
+
+              return (
+                <div 
+                  onClick={(e) => { e.stopPropagation(); setIsExpanded(!isExpanded); }}
+                  onMouseEnter={() => setIsExpanded(true)}
+                  onMouseLeave={() => setIsExpanded(false)}
+                  className={cn(
+                    "flex items-center gap-2 px-1.5 h-6 rounded-full border transition-all duration-300 cursor-pointer overflow-hidden",
+                    isExpanded ? "max-w-[200px]" : "max-w-[24px]", // Width transitions
+                    isExpanded ? "border-gray-100 pr-3" : "border-transparent",
+                    isExpanded ? statusData.bg : "bg-transparent"
+                  )}
+                >
+                  <div className={cn(
+                    "w-2 h-2 rounded-full shrink-0", 
+                    statusData.color,
+                    statusData.pulse && "animate-pulse"
+                  )} />
+                  {isExpanded && (
+                    <span className={cn("text-[9px] font-black uppercase tracking-widest whitespace-nowrap", statusData.text)}>
+                      {statusData.label}
+                    </span>
+                  )}
+                </div>
+              );
+            };
 
             return (
               <div
                 key={topic.id}
                 className={cn(
-                  "group relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border flex flex-col",
-                  cardBg, cardBorder,
+                  "group relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border flex flex-col",
+                  cardBg, cardBorder, hoverShadow,
                   view === "grid" ? "p-8 md:p-10 rounded-[2.5rem] min-h-[440px]" : "p-6 rounded-3xl md:flex-row items-center justify-between gap-8 h-fit text-left w-full",
                 )}
               >
-                {/* Status Badge */}
-                <div className="absolute top-6 left-8 z-10">
-                  {statusBadge}
+                {/* Status Indicator Dot - Top Left */}
+                <div className="absolute top-8 left-8 z-10">
+                  <StatusIndicator />
                 </div>
 
                 {/* Decorative background glow */}
@@ -293,7 +322,7 @@ export default function LuyenTap() {
 
                 <div className={cn("flex flex-col gap-2 text-left pt-6", view === "grid" ? "h-[110px]" : "flex-1")}>
                   <div className="flex justify-between items-start gap-4">
-                    <h3 className="text-xl md:text-2xl font-black font-montserrat text-gray-900 group-hover:text-[#0e56fa] transition-colors leading-tight">{topic.name}</h3>
+                    <h3 className={cn("text-xl md:text-2xl font-black font-montserrat text-gray-900 transition-colors leading-tight", titleHoverColor)}>{topic.name}</h3>
                     {topic.mastery > 90 && view === "grid" && (
                       <div className="px-3 py-1 bg-green-50 rounded-lg flex items-center gap-1.5 shrink-0">
                         <Sparkles className="h-3 w-3 text-green-600" />

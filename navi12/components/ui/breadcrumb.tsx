@@ -7,11 +7,24 @@ import { ChevronRight, Home } from "lucide-react";
 const routeMap: Record<string, string> = {
   "": "Trang chủ",
   "thi-thu": "Thi thử",
+  "luyen-tap": "Luyện tập",
   "room": "Phòng thi",
   "deep-analysis": "Phân tích sâu",
   "results": "Kết quả",
   "review": "Xem lại bài thi",
   "pricing": "Bảng giá",
+  "ham-so": "Hàm số",
+  "mu-logarit": "Mũ - Lôgarit",
+  "nguyen-ham-tich-phan": "Nguyên hàm - Tích phân",
+  "hinh-hoc-oxyz": "Hình học không gian Oxyz",
+  "luong-giac": "Lượng giác",
+  "day-so-cap-so": "Dãy số - Cấp số cộng/nhân",
+  "hinh-hoc-khong-gian": "Hình học không gian",
+  "ly-thuyet-do-thi": "Lý thuyết đồ thị",
+  "xac-suat-co-dien": "Xác suất cổ điển",
+  "xac-suat-co-dieu-kien": "Xác suất có điều kiện",
+  "vecto-khong-gian": "Véctơ không gian",
+  "thong-ke": "Thống kê",
 };
 
 export function Breadcrumbs() {
@@ -42,8 +55,8 @@ export function Breadcrumbs() {
           return (
             <div key={path} className="flex items-center gap-2">
               <ChevronRight className="h-3 w-3 text-gray-300" />
-              {isLast ? (
-                <span className="text-[10px] font-black uppercase tracking-widest text-[#0e56fa] bg-blue-50/50 px-2.5 py-1 rounded-lg border border-blue-100/50">
+               {isLast ? (
+                <span className="text-[10px] font-black uppercase tracking-widest text-[#0e56fa] bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100 shadow-sm">
                   {label}
                 </span>
               ) : (

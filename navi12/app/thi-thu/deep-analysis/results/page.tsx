@@ -23,7 +23,7 @@ function DeepAnalysisResultsContent() {
                   Bạn có thể "ăn trọn" <span className="text-[#0e56fa]">1.5 điểm nữa</span> từ chuyên đề Hàm số
                </h1>
                <p className="max-w-2xl text-lg md:text-xl text-gray-500 font-medium leading-relaxed">
-                  Dựa trên 12 câu hỏi chắt lọc, NaviEdu xác định bạn chỉ cần tập trung đạt đến <span className="text-gray-900 font-black underline decoration-blue-100 underline-offset-4">Vận dụng cao</span> để giành lại toàn bộ phần điểm đang hụt mất.
+                  Dựa trên 12 câu hỏi chắt lọc, NaviEdu xác định bạn chỉ cần tập trung đạt đến <span className="text-gray-900 font-black underline decoration-blue-100 underline-offset-4">Vận dụng và Vận dụng cao</span> để giành lại toàn bộ phần điểm đang hụt mất.
                </p>
             </div>
 
@@ -96,10 +96,57 @@ function DeepAnalysisResultsContent() {
                      </div>
                   </div>
 
+                  {/* Section 1.2: Chi tiết năng lực theo đơn vị kiến thức */}
+                  <div className="pt-10 border-t border-gray-100 flex flex-col gap-10">
+                     <div className="flex flex-col gap-2">
+                        <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">Chi tiết năng lực</span>
+                        <h3 className="text-2xl font-black font-montserrat text-gray-900 leading-tight">Kết quả từng đơn vị kiến thức</h3>
+                     </div>
+
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+                        {[
+                           { name: "Tính đơn điệu của hàm số", levels: [100, 100, 75, 40], avg: "Level 3" },
+                           { name: "Cực trị của hàm số", levels: [100, 92, 60, 20], avg: "Level 2" },
+                           { name: "GTLN - GTNN của hàm số", levels: [100, 100, 85, 30], avg: "Level 3" },
+                           { name: "Tiệm cận của đồ thị hàm số", levels: [100, 80, 40, 10], avg: "Level 2" },
+                           { name: "Ứng dụng đạo hàm thực tế", levels: [100, 70, 30, 0], avg: "Level 2" }
+                        ].map((sub, i) => (
+                           <div key={i} className="flex flex-col gap-4">
+                              <div className="flex justify-between items-end h-[34px]">
+                                 <h4 className="text-sm font-bold text-gray-800 leading-tight flex-1 pr-4">{sub.name}</h4>
+                                 <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest whitespace-nowrap">{sub.avg}</span>
+                              </div>
+                              
+                              <div className="grid grid-cols-4 gap-2">
+                                 {["NB", "TH", "VD", "VDC"].map((label, idx) => {
+                                    const val = sub.levels[idx];
+                                    let color = "bg-gray-100";
+                                    if (val >= 90) color = "bg-green-500";
+                                    else if (val >= 60) color = "bg-[#0e56fa]";
+                                    else if (val > 0) color = "bg-amber-400";
+                                    
+                                    return (
+                                       <div key={idx} className="flex flex-col gap-2">
+                                          <div className="h-1.5 w-full bg-gray-50 rounded-full overflow-hidden">
+                                             <div 
+                                                className={cn("h-full transition-all duration-1000", color)}
+                                                style={{ width: `${val}%` }}
+                                             />
+                                          </div>
+                                          <span className="text-[8px] font-black text-gray-400 text-center uppercase tracking-widest">{label}</span>
+                                       </div>
+                                    );
+                                 })}
+                              </div>
+                           </div>
+                        ))}
+                     </div>
+                  </div>
+
                   <div className="p-8 md:p-10 bg-blue-50/30 rounded-[2rem] border border-blue-100/50">
                      <p className="text-lg font-medium text-gray-700 leading-relaxed text-left">
                         <span className="font-black text-blue-600 leading-relaxed italic block mb-3 underline decoration-blue-200 decoration-4">KẾT LUẬN MỤC TIÊU {targetScore}:</span>
-                        Kỹ năng cơ bản của bạn đã ổn, nhưng để chạm mốc {targetScore}, bạn cần đạt được <span className="text-red-500 font-bold underline decoration-red-100 italic">Vận dụng cao của Hàm số.</span>
+                        Kỹ năng cơ bản của bạn đã ổn, nhưng để chạm mốc {targetScore}, bạn cần đạt được <span className="text-red-500 font-bold underline decoration-red-100 italic">Vận dụng và Vận dụng cao của Hàm số.</span>
                         <br /> Dưới đây là lộ trình giúp bạn lấy lại <span className="font-black text-blue-600">1.5 điểm</span> còn thiếu ngay hôm nay.
                      </p>
                   </div>
