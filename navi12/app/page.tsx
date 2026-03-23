@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, Check, X, Star, Calendar, Clock, Trophy, LineChart, Zap, TrendingUp } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion, useScroll, useTransform } from "framer-motion";
 import CountdownTimer from "@/components/ui/countdown-timer";
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
@@ -61,22 +62,8 @@ export default function LandingPage() {
         }, 0); 
       }
 
-      // Simple Entrance Animations for Solution Steps
-      if (solutionSectionRef.current) {
-        gsap.utils.toArray(".solution-item-row").forEach((row: any) => {
-          gsap.from(row, {
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            scrollTrigger: {
-              trigger: row,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
-            }
-          });
-        });
-      }
-    }, [trapSectionRef, solutionSectionRef]);
+      // Trap cards animation remains in GSAP as it handles horizontal pinning
+    }, [trapSectionRef]);
 
     return () => ctx.revert();
   }, []);
@@ -226,7 +213,13 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-12 flex flex-col gap-24 md:gap-32">
           
           {/* Main Header - Centered & Consistent */}
-          <div className="flex flex-col items-center text-center mx-auto max-w-4xl mb-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col items-center text-center mx-auto max-w-4xl mb-12"
+          >
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black text-blue-600 border border-blue-100 uppercase tracking-widest">
                GIẢI PHÁP ĐỘT PHÁ CỦA NAVIEDU
             </div>
@@ -234,10 +227,10 @@ export default function LandingPage() {
               Cách NaviEdu <br />
               <span className="text-[#0e56fa]">mở khóa tiềm năng</span> của bạn
             </h2>
-            <p className="text-xl text-gray-500 font-medium leading-relaxed font-primary max-w-2xl">
+            <p className="text-xl text-gray-500 font-medium leading-relaxed font-primary max-w-2xl mt-6">
               Chúng tôi không dạy bạn mọi thứ. Chúng tôi chỉ giúp bạn giỏi thứ bạn đang yếu nhất để tăng điểm nhanh nhất.
             </p>
-          </div>
+          </motion.div>
 
           {[
             {
@@ -266,52 +259,7 @@ export default function LandingPage() {
               color: "bg-green-500"
             }
           ].map((item, i) => (
-            <div key={i} className={cn(
-              "solution-item-row grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center",
-              item.reverse ? "lg:flex-row-reverse" : ""
-            )}>
-              {/* Text Content */}
-              <div className={cn("order-2 lg:order-none", item.reverse ? "lg:order-2" : "lg:order-1")}>
-                <div className="mb-6 inline-flex items-center gap-2 text-xs font-black text-blue-600 uppercase tracking-widest">
-                   {item.tag}
-                </div>
-                <h3 className="text-3xl md:text-4xl font-black tracking-tight text-gray-900 mb-8 leading-tight">
-                  {item.title}
-                </h3>
-                <p className="text-lg text-gray-500 font-medium leading-relaxed mb-10 font-primary">
-                  {item.desc}
-                </p>
-                <div className="grid gap-4">
-                  {item.features.map((f, j) => (
-                    <div key={j} className="flex items-center gap-4 text-gray-900 font-bold">
-                      <div className="h-6 w-6 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
-                        <Check className="h-4 w-4 stroke-[3]" />
-                      </div>
-                      {f}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Image Mockup */}
-              <div className={cn("order-1 lg:order-none relative h-full flex items-center justify-center", item.reverse ? "lg:order-1" : "lg:order-2")}>
-                <div className="relative w-full max-w-[600px] aspect-[4/3] rounded-[3rem] bg-white p-4 shadow-2xl border-4 border-white overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
-                  <div className="absolute inset-0 opacity-10"><AnimatedGridPattern /></div>
-                  
-                  <div className="relative h-full w-full rounded-[2.2rem] overflow-hidden bg-gray-50 flex items-center justify-center border border-gray-100">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-contain p-4 md:p-8"
-                    />
-                  </div>
-
-                  <div className={cn("absolute top-8 right-8 h-14 w-14 rounded-[1.2rem] flex items-center justify-center text-white shadow-xl animate-pulse", item.color)}>
-                    <Zap className="h-8 w-8 fill-current" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <SolutionItem key={i} item={item} index={i} />
           ))}
         </div>
       </section>
@@ -527,6 +475,100 @@ export default function LandingPage() {
   );
 }
 
+function SolutionItem({ item, index: i }: any) {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
+
+  return (
+    <motion.div 
+      ref={containerRef}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      className={cn(
+        "solution-item-row grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center mb-24 md:mb-32",
+        item.reverse ? "lg:flex-row-reverse" : ""
+      )}
+    >
+      {/* Text Content */}
+      <div className={cn("order-2 lg:order-none", item.reverse ? "lg:order-2" : "lg:order-1")}>
+        <motion.div
+          initial={{ opacity: 0, x: item.reverse ? 20 : -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 + (i * 0.1) }}
+        >
+          <div className="mb-6 inline-flex items-center gap-2 text-xs font-black text-blue-600 uppercase tracking-widest">
+            {item.tag}
+          </div>
+          <h3 className="text-3xl md:text-4xl font-black tracking-tight text-gray-900 mb-8 leading-tight">
+            {item.title}
+          </h3>
+          <p className="text-lg text-gray-500 font-medium leading-relaxed mb-10 font-primary">
+            {item.desc}
+          </p>
+        </motion.div>
+
+        <div className="grid gap-4">
+          {item.features.map((f: string, j: number) => (
+            <motion.div 
+              key={j} 
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.5 + (j * 0.1) + (i * 0.1) }}
+              className="flex items-center gap-4 text-gray-900 font-bold"
+            >
+              <div className="h-6 w-6 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                <Check className="h-4 w-4 stroke-[3]" />
+              </div>
+              {f}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Image Mockup */}
+      <motion.div 
+        style={{ y }}
+        initial={{ opacity: 0, scale: 0.9, rotate: item.reverse ? -2 : 2 }}
+        whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.2 + (i * 0.1), ease: [0.22, 1, 0.36, 1] }}
+        className={cn("order-1 lg:order-none relative h-full flex items-center justify-center", item.reverse ? "lg:order-1" : "lg:order-2")}
+      >
+        <div className="relative w-full max-w-[600px] aspect-[4/3] rounded-[3rem] bg-white p-4 shadow-2xl border-4 border-white overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
+          <div className="absolute inset-0 opacity-10"><AnimatedGridPattern /></div>
+          
+          <div className="relative h-full w-full rounded-[2.2rem] overflow-hidden bg-gray-50 flex items-center justify-center border border-gray-100">
+            <motion.img
+              initial={{ scale: 1.1 }}
+              whileInView={{ scale: 1 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+              src={item.image}
+              alt={item.title}
+              className="w-full h-full object-contain p-4 md:p-8"
+            />
+          </div>
+
+          <motion.div 
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className={cn("absolute top-8 right-8 h-14 w-14 rounded-[1.2rem] flex items-center justify-center text-white shadow-xl", item.color)}
+          >
+            <Zap className="h-8 w-8 fill-current" />
+          </motion.div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 function StatItem({ value, label, prefix = "", suffix = "", decimals = 0, subLabel = "", separator = "," }: any) {
   const numberRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -572,3 +614,4 @@ function StatItem({ value, label, prefix = "", suffix = "", decimals = 0, subLab
     </div>
   );
 }
+
