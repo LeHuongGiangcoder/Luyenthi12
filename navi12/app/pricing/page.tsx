@@ -106,12 +106,17 @@ export default function Pricing() {
            <span className="text-[#0e56fa] italic font-medium">Mỗi phút phải đúng chỗ.</span>
         </h1>
         <p className="max-w-2xl text-center text-lg leading-relaxed text-gray-600">
-           Giai đoạn nước rút không còn chỗ cho việc ôn dàn trải. Chọn gói Sprint 60 phù hợp để rà soát chính xác lỗ hổng và tối đa hóa điểm số ngay hôm nay.
+           Giai đoạn nước rút không còn chỗ cho việc ôn dàn trải. Chọn gói Sprint 60 phù hợp để rà soát chính xác lỗ hổng và lấy lại điểm số ngay hôm nay.
         </p>
       </section>
 
       {/* Interactive Pricing Cards - MOVED UP TO PREVENT CONFUSION */}
-      <section className="mx-auto w-full max-w-7xl px-4 md:px-12 mb-40">
+      <section className="mx-auto w-full max-w-7xl px-4 md:px-12 mb-40 flex flex-col items-center">
+         <div className="mb-14 flex items-center gap-3 px-6 py-2.5 bg-green-50 rounded-full border border-green-100 shadow-sm animate-subtle-pulse">
+            <TrendingUp className="h-4 w-4 text-green-600" />
+            <span className="text-[11px] font-black text-green-700 uppercase tracking-widest leading-none">100% học sinh tăng trung bình 1-2 điểm sau 60 ngày luyện tập</span>
+         </div>
+         
          <div className="text-center mb-16">
             <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em]">CHỌN GÓI PHÙ HỢP CỦA BẠN</span>
          </div>

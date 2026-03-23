@@ -99,17 +99,16 @@ export default function LandingPage() {
 
           <h1 className="max-w-4xl text-center text-4xl font-extrabold leading-[1.1] md:text-7xl font-montserrat tracking-tight">
             Giai đoạn nước rút <br />
-            mỗi điểm Toán <br />
-            <span className="text-[#0e56fa] italic font-medium">đều phải có lý do</span>
+            <span className="text-[#0e56fa] italic font-medium">bạn phí điểm ở đâu</span>
           </h1>
 
           <p className="mt-8 max-w-2xl text-center text-lg leading-relaxed text-gray-600 px-4">
-            Không còn thời gian để ôn dàn trải. Navi giúp bạn <span className="font-bold text-gray-900 surface-emphasis">giỏi cái bạn đang yếu nhất</span> để tối đa hóa từng điểm số cho kỳ thi.
+            Bạn đang mất điểm ở các dạng bài lặp lại. Navi chỉ ra chính xác điểm yếu <span className="font-bold text-gray-900 surface-emphasis">và cách bạn lấy lại từng điểm</span>.
           </p>
 
           <div className="mt-12 flex flex-col items-center gap-6">
             <InteractiveButton href="/thi-thu" className="rounded-2xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 hover:bg-blue-700">
-              Tăng được mấy điểm
+              Tìm chỗ mất điểm
             </InteractiveButton>
             <div className="flex flex-col items-center gap-1.5 grayscale opacity-70">
               <span className="text-sm font-medium text-gray-600">
@@ -136,7 +135,7 @@ export default function LandingPage() {
         <div className="relative z-10 w-full text-center px-4 mb-12">
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-red-500 mb-4 block">CẢNH BÁO GIAI ĐOẠN CUỐI</span>
           <h2 className="text-4xl md:text-6xl font-extrabold font-montserrat tracking-tight text-gray-900">
-            4 cái bẫy khiến điểm <span className="text-red-500">đứng im</span>
+            4 cái bẫy khiến bạn <span className="text-red-500">mất điểm</span>
           </h2>
         </div>
 
@@ -225,10 +224,10 @@ export default function LandingPage() {
             </div>
             <h2 className="text-4xl md:text-6xl font-extrabold font-montserrat tracking-tight text-gray-900 leading-[1.1]">
               Cách NaviEdu <br />
-              <span className="text-[#0e56fa]">mở khóa tiềm năng</span> của bạn
+              <span className="text-[#0e56fa]">lấy lại từng điểm số cho bạn</span> 
             </h2>
             <p className="text-xl text-gray-500 font-medium leading-relaxed font-primary max-w-2xl mt-6">
-              Chúng tôi không dạy bạn mọi thứ. Chúng tôi chỉ giúp bạn giỏi thứ bạn đang yếu nhất để tăng điểm nhanh nhất.
+              Na không dạy bạn mọi thứ. Na chỉ giúp bạn giỏi thứ bạn đang yếu nhất để tăng điểm nhanh nhất.
             </p>
           </motion.div>
 
@@ -236,7 +235,7 @@ export default function LandingPage() {
             {
               tag: "Giai đoạn 1",
               title: "Chụp X-Quang lỗ hổng kiến thức",
-              desc: "NaviEdu phân tích bài thi qua 5 cấp độ tư duy: Nhận biết, Thông hiểu, Vận dụng, Vận dụng cao. Phát hiện ngay tầng kiến thức nào đang 'âm thầm' kéo điểm số của bạn xuống.",
+              desc: "Na phân tích bài thi qua 5 cấp độ tư duy: Nhận biết, Thông hiểu, Vận dụng, Vận dụng cao. Phát hiện ngay tầng kiến thức nào đang 'âm thầm' kéo điểm số của bạn xuống.",
               features: ["Phân tích 5 cấp độ nhận thức", "Báo cáo radar điểm mạnh/yếu", "Kết luận lộ trình ngay lập tức"],
               image: "/pic1.png",
               color: "bg-blue-500"
@@ -244,7 +243,7 @@ export default function LandingPage() {
             {
               tag: "Giai đoạn 2",
               title: "Xác định rõ 'kẻ trộm điểm số'",
-              desc: "Không chỉ biết sai ở đâu, NaviEdu lượng hóa tầm quan trọng của lỗi sai: Nếu sửa dạng Hàm số này, bạn gỡ lại ngay +1.5đ thâm hụt so với mục tiêu.",
+              desc: "Không chỉ biết sai ở đâu, Na lượng hóa tầm quan trọng của lỗi sai: Nếu sửa dạng Hàm số này, bạn gỡ lại ngay +1.5đ thâm hụt so với mục tiêu.",
               features: ["Lượng hóa điểm số bị mất", "Ưu tiên chuyên đề yếu nhất", "Dự báo mức tăng điểm tiềm năng"],
               image: "/pic2.png",
               reverse: true,

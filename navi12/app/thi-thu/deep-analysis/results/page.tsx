@@ -210,7 +210,7 @@ function DeepAnalysisResultsContent() {
                               <span className="text-[10px] font-black text-green-700 uppercase tracking-widest">Trong tầm tay sau 7 ngày theo sát lộ trình</span>
                            </div>
                         <Link href="/pricing" className="w-full py-6 bg-[#0e56fa] text-white font-black rounded-2xl shadow-xl shadow-blue-400/30 transition-all hover:bg-blue-700 hover:scale-[1.05] active:scale-95 text-xl flex items-center justify-center gap-3 animate-subtle-pulse">
-                           Luyện cá nhân hoá ngay
+                           Bắt đầu lấy lại điểm
                            <ArrowRight className="h-6 w-6" />
                         </Link>
                         

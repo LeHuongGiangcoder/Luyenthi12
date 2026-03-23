@@ -249,7 +249,7 @@ function ExamResultsContent() {
               </p>
            </div>
            <Link href="/pricing" className="whitespace-nowrap px-10 py-5 bg-white text-blue-600 font-black rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center">
-              Khám phá ngay →
+            Lấy lại điểm →
            </Link>
         </div>
       </div>
