@@ -59,7 +59,7 @@ export default function LandingPage() {
           stagger: 0.05,
           duration: 0.2,
           ease: "power2.out",
-        }, 0); 
+        }, 0);
       }
 
       // Trap cards animation remains in GSAP as it handles horizontal pinning
@@ -210,9 +210,9 @@ export default function LandingPage() {
 
       <section ref={solutionSectionRef} className="relative bg-white py-24 md:py-32 overflow-hidden font-montserrat">
         <div className="max-w-7xl mx-auto px-4 md:px-12 flex flex-col gap-16 md:gap-20">
-          
+
           {/* Main Header - Centered & Consistent */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -220,11 +220,11 @@ export default function LandingPage() {
             className="flex flex-col items-center text-center mx-auto max-w-4xl mb-12"
           >
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black text-blue-600 border border-blue-100 uppercase tracking-widest">
-               GIẢI PHÁP ĐỘT PHÁ CỦA NAVIEDU
+              GIẢI PHÁP ĐỘT PHÁ CỦA NAVIEDU
             </div>
             <h2 className="text-4xl md:text-6xl font-extrabold font-montserrat tracking-tight text-gray-900 leading-[1.1]">
               Cách NaviEdu <br />
-              <span className="text-[#0e56fa]">lấy lại từng điểm số cho bạn</span> 
+              <span className="text-[#0e56fa]">lấy lại từng điểm số cho bạn</span>
             </h2>
             <p className="text-xl text-gray-500 font-medium leading-relaxed font-primary max-w-2xl mt-6">
               Na không dạy bạn mọi thứ. Na chỉ giúp bạn giỏi thứ bạn đang yếu nhất để tăng điểm nhanh nhất.
@@ -274,7 +274,7 @@ export default function LandingPage() {
           {/* Section Header */}
           <div className="flex flex-col items-center text-center mx-auto max-w-3xl mb-16 md:mb-24">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black text-blue-600 border border-blue-100 uppercase tracking-widest">
-               KẾT QUẢ THỰC TẾ
+              KẾT QUẢ THỰC TẾ
             </div>
             <h2 className="text-4xl md:text-6xl font-extrabold font-montserrat tracking-tight text-gray-900 mb-6 leading-tight">
               Học sinh NaviEdu <br />
@@ -289,7 +289,7 @@ export default function LandingPage() {
             {/* Gradient Overlays for smooth edges */}
             <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#fafbff] to-transparent z-20" />
             <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#fafbff] to-transparent z-20" />
-            
+
             <div className="animate-marquee flex gap-8 w-max">
               {[
                 {
@@ -405,50 +405,50 @@ export default function LandingPage() {
                 <div key={idx} className="flex flex-col justify-between bg-white rounded-[2.5rem] p-10 shadow-xl shadow-gray-200/50 border border-gray-100 w-[420px] shrink-0 transition-transform active:scale-95">
                   <div>
                     <div className="flex items-center justify-between mb-8">
-                       <div className={cn("px-4 py-2 rounded-2xl font-black text-sm shadow-sm", t.color)}>
-                          {t.result}
-                       </div>
-                       <Star className="h-6 w-6 text-yellow-400 fill-current" />
+                      <div className={cn("px-4 py-2 rounded-2xl font-black text-sm shadow-sm", t.color)}>
+                        {t.result}
+                      </div>
+                      <Star className="h-6 w-6 text-yellow-400 fill-current" />
                     </div>
-                    
+
                     <div className="mb-6 space-y-4">
                       <div className="text-xs font-black uppercase tracking-widest text-gray-400">{t.gap}</div>
                       <div className="text-2xl font-black font-montserrat text-gray-900">{t.metric}</div>
                     </div>
-  
+
                     <p className="text-gray-500 font-medium leading-relaxed italic mb-10 relative">
                       <span className="text-4xl text-blue-100 absolute -top-4 -left-4 font-serif">“</span>
                       {t.quote}
                     </p>
                   </div>
-  
+
                   <div className="flex items-center gap-4 pt-8 border-t border-gray-50">
-                     <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-400 shadow-inner">
-                        {t.name.charAt(0)}
-                     </div>
-                     <div className="flex flex-col">
-                        <span className="text-sm font-black text-gray-900">{t.name}</span>
-                        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">{t.school}</span>
-                     </div>
+                    <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-400 shadow-inner">
+                      {t.name.charAt(0)}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-black text-gray-900">{t.name}</span>
+                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">{t.school}</span>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          
+
           {/* Trust Badge */}
           <div className="mt-16 flex flex-col items-center gap-4 opacity-50 grayscale">
-             <div className="flex items-center gap-2">
-                <div className="flex -space-x-2">
-                  {[1,2,3,4].map(i => <div key={i} className="h-6 w-6 rounded-full border-2 border-white bg-gray-200" />)}
-                </div>
-                <span className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Được tin dùng bởi 15k+ học sinh 2k8</span>
-             </div>
+            <div className="flex items-center gap-2">
+              <div className="flex -space-x-2">
+                {[1, 2, 3, 4].map(i => <div key={i} className="h-6 w-6 rounded-full border-2 border-white bg-gray-200" />)}
+              </div>
+              <span className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Được tin dùng bởi 15k+ học sinh 2k8</span>
+            </div>
           </div>
         </div>
       </section>
       <section className="px-4 py-16 md:py-20 flex flex-col items-center bg-gray-50/50 overflow-hidden">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -458,7 +458,7 @@ export default function LandingPage() {
           <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
             <AnimatedGridPattern />
           </div>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -469,7 +469,7 @@ export default function LandingPage() {
             {daysRemaining} ngày còn lại — đủ để tăng điểm nếu luyện đúng chỗ
           </motion.div>
 
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -478,8 +478,8 @@ export default function LandingPage() {
           >
             Bạn đang mất điểm <br /> ở dạng Toán nào?
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -514,7 +514,7 @@ function SolutionItem({ item, index: i }: any) {
   const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
   return (
-    <motion.div 
+    <motion.div
       ref={containerRef}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -546,8 +546,8 @@ function SolutionItem({ item, index: i }: any) {
 
         <div className="grid gap-4">
           {item.features.map((f: string, j: number) => (
-            <motion.div 
-              key={j} 
+            <motion.div
+              key={j}
               initial={{ opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -564,7 +564,7 @@ function SolutionItem({ item, index: i }: any) {
       </div>
 
       {/* Image Mockup */}
-      <motion.div 
+      <motion.div
         style={{ y }}
         initial={{ opacity: 0, scale: 0.9, rotate: item.reverse ? -2 : 2 }}
         whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -574,7 +574,7 @@ function SolutionItem({ item, index: i }: any) {
       >
         <div className="relative w-full max-w-[600px] aspect-[4/3] rounded-[3rem] bg-white p-4 shadow-2xl border-4 border-white overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
           <div className="absolute inset-0 opacity-10"><AnimatedGridPattern /></div>
-          
+
           <div className="relative h-full w-full rounded-[2.2rem] overflow-hidden bg-gray-50 flex items-center justify-center border border-gray-100">
             <motion.img
               initial={{ scale: 1.1 }}
@@ -586,7 +586,7 @@ function SolutionItem({ item, index: i }: any) {
             />
           </div>
 
-          <motion.div 
+          <motion.div
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             className={cn("absolute top-8 right-8 h-14 w-14 rounded-[1.2rem] flex items-center justify-center text-white shadow-xl", item.color)}
@@ -669,7 +669,7 @@ function InteractiveButton({ children, href, className }: any) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <span className="relative z-10">{children}</span>
-      
+
       {/* Interactive Cursor Label */}
       <motion.div
         animate={{
