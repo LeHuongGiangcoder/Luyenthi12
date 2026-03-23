@@ -210,7 +210,7 @@ export default function LandingPage() {
       </section>
 
       <section ref={solutionSectionRef} className="relative bg-white py-24 md:py-32 overflow-hidden font-montserrat">
-        <div className="max-w-7xl mx-auto px-4 md:px-12 flex flex-col gap-24 md:gap-32">
+        <div className="max-w-7xl mx-auto px-4 md:px-12 flex flex-col gap-16 md:gap-20">
           
           {/* Main Header - Centered & Consistent */}
           <motion.div 
@@ -266,7 +266,7 @@ export default function LandingPage() {
 
 
       {/* Testimonials Section - High Impact Results */}
-      <section className="relative bg-[#fafbff] py-24 md:py-32 overflow-hidden border-t border-gray-100">
+      <section className="relative bg-[#fafbff] py-16 md:py-20 overflow-hidden border-t border-gray-100">
         {/* Abstract Background Decoration */}
         <div className="absolute top-0 right-0 p-32 opacity-10 pointer-events-none grayscale"><TrendingUp className="h-64 w-64" /></div>
         <div className="absolute -bottom-24 -left-24 h-96 w-96 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
@@ -448,7 +448,7 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-      <section className="px-4 py-32 flex flex-col items-center bg-gray-50/50 overflow-hidden">
+      <section className="px-4 py-16 md:py-20 flex flex-col items-center bg-gray-50/50 overflow-hidden">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -522,7 +522,7 @@ function SolutionItem({ item, index: i }: any) {
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "solution-item-row grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center mb-24 md:mb-32",
+        "solution-item-row grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center mb-16 md:mb-20",
         item.reverse ? "lg:flex-row-reverse" : ""
       )}
     >
