@@ -514,7 +514,7 @@ export default function LandingPage() {
             Bạn đang mất điểm <br /> ở dạng Toán nào?
           </h2>
           <p className="max-w-2xl text-lg md:text-xl text-blue-100 font-medium mb-12">
-            Thi thử 40 câu miễn phí — hệ thống chỉ ra ngay bạn đang mất điểm ở đâu và có thể gỡ thêm bao nhiêu điểm nếu tập trung đúng tâm.
+            Thi thử 22 câu miễn phí — hệ thống chỉ ra ngay bạn đang mất điểm ở đâu và có thể gỡ thêm bao nhiêu điểm nếu tập trung đúng tâm.
           </p>
 
           <Link href="/thi-thu" className="rounded-2xl bg-white px-12 py-6 text-xl font-black text-[#0e56fa] shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center gap-3">
