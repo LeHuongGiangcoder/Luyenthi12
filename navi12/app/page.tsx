@@ -259,7 +259,7 @@ export default function LandingPage() {
             },
             {
               tag: "Giai đoạn 3",
-              title: "Luyện tập 15 phút đúng trọng tâm",
+              title: "Luyện tập đúng trọng tâm theo lộ trình cá nhân hoá",
               desc: "Mọi đề luyện đều được cá nhân hóa. Hệ thống tự động bỏ qua 80% câu hỏi thừa, bạn dành trọn 100% sức lực vào nơi tạo ra sự thay đổi điểm số.",
               features: ["Tự động bỏ qua phần đã vững", "Cá nhân hóa 100% đề thi", "Tăng 1.4đ sau 4 tuần luyện tập"],
               image: "/pic3.png",
