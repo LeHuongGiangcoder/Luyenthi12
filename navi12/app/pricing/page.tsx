@@ -97,7 +97,7 @@ export default function Pricing() {
     <main className="flex min-h-screen flex-col bg-white overflow-x-hidden pt-8 pb-20">
       
       {/* Hero Section - SYNCED WITH LANDING PAGE FOR CONSISTENCY */}
-      <section className="mx-auto w-full max-w-5xl px-4 md:px-12 text-center mt-12 mb-24 flex flex-col items-center">
+      <section className="mx-auto w-full max-w-5xl px-4 md:px-12 text-center mt-12 mb-16 flex flex-col items-center">
         <div className="inline-flex px-5 py-2 bg-[#0e56fa] text-white rounded-full text-[10px] font-black uppercase tracking-widest mb-10 shadow-lg shadow-blue-100">
            Sprint 60 · Toán THPT 2026 · Gỡ điểm thông minh
         </div>
@@ -105,49 +105,15 @@ export default function Pricing() {
            <DynamicDayCounter /> ngày còn lại. <br/>
            <span className="text-[#0e56fa] italic font-medium">Mỗi phút phải đúng chỗ.</span>
         </h1>
-        <p className="max-w-2xl text-center text-lg leading-relaxed text-gray-600 mb-4">
-           Giai đoạn nước rút không còn chỗ cho việc ôn dàn trải. Sprint 60 xác định chính xác dạng Toán bạn đang mất điểm và tập trung luyện đúng chỗ đó — tối đa hóa điểm số trong thời gian còn lại.
+        <p className="max-w-2xl text-center text-lg leading-relaxed text-gray-600">
+           Giai đoạn nước rút không còn chỗ cho việc ôn dàn trải. Chọn gói Sprint 60 phù hợp để rà soát chính xác lỗ hổng và tối đa hóa điểm số ngay hôm nay.
         </p>
       </section>
 
-      {/* How it Works (1-2-3) */}
-      <section className="mx-auto w-full max-w-6xl px-4 md:px-12 mb-40">
-         <div className="text-center mb-20">
-            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em]">LUYỆN THÔNG MINH VỚI SPRINT 60 — HOẠT ĐỘNG NHƯ THẾ NÀO</span>
-         </div>
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
-            {[
-              { 
-                step: 1, 
-                title: "Thi thử → Biết ngay mất điểm ở đâu", 
-                desc: "22 câu sát đề thật. Hệ thống phân tích từng câu sai — chỉ ra đúng dạng Toán, kỹ năng nào đang kéo điểm xuống và chiếm bao nhiêu điểm trong đề."
-              },
-              { 
-                step: 2, 
-                title: "Đánh giá sâu → Lộ trình riêng cho bạn", 
-                desc: "Hệ thống đo chính xác bạn đang yếu ở mức nào trong từng dạng Toán — rồi tạo lộ trình luyện cá nhân hóa, ưu tiên những chỗ có thể gỡ điểm hiệu quả nhất."
-              },
-              { 
-                step: 3, 
-                title: "15 phút/ngày → Gỡ điểm từng tuần", 
-                desc: "Mỗi ngày hệ thống chọn sẵn 5—8 câu đúng dạng bạn cần cải thiện. Không phải bạn chọn — không mất thời gian loay hoay. Thi thử mỗi Chủ nhật để thấy điểm tăng rõ ràng."
-              }
-            ].map(item => (
-              <div key={item.step} className="flex flex-col items-center text-center group">
-                 <div className="h-14 w-14 rounded-full bg-blue-50 text-[#0e56fa] flex items-center justify-center font-black text-xl mb-8 ring-8 ring-blue-50/50 group-hover:bg-[#0e56fa] group-hover:text-white transition-all duration-300">
-                    {item.step}
-                 </div>
-                 <h3 className="font-extrabold text-lg text-gray-900 mb-5 px-4 leading-tight">{item.title}</h3>
-                 <p className="text-[13px] font-medium text-gray-500 leading-relaxed max-w-xs">{item.desc}</p>
-              </div>
-            ))}
-         </div>
-      </section>
-
-      {/* Interactive Pricing Cards */}
+      {/* Interactive Pricing Cards - MOVED UP TO PREVENT CONFUSION */}
       <section className="mx-auto w-full max-w-7xl px-4 md:px-12 mb-40">
-         <div className="text-center mb-20">
-            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em]">CHỌN GÓI PHÙ HỢP</span>
+         <div className="text-center mb-16">
+            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em]">CHỌN GÓI PHÙ HỢP CỦA BẠN</span>
          </div>
          
          <div className="flex flex-col lg:flex-row items-stretch justify-center gap-8">
@@ -242,6 +208,40 @@ export default function Pricing() {
                 </div>
               );
             })}
+         </div>
+      </section>
+
+      {/* How it Works (1-2-3) - MOVED DOWN */}
+      <section className="mx-auto w-full max-w-6xl px-4 md:px-12 mb-40">
+         <div className="text-center mb-20">
+            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em]">LUYỆN THÔNG MINH VỚI SPRINT 60 — HOẠT ĐỘNG NHƯ THẾ NÀO</span>
+         </div>
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
+            {[
+              { 
+                step: 1, 
+                title: "Thi thử → Biết ngay mất điểm ở đâu", 
+                desc: "22 câu sát đề thật. Hệ thống phân tích từng câu sai — chỉ ra đúng dạng Toán, kỹ năng nào đang kéo điểm xuống và chiếm bao nhiêu điểm trong đề."
+              },
+              { 
+                step: 2, 
+                title: "Đánh giá sâu → Lộ trình riêng cho bạn", 
+                desc: "Hệ thống đo chính xác bạn đang yếu ở mức nào trong từng dạng Toán — rồi tạo lộ trình luyện cá nhân hóa, ưu tiên những chỗ có thể gỡ điểm hiệu quả nhất."
+              },
+              { 
+                step: 3, 
+                title: "15 phút/ngày → Gỡ điểm từng tuần", 
+                desc: "Mỗi ngày hệ thống chọn sẵn 5—8 câu đúng dạng bạn cần cải thiện. Không phải bạn chọn — không mất thời gian loay hoay. Thi thử mỗi Chủ nhật để thấy điểm tăng rõ ràng."
+              }
+            ].map(item => (
+              <div key={item.step} className="flex flex-col items-center text-center group">
+                 <div className="h-14 w-14 rounded-full bg-blue-50 text-[#0e56fa] flex items-center justify-center font-black text-xl mb-8 ring-8 ring-blue-50/50 group-hover:bg-[#0e56fa] group-hover:text-white transition-all duration-300">
+                    {item.step}
+                 </div>
+                 <h3 className="font-extrabold text-lg text-gray-900 mb-5 px-4 leading-tight">{item.title}</h3>
+                 <p className="text-[13px] font-medium text-gray-500 leading-relaxed max-w-xs">{item.desc}</p>
+              </div>
+            ))}
          </div>
       </section>
 
