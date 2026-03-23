@@ -108,9 +108,9 @@ export default function LandingPage() {
           </p>
 
           <div className="mt-12 flex flex-col items-center gap-6">
-            <Link href="/thi-thu" className="rounded-2xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 hover:bg-blue-700">
+            <InteractiveButton href="/thi-thu" className="rounded-2xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 hover:bg-blue-700">
               Kiểm tra điểm yếu ngay
-            </Link>
+            </InteractiveButton>
             <div className="flex flex-col items-center gap-1.5 grayscale opacity-70">
               <span className="text-sm font-medium text-gray-600">
                 ⚡️ Không cần đăng ký · Trả kết quả ngay lập tức
@@ -496,10 +496,9 @@ export default function LandingPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5, type: "spring", stiffness: 200 }}
           >
-            <Link href="/thi-thu" className="rounded-2xl bg-white px-12 py-6 text-xl font-black text-[#0e56fa] shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center gap-3">
+            <InteractiveButton href="/thi-thu" className="rounded-2xl bg-white px-12 py-6 text-xl font-black text-[#0e56fa] shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center gap-3">
               Kiểm tra ngay
-              <ArrowRight className="h-6 w-6" />
-            </Link>
+            </InteractiveButton>
           </motion.div>
         </motion.div>
       </section>
@@ -646,4 +645,47 @@ function StatItem({ value, label, prefix = "", suffix = "", decimals = 0, subLab
     </div>
   );
 }
+
+function InteractiveButton({ children, href, className }: any) {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!buttonRef.current) return;
+    const rect = buttonRef.current.getBoundingClientRect();
+    setPosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <Link
+      ref={buttonRef}
+      href={href}
+      className={cn("relative group/btn", className)}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <span className="relative z-10">{children}</span>
+      
+      {/* Interactive Cursor Label */}
+      <motion.div
+        animate={{
+          x: position.x + 10,
+          y: position.y + 10,
+          opacity: isHovered ? 1 : 0,
+          scale: isHovered ? 1 : 0.5,
+        }}
+        transition={{ type: "spring", damping: 20, stiffness: 200, mass: 0.5 }}
+        className="pointer-events-none absolute left-0 top-0 z-20 rounded-full bg-blue-400 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white shadow-lg backdrop-blur-md"
+      >
+        tốc độ
+      </motion.div>
+    </Link>
+  );
+}
+
 

@@ -111,7 +111,7 @@ export default function ExamResults() {
               status: "YẾU NHẤT - CẦN ƯU TIÊN KHẮC PHỤC",
               color: "bg-red-500",
               isCritical: true,
-              cta: "Bắt đầu đánh giá sâu — Miễn phí"
+              cta: "Bắt đầu đánh giá sâu"
             },
             {
               title: "Hình học không gian",
