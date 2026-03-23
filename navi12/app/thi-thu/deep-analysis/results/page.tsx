@@ -197,7 +197,7 @@ function DeepAnalysisResultsContent() {
                         { label: "Hàm số", status: "Đã phân tích", color: "bg-blue-50 border-blue-100 text-blue-600" },
                         { label: "Hình học KG", status: "Chưa đo", color: "bg-amber-50 border-amber-100 text-amber-600" },
                         { label: "Xác suất", status: "Chưa đo", color: "bg-amber-50 border-amber-100 text-amber-600" },
-                        { label: "Tịch phân", status: "Chưa đo", color: "bg-amber-50 border-amber-100 text-amber-600" }
+                        { label: "Tích phân", status: "Chưa đo", color: "bg-amber-50 border-amber-100 text-amber-600" }
                      ].map(tag => (
                         <div key={tag.label} className={cn("px-8 py-4 rounded-2xl border text-sm font-black flex items-center gap-3 shadow-sm transition-all hover:scale-105", tag.color)}>
                            <span>{tag.label}</span>

@@ -188,10 +188,13 @@ function ExamResultsContent() {
                   {/* Refined CTA Link for Critical Weakness */}
                   {item.cta && (
                     <div className="pt-2 flex flex-col items-center gap-4">
-                       <Link href={`/thi-thu/deep-analysis?target=${targetScore}`} className="inline-flex items-center justify-center gap-2 px-10 py-3.5 bg-[#0e56fa] text-white font-black rounded-2xl shadow-xl shadow-blue-100 hover:bg-blue-700 hover:shadow-blue-200 transition-all hover:scale-105 active:scale-95 text-sm md:text-base">
-                          {item.cta}
-                          <ArrowRight className="h-5 w-5" />
-                       </Link>
+                       <Link 
+                        href="/thi-thu/deep-analysis"
+                        className="inline-flex items-center justify-center gap-2 w-full py-3.5 bg-gray-900 hover:bg-black text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-gray-100"
+                      >
+                        {item.cta}
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
                        <p className="text-[10px] font-bold text-blue-300 uppercase tracking-[0.2em] opacity-80">
                           12 CÂU — 8 PHÚT · TỰ ĐỘNG CHỈ RA LỖ HỔNG KIẾN THỨC
                        </p>
