@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Send, Pause, Flag, Target, Sparkles, Trophy } from "lucide-react";
+import { ChevronLeft, ChevronRight, Send, Pause, Flag, Target, Sparkles, Trophy, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -13,12 +13,22 @@ export default function ExamRoom() {
   const [marked, setMarked] = useState<number[]>([]);
   const [answered, setAnswered] = useState<Record<number, any>>({});
   const [timeLeft, setTimeLeft] = useState(5400); 
+  const [showToast, setShowToast] = useState(false);
   
   const formatTime = (seconds: number) => {
     const mm = Math.floor(seconds / 60);
     const ss = seconds % 60;
     return `${mm}:${ss.toString().padStart(2, "0")}`;
   };
+  
+  // Motivational Toast Logic
+  useEffect(() => {
+    if (isStarted) {
+      setShowToast(true);
+      const timer = setTimeout(() => setShowToast(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [isStarted]);
 
   useEffect(() => {
     if (!isStarted) return;
@@ -297,6 +307,79 @@ export default function ExamRoom() {
 
         </div>
       </div>
+
+      {/* Mission Briefing Modal - Centered and High Impact */}
+      <AnimatePresence>
+        {showToast && (
+          <>
+            {/* Backdrop */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] bg-gray-900/60 backdrop-blur-md"
+              onClick={() => setShowToast(false)}
+            />
+            
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20, x: "-50%" }}
+              animate={{ opacity: 1, scale: 1, y: "-50%", x: "-50%" }}
+              exit={{ opacity: 0, scale: 0.95, y: 10, x: "-50%" }}
+              className="fixed top-1/2 left-1/2 z-[101] w-[95vw] max-w-xl bg-white rounded-[3.5rem] border border-white shadow-[0_32px_80px_rgba(0,0,0,0.3)] p-8 md:p-12 flex flex-col items-center text-center overflow-hidden"
+            >
+              {/* Highlight Header */}
+              <div className="mb-8 w-full aspect-[4/3] rounded-[2.5rem] bg-gray-50 border border-gray-100 overflow-hidden relative group">
+                <img 
+                  src="/pic1.png" 
+                  className="w-full h-full object-cover object-top p-0 group-hover:scale-110 transition-transform duration-1000" 
+                  alt="Diagnostic Report" 
+                />
+                
+                {/* Floating "System Detected" Callout */}
+                <motion.div 
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.6 }}
+                  className="absolute top-[18%] right-8 bg-red-500 text-white px-4 py-2 rounded-2xl shadow-lg border border-red-400 z-10 flex items-center gap-2"
+                >
+                   <div className="h-2 w-2 rounded-full bg-white animate-pulse" />
+                   <span className="text-[10px] font-black uppercase tracking-widest whitespace-nowrap">Lỗ hổng (-1.5đ)</span>
+                   <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-[1px] bg-red-400" />
+                </motion.div>
+
+                {/* Annotation Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-40 pointer-events-none" />
+              </div>
+
+              <div className="flex flex-col gap-4 mb-2 max-w-md mx-auto relative z-10">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                   <div className="h-6 w-6 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shadow-sm border border-blue-100">
+                      <Sparkles className="h-3.5 w-3.5 fill-current" />
+                   </div>
+                   <span className="text-[10px] font-black text-[#0e56fa] uppercase tracking-[0.4em]">QUYẾT TÂM TĂNG ĐIỂM</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-black font-montserrat text-gray-900 leading-tight">
+                  Na sẽ chỉ ra chính xác <br /> <span className="text-red-500 italic">từng 0.1đ</span> bạn đang bị phí
+                </h3>
+                <p className="text-sm font-medium text-gray-500 leading-relaxed px-4">
+                  Sự tập trung của bạn trong 90 phút tới sẽ giúp hệ thống "quét" chính xác các dạng Toán bạn đang yếu nhất để bắt đầu lộ trình gỡ điểm.
+                </p>
+              </div>
+
+              {/* Progress bar countdown - Bottom indicator */}
+              <div className="absolute bottom-0 left-0 w-full h-2 bg-gray-50">
+                 <motion.div 
+                    initial={{ width: "100%" }}
+                    animate={{ width: "0%" }}
+                    transition={{ duration: 5, ease: "linear" }}
+                    className="h-full bg-blue-600"
+                 />
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
