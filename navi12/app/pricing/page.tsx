@@ -56,21 +56,6 @@ export default function Pricing() {
       ],
       color: "blue",
       cta: "Bắt đầu Sprint 60 - 299.000đ"
-    },
-    {
-      name: "Sprint 60 Plus",
-      price: "499k",
-      originalPrice: "799k",
-      sub: "Dùng đến 30/6/2026",
-      tag: "Kèm phụ huynh",
-      features: [
-        { label: "Tất cả Sprint 60 +", bold: true },
-        { label: "Báo cáo tuần gửi qua Zalo" },
-        { label: "Dashboard phụ huynh" },
-        { label: "Dự báo điểm thi cuối kỳ" }
-      ],
-      color: "amber",
-      cta: "Đăng ký Plus - 499.000đ"
     }
   ];
 

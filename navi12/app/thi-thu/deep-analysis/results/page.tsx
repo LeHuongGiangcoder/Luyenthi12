@@ -172,19 +172,19 @@ function DeepAnalysisResultsContent() {
                         {[
                            {
                               step: "Stage 01",
-                              title: "Lấp lỗ hổng Level 3",
+                              title: "Luyện tập để lấp lỗ hổng",
                               desc: "Củng cố các dạng tiệm cận, cực trị hàm ẩn căn bản.",
                               icon: <LayoutList className="h-6 w-6 text-white" />
                            },
                            {
                               step: "Stage 02",
-                              title: "Chuyên sâu Level 4",
+                              title: "Quét mọi dạng bài thường thi",
                               desc: "Luyện 50 câu VDC tương tác có giải thích từng bước.",
                               icon: <Award className="h-6 w-6 text-white" />
                            },
                            {
                               step: "Stage 03",
-                              title: "Chinh phục mốc 8+",
+                              title: "Rèn phản xạ, tối ưu thời gian làm bài",
                               desc: "Mẹo giải nhanh các câu đồ thị phức tạp & tham số.",
                               icon: <TrendingUp className="h-6 w-6 text-white" />
                            }
