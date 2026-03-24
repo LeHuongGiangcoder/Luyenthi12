@@ -78,9 +78,9 @@ export default function Sprint60() {
     <main className="min-h-screen bg-[#fafbff] pt-24 pb-20 overflow-x-hidden">
       <div className="mx-auto w-full max-w-7xl px-4 md:px-12">
         
-        {/* Sprint Header */}
-        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div>
+        {/* Sprint Header & Journey Progress */}
+        <div className="mb-14 flex flex-col lg:flex-row lg:items-center justify-between gap-10">
+          <div className="flex-1">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black text-blue-600 border border-blue-100 uppercase tracking-widest">
                <Zap className="h-3.5 w-3.5 fill-current" />
                Sprint 60 — Ngày 12/60
@@ -88,20 +88,78 @@ export default function Sprint60() {
             <h1 className="text-4xl md:text-5xl font-black font-montserrat tracking-tight text-gray-900 leading-tight">
               Lộ trình <span className="text-[#0e56fa]">về đích</span>
             </h1>
-            <p className="mt-4 text-lg text-gray-500 font-medium max-w-xl">
+            <p className="mt-4 text-lg text-gray-400 font-medium max-w-xl">
               Chào Giang, hôm nay chúng ta sẽ bắt đầu gỡ <b>0.7đ</b> thâm hụt. Hệ thống đã chuẩn bị sẵn các câu hỏi phù hợp nhất.
             </p>
           </div>
 
-          {/* Quick Stats Banner */}
-          <div className="flex gap-4 p-2 bg-white rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/40">
-             <div className="px-6 py-4 rounded-2xl bg-blue-50/50 flex flex-col">
-                <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest leading-none mb-1">Điểm hiện tại</span>
-                <span className="text-2xl font-black text-gray-900 font-montserrat">7.4</span>
+          {/* Master Journey Progress Bar */}
+          <div className="flex-[1.2] w-full max-w-2xl bg-white p-8 md:p-10 pb-16 rounded-[3rem] border border-gray-100 shadow-xl shadow-gray-200/30 relative overflow-hidden group">
+             <div className="absolute top-0 left-0 w-2 h-full bg-blue-600" />
+             
+             <div className="flex items-center justify-between mb-16">
+                <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Tiến độ hành trình cá nhân</span>
+                <div className="flex items-center gap-1.5 bg-green-50 px-3 py-1 rounded-full border border-green-100/50">
+                   <TrendingUp className="h-3.5 w-3.5 text-green-600" />
+                   <span className="text-[10px] font-black text-green-600 uppercase tracking-widest">Đã tiến bộ +1.2đ</span>
+                </div>
              </div>
-             <div className="px-6 py-4 rounded-2xl bg-green-50/50 flex flex-col">
-                <span className="text-[10px] font-black text-green-600 uppercase tracking-widest leading-none mb-1">Mục tiêu</span>
-                <span className="text-2xl font-black text-gray-900 font-montserrat">9.2</span>
+
+             <div className="relative mt-8 mb-4 px-2">
+                {/* Background Track - Enhanced for Depth */}
+                <div className="h-3.5 w-full bg-gray-50 rounded-full border border-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.03)]" />
+                
+                {/* Fill Progress: (7.4-6.2)/(9.2-6.2) = 1.2/3.0 = 40% */}
+                <motion.div 
+                  initial={{ width: 0 }}
+                  animate={{ width: "40%" }}
+                  transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+                  className="absolute top-0 left-0 h-3.5 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full shadow-lg shadow-blue-100"
+                />
+
+                {/* Markers */}
+                <div className="absolute top-full left-0 pt-5 flex flex-col items-start lg:translate-x-[-10px] group/start">
+                   <div className="h-3 w-[2px] bg-gray-200 mb-2 transition-colors group-hover/start:bg-blue-600" />
+                   <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Bắt đầu</span>
+                   <motion.span 
+                      initial={{ opacity: 0, y: 5 }}
+                      whileHover={{ opacity: 1, y: 0 }}
+                      className="text-base font-black text-gray-900 font-montserrat tracking-tight opacity-0 group-hover/start:opacity-100 transition-all duration-300 pointer-events-none"
+                   >
+                      6.2
+                   </motion.span>
+                </div>
+
+                <div className="absolute top-full right-0 pt-5 flex flex-col items-end lg:translate-x-[10px] group/target">
+                   <div className="h-3 w-[2px] bg-blue-600 mb-2 transition-all group-hover/target:h-4" />
+                   <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest">Mục tiêu</span>
+                   <motion.span 
+                      initial={{ opacity: 0, y: 5 }}
+                      whileHover={{ opacity: 1, y: 0 }}
+                      className="text-base font-black text-gray-900 font-montserrat tracking-tight opacity-0 group-hover/target:opacity-100 transition-all duration-300 pointer-events-none"
+                   >
+                      9.2
+                   </motion.span>
+                </div>
+
+                {/* Current Pointer Indicator */}
+                <motion.div 
+                  initial={{ left: 0, opacity: 0 }}
+                  animate={{ left: "40%", opacity: 1 }}
+                  transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+                  className="absolute top-0 -translate-x-1/2 flex flex-col items-center"
+                >
+                   {/* Tooltip above the bar - Simplified & Fixed */}
+                   <div className="absolute bottom-[28px] bg-blue-600 text-white px-4 py-1.5 rounded-xl text-[12px] font-black shadow-lg shadow-blue-200 whitespace-nowrap">
+                      Hiện tại 7.4
+                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-blue-600 rotate-45 rounded-sm" />
+                   </div>
+                   
+                   {/* Premium Indicator Circle */}
+                   <div className="h-7 w-7 bg-white border-4 border-blue-600 rounded-full shadow-xl flex items-center justify-center -translate-y-1.5 relative z-10">
+                      <div className="h-1.5 w-1.5 bg-blue-600 rounded-full" />
+                   </div>
+                </motion.div>
              </div>
           </div>
         </div>
@@ -353,7 +411,7 @@ export default function Sprint60() {
                                  </div>
                                  <div className="flex flex-col">
                                     <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">Mục tiêu còn</span>
-                                    <span className="text-2xl font-black text-blue-600 font-montserrat">0.6đ</span>
+                                    <span className="text-2xl font-black text-blue-600 font-montserrat">1.5đ</span>
                                  </div>
                               </div>
                               <ArrowRight className={cn("h-5 w-5 text-gray-300 transition-transform", expandedMetric === "target" && "rotate-90")} />

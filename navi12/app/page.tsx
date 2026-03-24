@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check, X, Star, Calendar, Clock, Trophy, LineChart, Zap, TrendingUp } from "lucide-react";
+import { ArrowRight, Check, X, Star, Calendar, Clock, Trophy, LineChart, Zap, TrendingUp, AlertTriangle } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -133,7 +133,9 @@ export default function LandingPage() {
       {/* Trap Section - SMOOTH HORIZONTAL STICKY SCROLL */}
       <section ref={trapSectionRef} className="relative bg-[#fafbff] overflow-hidden min-h-screen flex flex-col justify-center py-20">
         <div className="relative z-10 w-full text-center px-4 mb-12">
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-red-500 mb-4 block">CẢNH BÁO GIAI ĐOẠN CUỐI</span>
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-red-50 px-4 py-1.5 text-xs font-black text-red-600 border border-red-100 uppercase tracking-widest">
+            CẢNH BÁO GIAI ĐOẠN CUỐI
+          </div>
           <h2 className="text-4xl md:text-6xl font-extrabold font-montserrat tracking-tight text-gray-900">
             4 cái bẫy khiến bạn <span className="text-red-500">mất điểm</span>
           </h2>
