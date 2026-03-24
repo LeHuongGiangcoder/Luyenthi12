@@ -16,7 +16,7 @@ export default function Navbar() {
       <div className="hidden items-center gap-8 md:flex">
         <Link href="/thi-thu" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Thi thử</Link>
         <Link href="/luyen-tap" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Luyện tập</Link>
-        <Link href="#" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Sprint 60</Link>
+        <Link href="/sprint-60" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Sprint 60</Link>
         <Link href="/login" className="text-sm font-bold text-gray-700 hover:text-[#0e56fa] transition-colors">
           Đăng nhập
         </Link>
