@@ -149,9 +149,6 @@ export default function LuyenTap() {
 
         {/* Header Section */}
         <div className="mb-16 text-left border-l-4 border-blue-600 pl-8 relative">
-          <div className="absolute top-0 right-0 p-8 hidden lg:block opacity-5 pointer-events-none">
-            <BookOpen className="h-40 w-40 text-blue-600" />
-          </div>
           <span className="text-xs font-black text-blue-600 uppercase tracking-widest mb-4 block">HỆ THỐNG LUYỆN TẬP ADAPTIVE</span>
           <h1 className="text-4xl md:text-6xl font-black font-montserrat tracking-tight text-gray-900 mb-6 leading-[1.1] max-w-4xl">
             Chuyên đề luyện <br /> <span className="text-[#0e56fa]">theo năng lực</span>
