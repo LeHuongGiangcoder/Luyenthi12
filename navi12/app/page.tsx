@@ -633,16 +633,18 @@ function StatItem({ value, label, prefix = "", suffix = "", decimals = 0, subLab
   }, [value, decimals, separator]);
 
   return (
-    <div ref={containerRef} className="stat-card flex flex-col items-center justify-center bg-white p-12 transition-all hover:bg-blue-50/20 group">
-      <div className="flex items-baseline">
-        {prefix && <span className="text-2xl font-black text-[#0e56fa] mr-0.5">{prefix}</span>}
-        <span ref={numberRef} className="text-5xl font-black text-gray-900 font-montserrat tracking-tight">0</span>
-        {suffix && <span className="text-2xl font-black text-[#0e56fa] ml-0.5">{suffix}</span>}
+    <div ref={containerRef} className="stat-card flex flex-col items-center justify-center bg-white py-14 px-10 transition-all hover:bg-gray-50/50 group border-r border-gray-100 last:border-r-0">
+      <div className="flex items-baseline mb-4">
+        {prefix && <span className="text-2xl font-bold text-[#0e56fa] mr-1">{prefix}</span>}
+        <span ref={numberRef} className="text-4xl md:text-5xl font-extrabold text-gray-900 font-montserrat tracking-tight">0</span>
+        {suffix && <span className="text-2xl font-bold text-[#0e56fa] ml-1">{suffix}</span>}
       </div>
-      <span className="mt-4 text-[10px] font-black text-gray-400 uppercase tracking-widest text-center max-w-[140px] leading-relaxed">
-        {label}
-      </span>
-      {subLabel && <span className="mt-2 text-[10px] font-bold text-blue-300 italic">{subLabel}</span>}
+      <div className="flex flex-col items-center">
+        <span className="text-[11px] font-bold text-gray-500 font-montserrat uppercase tracking-[0.15em] text-center max-w-[160px] leading-snug antialiased group-hover:text-blue-600 transition-colors">
+          {label}
+        </span>
+        {subLabel && <span className="mt-2 text-[10px] font-bold text-blue-400 italic font-primary">{subLabel}</span>}
+      </div>
     </div>
   );
 }
