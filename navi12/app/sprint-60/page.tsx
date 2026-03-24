@@ -71,6 +71,8 @@ const todayTasks = [
 
 export default function Sprint60() {
   const [activeTab, setActiveTab] = useState<"tasks" | "progress">("tasks");
+  const [hoveredTopic, setHoveredTopic] = useState<any>(null);
+  const [expandedMetric, setExpandedMetric] = useState<string | null>("gain");
 
   return (
     <main className="min-h-screen bg-[#fafbff] pt-24 pb-20 overflow-x-hidden">
@@ -100,10 +102,6 @@ export default function Sprint60() {
              <div className="px-6 py-4 rounded-2xl bg-green-50/50 flex flex-col">
                 <span className="text-[10px] font-black text-green-600 uppercase tracking-widest leading-none mb-1">Mục tiêu</span>
                 <span className="text-2xl font-black text-gray-900 font-montserrat">9.2</span>
-             </div>
-             <div className="hidden sm:flex px-6 py-4 rounded-2xl bg-orange-50/50 flex-col">
-                <span className="text-[10px] font-black text-orange-600 uppercase tracking-widest leading-none mb-1">Đã gỡ được</span>
-                <span className="text-2xl font-black text-gray-900 font-montserrat">+1.2đ</span>
              </div>
           </div>
         </div>
@@ -239,106 +237,306 @@ export default function Sprint60() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12"
             >
-               {/* Radar Chart (Simplified SVG Implementation for high visual impact) */}
-               <div className="relative group">
-                  <div className="absolute inset-0 bg-blue-500/5 blur-[100px] rounded-full" />
-                  <div className="bg-white p-12 rounded-[4rem] border border-gray-100 shadow-2xl shadow-blue-100/50 relative overflow-hidden h-[600px] flex items-center justify-center">
-                    <div className="absolute top-8 left-1/2 -translate-x-1/2 text-center">
-                       <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">Radar Năng Lực 12 Chuyên Đề</span>
-                    </div>
+               {/* Sidebar Metrics Intelligence */}
+               <div className="lg:col-span-4 flex flex-col gap-6 h-full">
+                  <div className="bg-white p-2 rounded-[3.5rem] border border-gray-100 shadow-xl shadow-gray-200/20 h-full flex flex-col">
+                     <div className="p-10 flex flex-col gap-4">
+                        <span className="text-xs font-black text-gray-400 uppercase tracking-[0.2em]">Hệ thống phân tích dự đoán</span>
+                        <h3 className="text-2xl font-black font-montserrat text-gray-900 leading-tight">Sprint Indepth Insight</h3>
+                     </div>
+                     
+                     <div className="flex-1 flex flex-col gap-2 p-2 px-4">
+                        {/* Metric: Dự báo điểm */}
+                        <div 
+                          className={cn(
+                            "rounded-[2.5rem] border transition-all cursor-pointer group overflow-hidden",
+                            expandedMetric === "forecast" ? "bg-blue-50/30 border-blue-200" : "bg-white border-transparent hover:bg-gray-50"
+                          )}
+                          onClick={() => setExpandedMetric(expandedMetric === "forecast" ? null : "forecast")}
+                        >
+                           <div className="p-8 flex items-center justify-between">
+                              <div className="flex items-center gap-5">
+                                 <div className="h-12 w-12 rounded-2xl bg-gray-100 group-hover:bg-blue-600 group-hover:text-white flex items-center justify-center text-gray-400 transition-colors">
+                                    <TrendingUp className="h-6 w-6" />
+                                 </div>
+                                 <div className="flex flex-col">
+                                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">Dự báo điểm</span>
+                                    <span className="text-2xl font-black text-gray-900 font-montserrat">9.2 — 9.4</span>
+                                 </div>
+                              </div>
+                              <ArrowRight className={cn("h-5 w-5 text-gray-300 transition-transform", expandedMetric === "forecast" && "rotate-90")} />
+                           </div>
+                           <AnimatePresence>
+                              {expandedMetric === "forecast" && (
+                                <motion.div 
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  className="px-8 pb-8 pt-0"
+                                >
+                                   <div className="pt-6 border-t border-blue-100 flex flex-col gap-4">
+                                      <p className="text-sm font-medium text-blue-800/70 leading-relaxed">
+                                         Giữ vững phong độ hiện tại, bạn dự kiến sẽ chạm mốc <b className="text-blue-900">9.2đ</b> vào ngày <b>15/05</b>.
+                                      </p>
+                                      <div className="flex items-center gap-3 bg-blue-100/40 p-3 rounded-xl">
+                                         <Clock className="h-4 w-4 text-blue-600" />
+                                         <span className="text-xs font-black text-blue-700 uppercase tracking-widest">Thời gian còn: 34 ngày</span>
+                                      </div>
+                                   </div>
+                                </motion.div>
+                              )}
+                           </AnimatePresence>
+                        </div>
 
-                    {/* SVG Radar Placeholder - Styled premium */}
-                    <svg viewBox="0 0 100 100" className="w-[85%] h-[85%] animate-pulse">
-                      {/* Grid Circles */}
-                      {[20, 40, 60, 80, 100].map(r => (
-                        <circle key={r} cx="50" cy="50" r={r/2} fill="none" stroke="#f1f5f9" strokeWidth="0.5" />
-                      ))}
-                      {/* Topic Axes */}
-                      {Array.from({ length: 12 }).map((_, i) => {
-                        const angle = (i * 30) * Math.PI / 180;
-                        return <line key={i} x1="50" y1="50" x2={50 + 50 * Math.cos(angle)} y2={50 + 50 * Math.sin(angle)} stroke="#f1f5f9" strokeWidth="0.5" />;
-                      })}
-                      {/* Active Shape */}
-                      <path 
-                        d="M 50 15 L 75 35 L 85 50 L 70 75 L 50 85 L 30 75 L 15 50 L 25 35 Z" 
-                        fill="rgba(14, 86, 250, 0.15)" 
-                        stroke="#0e56fa" 
-                        strokeWidth="1.5" 
-                      />
-                      {/* Topic Labels - Simplified */}
-                      <text x="50" y="8" className="text-[3px] font-bold fill-gray-400" textAnchor="middle">Hàm số</text>
-                      <text x="92" y="52" className="text-[3px] font-bold fill-gray-400" textAnchor="start">Oxyz</text>
-                    </svg>
-                    
-                    {/* Floating Level Markers */}
-                    <div className="absolute bottom-10 left-10 p-5 bg-white/80 backdrop-blur rounded-[2rem] border border-white shadow-xl flex items-center gap-4">
-                       <div className="h-10 w-10 rounded-xl bg-orange-500 flex items-center justify-center text-white shadow-lg shadow-orange-100">
-                          <TrendingUp className="h-6 w-6" />
-                       </div>
-                       <div className="flex flex-col pr-2">
-                          <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Tier hiện tại</span>
-                          <span className="text-sm font-black text-gray-900">Chiến binh Vận Dụng</span>
-                       </div>
-                    </div>
+                        {/* Metric: Gỡ được */}
+                        <div 
+                          className={cn(
+                            "rounded-[2.5rem] border transition-all cursor-pointer group overflow-hidden",
+                            expandedMetric === "gain" ? "bg-green-50/30 border-green-200" : "bg-white border-transparent hover:bg-gray-50"
+                          )}
+                          onClick={() => setExpandedMetric(expandedMetric === "gain" ? null : "gain")}
+                        >
+                           <div className="p-8 flex items-center justify-between">
+                              <div className="flex items-center gap-5">
+                                 <div className="h-12 w-12 rounded-2xl bg-gray-100 group-hover:bg-green-600 group-hover:text-white flex items-center justify-center text-gray-400 transition-colors">
+                                    <TrendingUp className="h-6 w-6" />
+                                 </div>
+                                 <div className="flex flex-col">
+                                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">Đã gỡ được</span>
+                                    <span className="text-2xl font-black text-green-600 font-montserrat">+1.2đ</span>
+                                 </div>
+                              </div>
+                              <ArrowRight className={cn("h-5 w-5 text-gray-300 transition-transform", expandedMetric === "gain" && "rotate-90")} />
+                           </div>
+                           <AnimatePresence>
+                              {expandedMetric === "gain" && (
+                                <motion.div 
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  className="px-8 pb-8 pt-0"
+                                >
+                                   <div className="pt-6 border-t border-green-100 flex flex-col gap-3">
+                                      {[
+                                        { name: "Hàm số", recovery: "+0.5đ", date: "Hôm qua" },
+                                        { name: "Mũ - Log", recovery: "+0.4đ", date: "Hôm qua" },
+                                        { name: "Số phức", recovery: "+0.3đ", date: "12/03" }
+                                      ].map((item, idx) => (
+                                        <div key={idx} className="flex items-center justify-between p-3 bg-white/50 rounded-2xl border border-green-100/50 shadow-sm">
+                                           <div className="flex flex-col">
+                                              <span className="text-xs font-black text-gray-700">{item.name}</span>
+                                              <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{item.date}</span>
+                                           </div>
+                                           <span className="text-xs font-black text-green-600">{item.recovery}</span>
+                                        </div>
+                                      ))}
+                                   </div>
+                                </motion.div>
+                              )}
+                           </AnimatePresence>
+                        </div>
+
+                        {/* Metric: Mục tiêu còn */}
+                        <div 
+                          className={cn(
+                            "rounded-[2.5rem] border transition-all cursor-pointer group overflow-hidden",
+                            expandedMetric === "target" ? "bg-orange-50/30 border-orange-200" : "bg-white border-transparent hover:bg-gray-50"
+                          )}
+                          onClick={() => setExpandedMetric(expandedMetric === "target" ? null : "target")}
+                        >
+                           <div className="p-8 flex items-center justify-between">
+                              <div className="flex items-center gap-5">
+                                 <div className="h-12 w-12 rounded-2xl bg-gray-100 group-hover:bg-orange-600 group-hover:text-white flex items-center justify-center text-gray-400 transition-colors">
+                                    <Target className="h-6 w-6" />
+                                 </div>
+                                 <div className="flex flex-col">
+                                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">Mục tiêu còn</span>
+                                    <span className="text-2xl font-black text-blue-600 font-montserrat">0.6đ</span>
+                                 </div>
+                              </div>
+                              <ArrowRight className={cn("h-5 w-5 text-gray-300 transition-transform", expandedMetric === "target" && "rotate-90")} />
+                           </div>
+                           <AnimatePresence>
+                              {expandedMetric === "target" && (
+                                <motion.div 
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  className="px-8 pb-8 pt-0"
+                                >
+                                   <div className="pt-6 border-t border-orange-100 flex flex-col gap-3">
+                                      <p className="text-[10px] font-black text-orange-600 uppercase tracking-widest mb-1 italic px-1">Chuyên đề Potential gỡ điểm</p>
+                                      {[
+                                        { name: "Lượng giác", potential: "+1.5đ", difficulty: "Trung bình" },
+                                        { name: "Hình học KG", potential: "+1.0đ", difficulty: "Khó" },
+                                      ].map((item, idx) => (
+                                        <div key={idx} className="flex items-center justify-between p-3 bg-white/50 rounded-2xl border border-orange-100/50 shadow-sm">
+                                           <div className="flex flex-col">
+                                              <span className="text-xs font-black text-gray-700">{item.name}</span>
+                                              <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">Độ khó: {item.difficulty}</span>
+                                           </div>
+                                           <span className="text-xs font-black text-orange-600">{item.potential}</span>
+                                        </div>
+                                      ))}
+                                      <Link href="/luyen-tap" className="mt-2 py-3 bg-white rounded-xl text-[9px] font-black text-blue-600 uppercase tracking-widest border border-blue-50 text-center hover:bg-blue-50 transition-colors">
+                                         VÀO LUYỆN NGAY
+                                      </Link>
+                                   </div>
+                                </motion.div>
+                              )}
+                           </AnimatePresence>
+                        </div>
+                     </div>
                   </div>
                </div>
 
-               {/* Potential Breakdown */}
-               <div className="flex flex-col gap-6 pt-4">
-                  <div className="flex items-center justify-between mb-4">
-                     <span className="text-xs font-black text-gray-900 uppercase tracking-widest">TIỀM NĂNG GIÀNH LẠI ĐIỂM</span>
-                     <span className="text-[10px] font-black text-red-500 uppercase tracking-widest bg-red-50 px-3 py-1 rounded-full">Tổng +4.2đ</span>
-                  </div>
+               {/* Large Interactive Radar Chart */}
+               <div className="lg:col-span-8 relative group">
+                  <div className="absolute inset-0 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+                  <div className="bg-white p-6 md:p-14 rounded-[4rem] border border-gray-100 shadow-2xl shadow-blue-100/30 relative overflow-visible min-h-[700px] flex flex-col items-center justify-center">
+                    
+                    <div className="mb-10 text-center">
+                       <span className="text-xs font-black text-blue-600 uppercase tracking-[0.4em] mb-3 block">RADAR TRÌNH ĐỘ THỰC TẾ</span>
+                       <h2 className="text-3xl font-black font-montserrat text-gray-900">Na-Radar Analytics</h2>
+                    </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {topicsMastery.filter(t => t.potential > 1).map((topic, i) => (
-                      <div 
-                        key={i} 
-                        className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm transition-all hover:scale-[1.03] hover:shadow-xl hover:shadow-gray-200/50 group"
-                      >
-                         <div className="flex justify-between items-start mb-4">
-                            <span className="text-sm font-black text-gray-900 font-montserrat">{topic.name}</span>
-                            <span className="text-[10px] font-black text-green-600 bg-green-50 px-2 py-1 rounded-lg">+{topic.potential}đ</span>
-                         </div>
-                         <div className="flex flex-col gap-2">
-                            <div className="flex justify-between text-[9px] font-bold text-gray-400 uppercase tracking-widest">
-                               <span>Mastery</span>
-                               <span>{topic.value}%</span>
-                            </div>
-                            <div className="h-1.5 w-full bg-gray-50 rounded-full overflow-hidden">
-                               <div className="h-full bg-blue-500 transition-all duration-1000" style={{ width: `${topic.value}%` }} />
-                            </div>
-                         </div>
-                         <Link href={`/luyen-tap/${topic.name.toLowerCase()}`} className="mt-6 flex items-center justify-center gap-2 py-3 bg-gray-50 rounded-xl text-[10px] font-black text-blue-600 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">
-                            Lấy lại điểm ngay <ArrowRight className="h-3 w-3" />
-                         </Link>
-                      </div>
-                    ))}
-                  </div>
+                    <div className="relative w-full aspect-square max-w-[500px]">
+                      <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-2xl">
+                        {/* Grid Circles */}
+                        {[20, 40, 60, 80, 100].map(r => (
+                          <circle key={r} cx="50" cy="50" r={r/2} fill="none" stroke="#f1f5f9" strokeWidth="0.5" strokeDasharray={r === 100 ? "0" : "2 2"} />
+                        ))}
+                        
+                        {/* Topic Axes and Labels */}
+                        {topicsMastery.map((topic, i) => {
+                          const angle = (i * (360 / topicsMastery.length) - 90) * Math.PI / 180;
+                          const x2 = 50 + 50 * Math.cos(angle);
+                          const y2 = 50 + 50 * Math.sin(angle);
+                          const lx = 50 + 56 * Math.cos(angle);
+                          const ly = 50 + 56 * Math.sin(angle);
+                          
+                          return (
+                            <g key={i}>
+                              <line x1="50" y1="50" x2={x2} y2={y2} stroke="#f1f5f9" strokeWidth="0.5" />
+                              <text 
+                                x={lx} 
+                                y={ly} 
+                                className="text-[2.2px] font-black fill-gray-400 uppercase tracking-widest" 
+                                textAnchor="middle"
+                                dominantBaseline="middle"
+                              >
+                                {topic.name}
+                              </text>
+                            </g>
+                          );
+                        })}
 
-                  {/* Summary Card */}
-                  <div className="mt-8 bg-white p-10 rounded-[3rem] border border-gray-100 shadow-xl shadow-gray-200/30 relative overflow-hidden">
-                     <div className="absolute top-0 right-0 p-12 text-blue-500/5 rotate-12"><Target className="h-40 w-40" /></div>
-                     <h3 className="text-2xl font-black font-montserrat text-gray-900 mb-6 flex items-center gap-3">
-                        Kết luận lộ trình
-                        <div className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-                     </h3>
-                     <p className="text-gray-500 font-medium leading-[1.8] max-w-lg mb-8">
-                       Bạn đã hoàn thành 20% lộ trình Sprint 60. Tốc độ gỡ điểm hiện tại là <b className="text-blue-600">0.12đ/ngày</b>. <br /> Nếu duy trì, bạn sẽ hoàn thành mục tiêu 9.2 vào đúng tuần cuối tháng 5.
-                     </p>
-                     <div className="flex items-center gap-6">
-                        <div className="flex flex-col">
-                           <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Dự báo điểm đạt được</span>
-                           <span className="text-3xl font-black text-gray-900 font-montserrat tracking-tight">9.2 — 9.4</span>
-                        </div>
-                        <div className="h-12 w-[1px] bg-gray-100" />
-                        <div className="flex flex-col">
-                           <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Tỉ lệ hoàn thành</span>
-                           <span className="text-3xl font-black text-blue-600 font-montserrat tracking-tight">20%</span>
-                        </div>
-                     </div>
+                        {/* Active Radar Shape */}
+                        <motion.path 
+                          initial={{ pathLength: 0, opacity: 0 }}
+                          animate={{ pathLength: 1, opacity: 1 }}
+                          transition={{ duration: 1.5, ease: "easeInOut" }}
+                          d={topicsMastery.map((t, i) => {
+                            const angle = (i * (360 / topicsMastery.length) - 90) * Math.PI / 180;
+                            const r = t.value / 2;
+                            const x = 50 + r * Math.cos(angle);
+                            const y = 50 + r * Math.sin(angle);
+                            return `${i === 0 ? 'M' : 'L'} ${x} ${y}`;
+                          }).join(' ') + ' Z'} 
+                          fill="url(#radarGradient)" 
+                          stroke="#0e56fa" 
+                          strokeWidth="1" 
+                          strokeLinejoin="round"
+                        />
+                        
+                        <defs>
+                          <linearGradient id="radarGradient" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stopColor="rgba(14, 86, 250, 0.4)" />
+                            <stop offset="100%" stopColor="rgba(14, 86, 250, 0.1)" />
+                          </linearGradient>
+                        </defs>
+
+                        {/* Interactive Points */}
+                        {topicsMastery.map((t, i) => {
+                          const angle = (i * (360 / topicsMastery.length) - 90) * Math.PI / 180;
+                          const r = t.value / 2;
+                          const x = 50 + r * Math.cos(angle);
+                          const y = 50 + r * Math.sin(angle);
+                          
+                          return (
+                            <g 
+                              key={i} 
+                              className="cursor-pointer group/point"
+                              onMouseEnter={() => setHoveredTopic(t)}
+                              onMouseLeave={() => setHoveredTopic(null)}
+                            >
+                              <circle 
+                                cx={x} cy={y} r="1.5" 
+                                className="fill-blue-600 transition-all group-hover/point:r-2 shadow-lg" 
+                              />
+                              <circle 
+                                cx={x} cy={y} r="5" 
+                                className="fill-transparent" 
+                              />
+                            </g>
+                          );
+                        })}
+                      </svg>
+
+                      {/* Radar Hover Card */}
+                      <AnimatePresence>
+                        {hoveredTopic && (
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            className="absolute z-50 pointer-events-none"
+                            style={{
+                              left: `${50 + (hoveredTopic.value / 2) * Math.cos((topicsMastery.findIndex(t => t.name === hoveredTopic.name) * (360 / topicsMastery.length) - 90) * Math.PI / 180)}%`,
+                              top: `${50 + (hoveredTopic.value / 2) * Math.sin((topicsMastery.findIndex(t => t.name === hoveredTopic.name) * (360 / topicsMastery.length) - 90) * Math.PI / 180)}%`,
+                              transform: 'translate(-50%, -120%)'
+                            }}
+                          >
+                            <div className="bg-white/95 backdrop-blur-xl p-6 rounded-[2.5rem] border border-white shadow-2xl w-64 pointer-events-auto">
+                               <div className="flex justify-between items-start mb-4">
+                                  <h4 className="font-black text-gray-900 font-montserrat">{hoveredTopic.name}</h4>
+                                  <span className="text-[10px] font-black text-green-600 px-2 py-1 bg-green-50 rounded-lg">+{hoveredTopic.potential}đ</span>
+                               </div>
+                               
+                               <div className="grid grid-cols-4 gap-1.5 mb-6">
+                                  {[
+                                    { label: "NB", color: "bg-red-500", active: hoveredTopic.value >= 10 },
+                                    { label: "TH", color: "bg-amber-500", active: hoveredTopic.value >= 35 },
+                                    { label: "VD", color: "bg-[#0e56fa]", active: hoveredTopic.value >= 60 },
+                                    { label: "VDC", color: "bg-green-500", active: hoveredTopic.value >= 85 }
+                                  ].map((lvl, idx) => (
+                                    <div key={idx} className="flex flex-col gap-1">
+                                       <div className={cn(
+                                         "h-1.5 w-full rounded-full transition-all",
+                                         lvl.active ? lvl.color : "bg-gray-100"
+                                       )} />
+                                       <span className={cn(
+                                         "text-[7px] font-black text-center",
+                                         lvl.active ? "text-gray-900" : "text-gray-300"
+                                       )}>{lvl.label}</span>
+                                    </div>
+                                  ))}
+                               </div>
+
+                               <Link 
+                                 href={`/luyen-tap/${hoveredTopic.name.toLowerCase()}`}
+                                 className="w-full py-3 bg-gray-900 rounded-xl flex items-center justify-center text-white transition-all hover:bg-[#0e56fa]"
+                               >
+                                  <ArrowRight className="h-4 w-4" />
+                               </Link>
+                            </div>
+                            <div className="absolute left-1/2 -bottom-1 -translate-x-1/2 w-3 h-3 bg-white rotate-45 border-r border-b border-gray-100/50" />
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </div>
                </div>
             </motion.div>
@@ -348,3 +546,4 @@ export default function Sprint60() {
     </main>
   );
 }
+
