@@ -87,6 +87,17 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+@utility bg-level-1 { background-color: #fbbf24; }
+@utility bg-level-2 { background-color: #0e56fa; }
+@utility bg-level-3 { background-color: #22c55e; }
+@utility bg-level-4 { background-color: #4f46e5; }
+
+@utility text-level-1 { color: #d97706; } /* amber-600 */
+@utility text-level-2 { color: #0e56fa; }
+@utility text-level-3 { color: #16a34a; } /* green-600 */
+@utility text-level-4 { color: #4f46e5; }
+
+
 body {
   font-family: var(--font-inter);
 }

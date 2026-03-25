@@ -151,7 +151,7 @@ export default function LuyenTap() {
         <div className="mb-16 text-left border-l-4 border-blue-600 pl-8 relative">
           <span className="text-xs font-black text-blue-600 uppercase tracking-widest mb-4 block">HỆ THỐNG LUYỆN TẬP ADAPTIVE</span>
           <h1 className="text-4xl md:text-6xl font-black font-montserrat tracking-tight text-gray-900 mb-6 leading-[1.1] max-w-4xl">
-            Chuyên đề luyện <br /> <span className="text-[#0e56fa]">theo năng lực</span>
+            Luyện theo chuyên đề <br /> <span className="text-[#0e56fa]">tầm soát chuyên sâu</span>
           </h1>
           <p className="max-w-2xl text-lg md:text-xl text-gray-500 font-medium leading-relaxed">
             Hệ thống sẽ điều chỉnh độ khó dựa trên kết quả trả lời của bạn. <span className="text-gray-900 font-bold italic">Càng luyện, càng đúng chỗ.</span>
@@ -201,21 +201,21 @@ export default function LuyenTap() {
         )}>
           {filteredTopics.map((topic) => {
             // Determine current level and color
-            let levelColor = "bg-red-500";
-            let textColor = "text-red-600";
+            let levelColor = "bg-level-1";
+            let textColor = "text-level-1";
             let levelName = "Level 1: Nhận biết";
 
             if (topic.mastery >= 90) {
-              levelColor = "bg-green-500";
-              textColor = "text-green-600";
+              levelColor = "bg-level-4";
+              textColor = "text-level-4";
               levelName = "Level 4: VDC";
             } else if (topic.mastery >= 60) {
-              levelColor = "bg-[#0e56fa]";
-              textColor = "text-[#0e56fa]";
+              levelColor = "bg-level-3";
+              textColor = "text-level-3";
               levelName = "Level 3: Vận dụng";
             } else if (topic.mastery >= 30) {
-              levelColor = "bg-amber-500";
-              textColor = "text-amber-600";
+              levelColor = "bg-level-2";
+              textColor = "text-level-2";
               levelName = "Level 2: Thông hiểu";
             }
 
@@ -344,24 +344,24 @@ export default function LuyenTap() {
 
                   <div className="grid grid-cols-4 gap-2">
                     {[
-                      { label: "NB", val: isStarted ? Math.min(100, topic.mastery * 4) : 0, active: topic.mastery >= 10 },
-                      { label: "TH", val: isStarted ? Math.max(0, Math.min(100, (topic.mastery - 25) * 4)) : 0, active: topic.mastery >= 35 },
-                      { label: "VD", val: isStarted ? Math.max(0, Math.min(100, (topic.mastery - 50) * 4)) : 0, active: topic.mastery >= 60 },
-                      { label: "VDC", val: isStarted ? Math.max(0, Math.min(100, (topic.mastery - 75) * 4)) : 0, active: topic.mastery >= 90 }
+                      { label: "NB", val: isStarted ? Math.min(100, topic.mastery * 4) : 0, active: topic.mastery >= 10, color: "bg-level-1", text: "text-level-1" },
+                      { label: "TH", val: isStarted ? Math.max(0, Math.min(100, (topic.mastery - 25) * 4)) : 0, active: topic.mastery >= 35, color: "bg-level-2", text: "text-level-2" },
+                      { label: "VD", val: isStarted ? Math.max(0, Math.min(100, (topic.mastery - 50) * 4)) : 0, active: topic.mastery >= 60, color: "bg-level-3", text: "text-level-3" },
+                      { label: "VDC", val: isStarted ? Math.max(0, Math.min(100, (topic.mastery - 75) * 4)) : 0, active: topic.mastery >= 90, color: "bg-level-4", text: "text-level-4" }
                     ].map((lvl, i) => (
                       <div key={i} className="flex flex-col gap-2">
                         <div className="h-2 w-full bg-gray-50 rounded-full overflow-hidden relative">
                           <div
                             className={cn(
                               "h-full rounded-full transition-all duration-1000",
-                              lvl.active ? levelColor : "bg-gray-200"
+                              lvl.active ? lvl.color : (isAnalyzed ? "bg-emerald-50" : "bg-gray-100")
                             )}
-                            style={{ width: `${lvl.val}%` }}
+                            style={{ width: `${lvl.val || (isAnalyzed ? 100 : 0)}%`, opacity: isAnalyzed && !isStarted ? 0.3 : 1 }}
                           />
                         </div>
                         <span className={cn(
                           "text-[8px] font-black text-center transition-colors",
-                          lvl.active ? textColor : "text-gray-300"
+                          lvl.active ? lvl.text : "text-gray-300"
                         )}>{lvl.label}</span>
                       </div>
                     ))}
