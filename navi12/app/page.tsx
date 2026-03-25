@@ -98,12 +98,25 @@ export default function LandingPage() {
           </div>
 
           <h1 className="max-w-4xl text-center text-4xl font-extrabold leading-[1.1] md:text-7xl font-montserrat tracking-tight">
-            Giai đoạn nước rút <br />
-            <span className="text-[#0e56fa] italic font-medium">bạn phí điểm ở đâu</span>
+            Giai đoạn nước rút
+            <span className="mt-2 block text-2xl font-medium italic text-[#0e56fa] md:text-4xl tracking-normal">
+              Làm sao tăng{" "}
+              <span className="relative inline-block px-1">
+                <span className="relative z-10 font-bold not-italic">1-2 điểm</span>
+                <motion.span 
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "100%" }}
+                  viewport={{ once: true }}
+                  className="absolute bottom-1 md:bottom-1.5 left-0 h-[45%] w-full bg-blue-100/80 -rotate-1 -z-0 rounded-sm"
+                  transition={{ delay: 0.6, duration: 0.8 }}
+                />
+              </span>
+              {" "}trong 2 tuần?
+            </span>
           </h1>
 
           <p className="mt-8 max-w-2xl text-center text-lg leading-relaxed text-gray-600 px-4">
-            Bạn đang mất điểm ở các dạng bài lặp lại. Na chỉ ra chính xác điểm yếu <span className="font-bold text-gray-900 surface-emphasis">và cách bạn lấy lại từng điểm</span>.
+            Bí quyết: không mất điểm vô nghĩa, kiếm điểm nhờ biết và lấp ngay những lỗ hổng trong khả năng.
           </p>
 
           <div className="mt-12 flex flex-col items-center gap-6">
@@ -137,7 +150,8 @@ export default function LandingPage() {
             CẢNH BÁO GIAI ĐOẠN CUỐI
           </div>
           <h2 className="text-4xl md:text-6xl font-extrabold font-montserrat tracking-tight text-gray-900">
-            4 cái bẫy khiến bạn <span className="text-red-500">mất điểm</span>
+            3 lý do ôn cả tháng mà <br className="md:hidden" />
+            <span className="text-red-500">điểm số không tăng</span>
           </h2>
         </div>
 
@@ -146,35 +160,27 @@ export default function LandingPage() {
             {[
               {
                 id: "01",
-                title: "Vòng lặp 'Sai chỗ cũ'",
-                desc: "Làm 10 đề mỗi tuần nhưng hổng đúng dạng đó. Xem đáp án thấy hiểu, nhưng lần sau gặp lại vẫn 'đứng hình' như lần đầu.",
-                icon: <X className="h-8 w-8 text-red-500" />,
+                title: "Không có chiến lược",
+                desc: "Thời gian còn lại rất ngắn, cần xác định đúng năng lực và mục tiêu để có lộ trình ôn tập thực sự hiệu quả và đúng trọng tâm.",
+                icon: <Zap className="h-8 w-8 text-red-500" />,
                 color: "border-red-100",
                 accent: "bg-red-500"
               },
               {
                 id: "02",
-                title: "Lạc giữa 'Ma trận kiến thức'",
-                desc: "Toán có 50 dạng, chỗ nào cũng thấy lo. Không biết nên dồn sức vào Tích phân hay OXY trước để kịp gỡ điểm trong 80 ngày.",
-                icon: <ArrowRight className="h-8 w-8 text-orange-500 rotate-45" />,
+                title: "Ôn tập lan man",
+                desc: "Cái gì cũng ôn, cái gì cũng làm nhưng thiếu tập trung vào những lỗ hổng thực sự đang 'đốt' điểm của bạn mỗi ngày.",
+                icon: <X className="h-8 w-8 text-orange-500" />,
                 color: "border-orange-100",
                 accent: "bg-orange-500"
               },
               {
                 id: "03",
-                title: "Mất điểm 'Vô nghĩa'",
-                desc: "Sai ngu ở những câu 7đ, hụt hơi ở những câu 8đ chỉ vì chưa ai chỉ ra quy luật sai của riêng bạn. Mỗi điểm mất đi đều có lý do.",
-                icon: <Star className="h-8 w-8 text-blue-500" />,
+                title: "Lao vào học quá nhiều",
+                desc: "Giờ là lúc cần tĩnh tâm, dành nhiều thời gian tự luyện tập và lấp lỗ hổng hơn là nạp thêm kiến thức mới một cách mù quáng.",
+                icon: <Clock className="h-8 w-8 text-blue-500" />,
                 color: "border-blue-100",
                 accent: "bg-blue-500"
-              },
-              {
-                id: "04",
-                title: "Ôn tập 'Mù quáng'",
-                desc: "Mỗi ngày trôi qua chỉ thấy Lo thêm chứ không thấy Vững thêm. Không có thước đo cụ thể, bạn đang đi trên một con đường sương mù.",
-                icon: <LineChart className="h-8 w-8 text-purple-500" />,
-                color: "border-purple-100",
-                accent: "bg-purple-500"
               }
             ].map((card, idx) => (
               <div
@@ -200,9 +206,9 @@ export default function LandingPage() {
 
                 <div className="relative z-10 flex items-center gap-4 text-[10px] font-black text-gray-400">
                   <span className="h-1.5 flex-1 rounded-full bg-gray-50 overflow-hidden">
-                    <div className={cn("h-full transition-all duration-1000", card.accent)} style={{ width: `${(idx + 1) * 25}%` }} />
+                    <div className={cn("h-full transition-all duration-1000", card.accent)} style={{ width: `${((idx + 1) / 3) * 100}%` }} />
                   </span>
-                  <span className="uppercase tracking-widest italic">THE TRAP {card.id}</span>
+                  <span className="uppercase tracking-widest italic">REASON {card.id}</span>
                 </div>
               </div>
             ))}

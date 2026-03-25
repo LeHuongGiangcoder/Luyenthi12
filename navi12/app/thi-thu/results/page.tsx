@@ -243,13 +243,13 @@ function ExamResultsContent() {
         {/* Final Roadmap CTA */}
         <div className="bg-[#0e56fa] p-10 rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-8 mb-8 shadow-2xl shadow-blue-200 text-left">
            <div className="text-white text-left">
-              <h3 className="text-2xl font-extrabold font-montserrat mb-3">Xem lộ trình gỡ điểm Sprint 60</h3>
+              <h3 className="text-2xl font-extrabold font-montserrat mb-3">Xem lộ trình cá nhân hoá giúp tăng điểm tối đa dành cho bạn</h3>
               <p className="text-blue-100 text-xs font-bold opacity-80 max-w-md leading-relaxed">
                 Cá nhân hóa theo đúng điểm yếu của bạn · 15 phút mỗi ngày · Cải thiện hiệu quả ngay sau 4 tuần ôn tập.
               </p>
            </div>
            <Link href="/pricing" className="whitespace-nowrap px-10 py-5 bg-white text-blue-600 font-black rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center">
-            Lấy lại điểm →
+            Đừng để điểm rơi →
            </Link>
         </div>
       </div>

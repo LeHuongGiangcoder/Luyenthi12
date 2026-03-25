@@ -200,9 +200,6 @@ export default function Sprint60() {
               {/* Task Sidebar - Today's Insight */}
               <div className="lg:col-span-1 flex flex-col gap-6">
                  <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-gray-200/30">
-                    <div className="h-14 w-14 rounded-2xl bg-blue-600 flex items-center justify-center text-white mb-6 shadow-lg shadow-blue-100">
-                       <Zap className="h-8 w-8 fill-current" />
-                    </div>
                     <h3 className="text-2xl font-black font-montserrat text-gray-900 mb-4 leading-tight">Insight Chiến thuật</h3>
                     <p className="text-gray-500 font-medium leading-relaxed italic">
                       "Dựa trên 200 câu sai gần nhất, hệ thống nhận thấy Giang hay mất điểm ở <b className="text-[#0e56fa]">Hình học Oxyz</b> vì quên công thức khoảng cách. Hôm nay hãy dành 15p review phần này."

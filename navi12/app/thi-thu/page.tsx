@@ -105,7 +105,7 @@ export default function MockTestRoom() {
             Thi thử — biết ngay mất điểm ở đâu
           </h1>
           <p className="max-w-3xl text-gray-500 font-medium leading-relaxed">
-            Sát cấu trúc đề TN THPT · Mỗi Chủ nhật một đề · Phân tích chính xác dạng Toán đang mất điểm sau khi nộp
+            Một bài thi không đủ biết chính xác bạn đang yếu ở đâu nhưng là bước đầu để NaviEdu dẫn bạn tới nơi bạn có thể gỡ điểm.
           </p>
         </div>
 
