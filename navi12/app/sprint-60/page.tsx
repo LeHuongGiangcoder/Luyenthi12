@@ -238,41 +238,45 @@ export default function Sprint60() {
                    <div 
                      key={task.id} 
                      className={cn(
-                       "bg-white p-8 rounded-[2.5rem] border transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6 group",
+                       "bg-white p-8 rounded-[2.5rem] border transition-all duration-300 grid grid-cols-1 md:grid-cols-[1fr_120px_180px] items-center gap-6 group min-h-[140px]",
                        task.status === "completed" ? "opacity-60 grayscale-[0.5] bg-gray-50/50 border-gray-100" : "border-gray-100 hover:border-blue-200 shadow-lg hover:shadow-xl shadow-gray-200/30"
                      )}
                    >
-                     <div className="flex items-center gap-6">
+                     {/* Topic Info Column */}
+                     <div className="flex items-center gap-6 min-w-0">
                         <div className={cn(
-                          "h-16 w-16 rounded-[1.5rem] flex items-center justify-center transition-transform group-hover:scale-110",
+                          "h-16 w-16 rounded-[1.5rem] flex items-center justify-center transition-transform group-hover:scale-110 shrink-0",
                           task.status === "completed" ? "bg-green-100 text-green-600" : "bg-blue-50 text-blue-600"
                         )}>
                            {task.status === "completed" ? <CheckCircle2 className="h-8 w-8" /> : <Zap className="h-8 w-8" />}
                         </div>
-                        <div>
+                        <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-3 mb-1">
-                             <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest px-2 py-0.5 bg-blue-50 rounded-md">{task.tag}</span>
-                             <span className="text-[10px] font-bold text-gray-400 italic">• {task.duration}</span>
+                             <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest px-2 py-0.5 bg-blue-50 rounded-md shrink-0">{task.tag}</span>
+                             <span className="text-[10px] font-bold text-gray-400 italic shrink-0">• {task.duration}</span>
                           </div>
-                          <h4 className="text-xl font-bold text-gray-900 font-montserrat">{task.topic}: {task.subtopic}</h4>
+                          <h4 className="text-xl font-bold text-gray-900 font-montserrat truncate">{task.topic}: {task.subtopic}</h4>
                         </div>
                      </div>
 
-                     <div className="flex items-center gap-6">
-                        <div className="hidden md:flex flex-col items-end">
-                           <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">Cơ hội giành lại</span>
-                           <span className="text-lg font-black text-green-600">{task.potential}</span>
-                        </div>
+                     {/* Potential Column */}
+                     <div className="hidden md:flex flex-col items-end shrink-0">
+                        <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1 text-right">Cơ hội giành lại</span>
+                        <span className="text-lg font-black text-green-600">{task.potential}</span>
+                     </div>
+
+                     {/* Action Button Column */}
+                     <div className="flex justify-end shrink-0">
                         {task.status !== "completed" ? (
                           <Link 
                             href={`/luyen-tap/${task.topic.toLowerCase()}`}
-                            className="bg-gray-900 text-white px-8 py-4 rounded-2xl font-black text-sm flex items-center gap-2 transition-all hover:bg-[#0e56fa] hover:translate-x-1"
+                            className="w-full bg-gray-900 text-white px-6 py-4 rounded-2xl font-black text-sm flex items-center justify-center gap-2 transition-all hover:bg-[#0e56fa] hover:translate-x-1"
                           >
                              LUYỆN NGAY
                              <ArrowRight className="h-4 w-4" />
                           </Link>
                         ) : (
-                          <div className="px-8 py-4 border border-green-200 text-green-600 font-black text-sm flex items-center gap-2 rounded-2xl">
+                          <div className="w-full px-6 py-4 border border-green-200 text-green-600 font-black text-sm flex items-center justify-center gap-2 rounded-2xl bg-white/50">
                              XONG
                           </div>
                         )}

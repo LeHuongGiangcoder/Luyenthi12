@@ -137,7 +137,7 @@ const topics = [
 
 export default function LuyenTap() {
   const [search, setSearch] = useState("");
-  const [view, setView] = useState<"grid" | "list">("grid");
+  const [view, setView] = useState<"grid" | "list">("list");
 
   const filteredTopics = topics.filter(t =>
     t.name.toLowerCase().includes(search.toLowerCase())
@@ -354,14 +354,14 @@ export default function LuyenTap() {
                           <div
                             className={cn(
                               "h-full rounded-full transition-all duration-1000",
-                              lvl.active ? lvl.color : (isAnalyzed ? "bg-emerald-50" : "bg-gray-100")
+                              lvl.active ? levelColor : (isAnalyzed ? "bg-emerald-50" : "bg-gray-100")
                             )}
                             style={{ width: `${lvl.val || (isAnalyzed ? 100 : 0)}%`, opacity: isAnalyzed && !isStarted ? 0.3 : 1 }}
                           />
                         </div>
                         <span className={cn(
                           "text-[8px] font-black text-center transition-colors",
-                          lvl.active ? lvl.text : "text-gray-300"
+                          lvl.active ? textColor : "text-gray-300"
                         )}>{lvl.label}</span>
                       </div>
                     ))}
