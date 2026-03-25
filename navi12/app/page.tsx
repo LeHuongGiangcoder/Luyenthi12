@@ -150,8 +150,8 @@ export default function LandingPage() {
             CẢNH BÁO GIAI ĐOẠN CUỐI
           </div>
           <h2 className="text-4xl md:text-6xl font-extrabold font-montserrat tracking-tight text-gray-900">
-            3 lý do ôn cả tháng mà <br className="md:hidden" />
-            <span className="text-red-500">điểm số không tăng</span>
+            Ôn mãi mà <br className="md:hidden" />
+            <span className="text-red-500">điểm không tăng?</span>
           </h2>
         </div>
 
