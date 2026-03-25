@@ -31,24 +31,37 @@ function DeepAnalysisResultsContent() {
                {/* Section 1: Phân tích chuyên sâu */}
                <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col gap-10 overflow-hidden text-left w-full">
                   <div className="flex flex-col xl:flex-row items-center gap-12">
-                     {/* Optimized Radar Chart (SVG) */}
+                     {/* Optimized Radar Chart (SVG) - 5 Axes for Knowledge Units */}
                      <div className="relative h-72 w-full max-w-[320px] md:max-w-[380px] shrink-0 flex items-center justify-center bg-gray-50/10 rounded-full">
                         <svg className="h-full w-full" viewBox="-40 -40 180 180">
-                           {/* Radar Background Polygons - Diamond Grid (4-axis) */}
-                           <polygon points="50,0 100,50 50,100 0,50" fill="none" stroke="#f1f5f9" strokeWidth="1" />
-                           <polygon points="50,12.5 87.5,50 50,87.5 12.5,50" fill="none" stroke="#f1f5f9" strokeWidth="1" />
-                           <polygon points="50,25 75,50 50,75 25,50" fill="none" stroke="#f1f5f9" strokeWidth="1" />
-                           <polygon points="50,37.5 62.5,50 50,62.5 37.5,50" fill="none" stroke="#f1f5f9" strokeWidth="1" />
+                           {/* Radar Background Pentagon Grid */}
+                           {[0.25, 0.5, 0.75, 1].map((scale) => {
+                              const r = 50 * scale;
+                              const pts = [
+                                 `50,${50-r}`,
+                                 `${50 + r*0.951},${50 - r*0.309}`,
+                                 `${50 + r*0.587},${50 + r*0.809}`,
+                                 `${50 - r*0.587},${50 + r*0.809}`,
+                                 `${50 - r*0.951},${50 - r*0.309}`
+                              ].join(" ");
+                              return <polygon key={scale} points={pts} fill="none" stroke="#f1f5f9" strokeWidth="1" />;
+                           })}
 
                            {/* Axes */}
-                           <line x1="50" y1="50" x2="50" y2="0" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="1 1" />
-                           <line x1="50" y1="50" x2="100" y2="50" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="1 1" />
-                           <line x1="50" y1="50" x2="50" y2="100" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="1 1" />
-                           <line x1="50" y1="50" x2="0" y2="50" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="1 1" />
+                           {[
+                              { x: 50, y: 0 },
+                              { x: 50 + 50*0.951, y: 50 - 50*0.309 },
+                              { x: 50 + 50*0.587, y: 50 + 50*0.809 },
+                              { x: 50 - 50*0.587, y: 50 + 50*0.809 },
+                              { x: 50 - 50*0.951, y: 50 - 50*0.309 }
+                           ].map((pt, i) => (
+                              <line key={i} x1="50" y1="50" x2={pt.x} y2={pt.y} stroke="#f1f5f9" strokeWidth="1" strokeDasharray="1 1" />
+                           ))}
 
-                           {/* Data Polygon (4-axis) */}
+                           {/* Data Polygon (5 topics) */}
+                           {/* Values: 85, 62, 88, 48, 35 */}
                            <polygon
-                              points="50,2.5 91,50 50,72.5 41,50"
+                              points="50,7.5 79.4,40 76.4,86.4 36.8,70.2 33,42.3"
                               fill="rgba(79, 70, 229, 0.15)"
                               stroke="#0e56fa"
                               strokeWidth="2.5"
@@ -56,39 +69,39 @@ function DeepAnalysisResultsContent() {
                            />
 
                            {/* Data Points */}
-                           <circle cx="50" cy="2.5" r="3.5" fill="#0e56fa" />
-                           <circle cx="91" cy="50" r="3.5" fill="#0e56fa" />
-                           <circle cx="50" cy="72.5" r="3.5" fill="#0e56fa" />
-                           <circle cx="41" cy="50" r="3.5" fill="#0e56fa" />
+                           <circle cx="50" cy="7.5" r="3" fill="#0e56fa" />
+                           <circle cx="79.4" cy="40" r="3" fill="#0e56fa" />
+                           <circle cx="76.4" cy="86.4" r="3" fill="#0e56fa" />
+                           <circle cx="36.8" cy="70.2" r="3" fill="#0e56fa" />
+                           <circle cx="33" cy="42.3" r="3" fill="#0e56fa" />
 
-                           {/* Optimized Labels */}
-                           <text x="50" y="-12" textAnchor="middle" fontSize="9" fontWeight="900" fill="#64748b" className="font-montserrat uppercase">NB</text>
-                           <text x="108" y="53" textAnchor="start" fontSize="9" fontWeight="900" fill="#64748b" className="font-montserrat uppercase">TH</text>
-                           <text x="50" y="115" textAnchor="middle" fontSize="9" fontWeight="900" fill="#64748b" className="font-montserrat uppercase">VD</text>
-                           <text x="-8" y="53" textAnchor="end" fontSize="9" fontWeight="900" fill="#64748b" className="font-montserrat uppercase">VDC</text>
+                           {/* Labels */}
+                           <text x="50" y="-12" textAnchor="middle" fontSize="8" fontWeight="900" fill="#64748b" className="font-montserrat uppercase">Đơn điệu</text>
+                           <text x="105" y="45" textAnchor="start" fontSize="8" fontWeight="900" fill="#64748b" className="font-montserrat uppercase">Cực trị</text>
+                           <text x="85" y="105" textAnchor="start" fontSize="8" fontWeight="900" fill="#64748b" className="font-montserrat uppercase">GTLN-GTNN</text>
+                           <text x="15" y="105" textAnchor="end" fontSize="8" fontWeight="900" fill="#64748b" className="font-montserrat uppercase">Tiệm cận</text>
+                           <text x="-5" y="45" textAnchor="end" fontSize="8" fontWeight="900" fill="#64748b" className="font-montserrat uppercase">Ứng dụng</text>
                         </svg>
                      </div>
 
-                     {/* Legend & Stats */}
+                     {/* Topic Mastery Summary */}
                      <div className="flex-1 w-full space-y-6 text-left">
                         {[
-                           { label: "Nhận biết", val: "95%", progress: 95, color: "bg-green-500", text: "text-green-600" },
-                           { label: "Thông hiểu", val: "82%", progress: 82, color: "bg-green-500", text: "text-green-600" },
-                           { label: "Vận dụng", val: "45%", progress: 45, color: "bg-amber-400", text: "text-amber-600" },
-                           { label: "Vận dụng cao", val: "18%", progress: 18, color: "bg-red-500", text: "text-red-600" }
-                        ].map((metric, i) => (
+                           { label: "Tính đơn điệu", val: "Level 3", progress: 85, color: "bg-green-500", text: "text-green-600" },
+                           { label: "Cực trị hàm số", val: "Level 2", progress: 62, color: "bg-[#0e56fa]", text: "text-blue-600" },
+                           { label: "GTLN - GTNN", val: "Level 3", progress: 88, color: "bg-green-500", text: "text-green-600" },
+                           { label: "Tiệm cận đồ thị", val: "Level 2", progress: 48, color: "bg-[#0e56fa]", text: "text-blue-600" },
+                           { label: "Ứng dụng thực tế", val: "Level 1", progress: 35, color: "bg-amber-400", text: "text-amber-600" }
+                        ].map((topic, i) => (
                            <div key={i} className="flex flex-col gap-2.5">
                               <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
-                                 <div className="flex items-center gap-2.5 text-left">
-                                    <div className="h-2.5 w-2.5 rounded-full" />
-                                    <span className="text-gray-500">{metric.label}</span>
-                                 </div>
-                                 <span className={metric.text}>{metric.val}</span>
+                                 <span className="text-gray-500">{topic.label}</span>
+                                 <span className={topic.text}>{topic.val}</span>
                               </div>
-                              <div className="h-2 w-full bg-gray-50 rounded-full overflow-hidden">
+                              <div className="h-2 w-full bg-gray-50 rounded-full overflow-hidden border border-gray-100/50">
                                  <div
-                                    className={cn("h-full transition-all duration-1000", metric.color)}
-                                    style={{ width: `${metric.progress}%` }}
+                                    className={cn("h-full transition-all duration-1000", topic.color)}
+                                    style={{ width: `${topic.progress}%` }}
                                  />
                               </div>
                            </div>
@@ -103,40 +116,41 @@ function DeepAnalysisResultsContent() {
                         <h3 className="text-2xl font-black font-montserrat text-gray-900 leading-tight">Kết quả từng đơn vị kiến thức</h3>
                      </div>
 
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
                         {[
-                           { name: "Tính đơn điệu của hàm số", levels: [100, 100, 75, 40], avg: "Level 3" },
-                           { name: "Cực trị của hàm số", levels: [100, 92, 60, 20], avg: "Level 2" },
-                           { name: "GTLN - GTNN của hàm số", levels: [100, 100, 85, 30], avg: "Level 3" },
-                           { name: "Tiệm cận của đồ thị hàm số", levels: [100, 80, 40, 10], avg: "Level 2" },
-                           { name: "Ứng dụng đạo hàm thực tế", levels: [100, 70, 30, 0], avg: "Level 2" }
+                           { name: "Tính đơn điệu của hàm số", value: 85, avg: "Level 3 (VD)" },
+                           { name: "Cực trị của hàm số", value: 62, avg: "Level 2 (TH)" },
+                           { name: "GTLN - GTNN của hàm số", value: 88, avg: "Level 3 (VD)" },
+                           { name: "Tiệm cận của đồ thị hàm số", value: 48, avg: "Level 2 (TH)" },
+                           { name: "Ứng dụng đạo hàm thực tế", value: 35, avg: "Level 1 (NB)" }
                         ].map((sub, i) => (
                            <div key={i} className="flex flex-col gap-4">
-                              <div className="flex justify-between items-end h-[34px]">
-                                 <h4 className="text-sm font-bold text-gray-800 leading-tight flex-1 pr-4">{sub.name}</h4>
-                                 <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest whitespace-nowrap">{sub.avg}</span>
+                              <div className="flex justify-between items-end">
+                                 <h4 className="text-[13px] font-bold text-gray-800 leading-tight flex-1 pr-4">{sub.name}</h4>
+                                 <span className="text-[10px] font-black text-[#0e56fa] uppercase tracking-widest whitespace-nowrap">{sub.avg}</span>
                               </div>
                               
-                              <div className="grid grid-cols-4 gap-2">
-                                 {["NB", "TH", "VD", "VDC"].map((label, idx) => {
-                                    const val = sub.levels[idx];
-                                    let color = "bg-gray-100";
-                                    if (val >= 90) color = "bg-green-500";
-                                    else if (val >= 60) color = "bg-[#0e56fa]";
-                                    else if (val > 0) color = "bg-amber-400";
-                                    
-                                    return (
-                                       <div key={idx} className="flex flex-col gap-2">
-                                          <div className="h-1.5 w-full bg-gray-50 rounded-full overflow-hidden">
-                                             <div 
-                                                className={cn("h-full transition-all duration-1000", color)}
-                                                style={{ width: `${val}%` }}
-                                             />
-                                          </div>
-                                          <span className="text-[8px] font-black text-gray-400 text-center uppercase tracking-widest">{label}</span>
-                                       </div>
-                                    );
-                                 })}
+                              <div className="flex flex-col gap-2">
+                                 <div className="h-3 w-full bg-gray-50 rounded-full overflow-hidden relative border border-gray-100/50">
+                                    {/* Background Level Indicators */}
+                                    <div className="absolute inset-0 flex">
+                                       <div className="flex-1 border-r border-gray-200/30" />
+                                       <div className="flex-1 border-r border-gray-200/30" />
+                                       <div className="flex-1 border-r border-gray-200/30" />
+                                       <div className="flex-1" />
+                                    </div>
+                                    <div 
+                                       className={cn("h-full transition-all duration-1000", 
+                                          sub.value >= 70 ? "bg-green-500" : sub.value >= 40 ? "bg-[#0e56fa]" : "bg-amber-400"
+                                       )}
+                                       style={{ width: `${sub.value}%` }}
+                                    />
+                                 </div>
+                                 <div className="flex justify-between px-1">
+                                    {["NB", "TH", "VD", "VDC"].map(lvl => (
+                                       <span key={lvl} className="text-[7px] font-black text-gray-400 uppercase tracking-widest">{lvl}</span>
+                                    ))}
+                                 </div>
                               </div>
                            </div>
                         ))}
