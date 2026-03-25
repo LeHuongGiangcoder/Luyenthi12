@@ -89,14 +89,14 @@ function DeepAnalysisResultsContent() {
                         {[
                            { label: "Tính đơn điệu", val: "Level 3", progress: 85, color: "bg-green-500", text: "text-green-600" },
                            { label: "Cực trị hàm số", val: "Level 2", progress: 62, color: "bg-[#0e56fa]", text: "text-blue-600" },
-                           { label: "GTLN - GTNN", val: "Level 3", progress: 88, color: "bg-green-500", text: "text-green-600" },
+                           { label: "GTLN - GTNN", val: "Level 4", progress: 92, color: "bg-indigo-600", text: "text-indigo-600" },
                            { label: "Tiệm cận đồ thị", val: "Level 2", progress: 48, color: "bg-[#0e56fa]", text: "text-blue-600" },
                            { label: "Ứng dụng thực tế", val: "Level 1", progress: 35, color: "bg-amber-400", text: "text-amber-600" }
                         ].map((topic, i) => (
                            <div key={i} className="flex flex-col gap-2.5">
                               <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
                                  <span className="text-gray-500">{topic.label}</span>
-                                 <span className={topic.text}>{topic.val}</span>
+                                 <span className={cn(topic.text, topic.val === "Level 4" ? "animate-pulse" : "")}>{topic.val}</span>
                               </div>
                               <div className="h-2 w-full bg-gray-50 rounded-full overflow-hidden border border-gray-100/50">
                                  <div
@@ -120,14 +120,22 @@ function DeepAnalysisResultsContent() {
                         {[
                            { name: "Tính đơn điệu của hàm số", value: 85, avg: "Level 3 (VD)" },
                            { name: "Cực trị của hàm số", value: 62, avg: "Level 2 (TH)" },
-                           { name: "GTLN - GTNN của hàm số", value: 88, avg: "Level 3 (VD)" },
+                           { name: "GTLN - GTNN của hàm số", value: 92, avg: "Level 4 (VDC)" },
                            { name: "Tiệm cận của đồ thị hàm số", value: 48, avg: "Level 2 (TH)" },
                            { name: "Ứng dụng đạo hàm thực tế", value: 35, avg: "Level 1 (NB)" }
                         ].map((sub, i) => (
                            <div key={i} className="flex flex-col gap-4">
                               <div className="flex justify-between items-end">
                                  <h4 className="text-[13px] font-bold text-gray-800 leading-tight flex-1 pr-4">{sub.name}</h4>
-                                 <span className="text-[10px] font-black text-[#0e56fa] uppercase tracking-widest whitespace-nowrap">{sub.avg}</span>
+                                 <span className={cn(
+                                    "text-[10px] font-black uppercase tracking-widest whitespace-nowrap",
+                                    sub.value >= 90 ? "text-indigo-600 animate-pulse" : 
+                                    sub.value >= 70 ? "text-green-600" : 
+                                    sub.value >= 40 ? "text-[#0e56fa]" : 
+                                    "text-amber-600"
+                                 )}>
+                                    {sub.avg}
+                                 </span>
                               </div>
                               
                               <div className="flex flex-col gap-2">
@@ -141,7 +149,7 @@ function DeepAnalysisResultsContent() {
                                     </div>
                                     <div 
                                        className={cn("h-full transition-all duration-1000", 
-                                          sub.value >= 70 ? "bg-green-500" : sub.value >= 40 ? "bg-[#0e56fa]" : "bg-amber-400"
+                                          sub.value >= 90 ? "bg-indigo-600" : sub.value >= 70 ? "bg-green-500" : sub.value >= 40 ? "bg-[#0e56fa]" : "bg-amber-400"
                                        )}
                                        style={{ width: `${sub.value}%` }}
                                     />
