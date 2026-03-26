@@ -357,47 +357,7 @@ export default function LandingPage() {
                 color: "text-cyan-600 bg-cyan-50"
               }
             ].map((t, idx) => (
-                <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 80, rotateX: 15, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ 
-                  duration: 1, 
-                  delay: (idx % 3) * 0.15,
-                  ease: [0.22, 1, 0.36, 1] 
-                }}
-                className="flex flex-col justify-between bg-white rounded-[2.5rem] p-10 shadow-xl shadow-gray-200/50 border border-gray-100 w-full shrink-0 transition-transform active:scale-95 hover:shadow-2xl hover:-translate-y-2 duration-500"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-8">
-                    <div className={cn("px-4 py-2 rounded-2xl font-black text-sm shadow-sm", t.color)}>
-                      {t.result}
-                    </div>
-                    <Star className="h-6 w-6 text-yellow-400 fill-current" />
-                  </div>
-
-                  <div className="mb-6 space-y-4">
-                    <div className="text-xs font-black uppercase tracking-widest text-gray-400">{t.gap}</div>
-                    <div className="text-2xl font-black font-montserrat text-gray-900">{t.metric}</div>
-                  </div>
-
-                  <p className="text-gray-500 font-medium leading-relaxed italic mb-10 relative">
-                    <span className="text-4xl text-blue-100 absolute -top-4 -left-4 font-serif">“</span>
-                    {t.quote}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-4 pt-8 border-t border-gray-50">
-                  <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-400 shadow-inner">
-                    {t.name.charAt(0)}
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-black text-gray-900">{t.name}</span>
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">{t.school}</span>
-                  </div>
-                </div>
-              </motion.div>
+              <TestimonialCard key={idx} t={t} idx={idx} />
             ))}
           </div>
 
@@ -469,6 +429,64 @@ export default function LandingPage() {
         </motion.div>
       </section>
     </main>
+  );
+}
+
+function TestimonialCard({ t, idx }: any) {
+  const [isStarred, setIsStarred] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 80, rotateX: 15, scale: 0.9 }}
+      whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ 
+        duration: 1, 
+        delay: (idx % 3) * 0.15,
+        ease: [0.22, 1, 0.36, 1] 
+      }}
+      className="flex flex-col justify-between bg-white rounded-[2.5rem] p-10 shadow-xl shadow-gray-200/50 border border-gray-100 w-full shrink-0 transition-transform active:scale-95 hover:shadow-2xl hover:-translate-y-2 duration-500"
+    >
+      <div>
+        <div className="flex items-center justify-between mb-8">
+          <div className={cn("px-4 py-2 rounded-2xl font-black text-sm shadow-sm", t.color)}>
+            {t.result}
+          </div>
+          <motion.button
+            whileTap={{ scale: 0.7 }}
+            onClick={() => setIsStarred(!isStarred)}
+            className="group/star"
+          >
+            <Star 
+              className={cn(
+                "h-6 w-6 transition-all duration-300", 
+                isStarred ? "text-yellow-400 fill-current scale-125" : "text-gray-200 group-hover/star:text-yellow-200"
+              )} 
+            />
+          </motion.button>
+        </div>
+
+        <div className="mb-6 space-y-4">
+          <div className="text-xs font-black uppercase tracking-widest text-gray-400">{t.gap}</div>
+          <div className="text-2xl font-black font-montserrat text-gray-900">{t.metric}</div>
+        </div>
+
+        <p className="text-gray-500 font-medium leading-relaxed italic mb-10 relative">
+          <span className="text-4xl text-blue-100 absolute -top-4 -left-4 font-serif">“</span>
+          {t.quote}
+        </p>
+      </div>
+
+      <div className="flex items-center gap-4 pt-8 border-t border-gray-50">
+        <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-400 shadow-inner">
+          {t.name.charAt(0)}
+        </div>
+        <div className="flex flex-col">
+          <span className="text-sm font-black text-gray-900">{t.name}</span>
+          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">{t.school}</span>
+        </div>
+      </div>
+    </motion.div>
   );
 }
 
