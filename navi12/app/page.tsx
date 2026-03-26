@@ -9,6 +9,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import CountdownTimer from "@/components/ui/countdown-timer";
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
+import WaitlistModal from "@/components/waitlist-modal";
 gsap.registerPlugin(ScrollTrigger);
 
 import { getDaysRemaining } from "@/lib/exam-date";
@@ -20,6 +21,7 @@ export default function LandingPage() {
   const trapContainerRef = useRef<HTMLDivElement>(null);
   const solutionSectionRef = useRef<HTMLDivElement>(null);
   const solutionStickyRef = useRef<HTMLDivElement>(null);
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -120,7 +122,10 @@ export default function LandingPage() {
           </p>
 
           <div className="mt-12 flex flex-col items-center gap-6">
-            <InteractiveButton href="/thi-thu" className="rounded-2xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 hover:bg-blue-700">
+            <InteractiveButton 
+              onClick={() => setIsWaitlistOpen(true)}
+              className="rounded-2xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 hover:bg-blue-700"
+            >
               Tìm chỗ mất điểm
             </InteractiveButton>
             <div className="flex flex-col items-center gap-1.5 grayscale opacity-70">
@@ -420,12 +425,17 @@ export default function LandingPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5, type: "spring", stiffness: 200 }}
           >
-            <InteractiveButton href="/thi-thu" className="rounded-2xl bg-white px-12 py-6 text-xl font-black text-[#0e56fa] shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center gap-3">
+            <InteractiveButton 
+              onClick={() => setIsWaitlistOpen(true)}
+              className="rounded-2xl bg-white px-12 py-6 text-xl font-black text-[#0e56fa] shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center gap-3"
+            >
               Kiểm tra ngay
             </InteractiveButton>
           </motion.div>
         </motion.div>
       </section>
+
+      <WaitlistModal isOpen={isWaitlistOpen} onClose={() => setIsWaitlistOpen(false)} />
     </main>
   );
 }
@@ -655,10 +665,10 @@ function StatItem({ value, label, prefix = "", suffix = "", decimals = 0, subLab
   );
 }
 
-function InteractiveButton({ children, href, className }: any) {
+function InteractiveButton({ children, href, onClick, className }: any) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const buttonRef = useRef<any>(null);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!buttonRef.current) return;
@@ -669,15 +679,8 @@ function InteractiveButton({ children, href, className }: any) {
     });
   };
 
-  return (
-    <Link
-      ref={buttonRef}
-      href={href}
-      className={cn("relative group/btn", className)}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+  const content = (
+    <>
       <span className="relative z-10">{children}</span>
 
       {/* Interactive Cursor Label */}
@@ -693,6 +696,34 @@ function InteractiveButton({ children, href, className }: any) {
       >
         tốc độ
       </motion.div>
+    </>
+  );
+
+  if (onClick) {
+    return (
+      <button
+        ref={buttonRef}
+        onClick={onClick}
+        className={cn("relative group/btn", className)}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <Link
+      ref={buttonRef}
+      href={href || "#"}
+      className={cn("relative group/btn", className)}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {content}
     </Link>
   );
 }
