@@ -217,7 +217,7 @@ export default function LandingPage() {
       </section>
 
       <section ref={solutionSectionRef} className="relative bg-white py-24 md:py-32 overflow-hidden font-montserrat">
-        <div className="max-w-7xl mx-auto px-4 md:px-12 flex flex-col gap-16 md:gap-20">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-12 flex flex-col">
 
           {/* Main Header - Centered & Consistent */}
           <motion.div
@@ -239,35 +239,40 @@ export default function LandingPage() {
             </p>
           </motion.div>
 
-          {[
-            {
-              tag: "Giai đoạn 1",
-              title: "Chụp X-Quang lỗ hổng kiến thức",
-              desc: "Na phân tích bài thi qua 5 cấp độ tư duy: Nhận biết, Thông hiểu, Vận dụng, Vận dụng cao. Phát hiện ngay tầng kiến thức nào đang 'âm thầm' kéo điểm số của bạn xuống.",
-              features: ["Phân tích 5 cấp độ nhận thức", "Báo cáo radar điểm mạnh/yếu", "Kết luận lộ trình ngay lập tức"],
-              image: "/pic1.png",
-              color: "bg-blue-500"
-            },
-            {
-              tag: "Giai đoạn 2",
-              title: "Xác định rõ 'kẻ trộm điểm số'",
-              desc: "Không chỉ biết sai ở đâu, Na lượng hóa tầm quan trọng của lỗi sai: Nếu sửa dạng Hàm số này, bạn gỡ lại ngay +1.5đ thâm hụt so với mục tiêu.",
-              features: ["Lượng hóa điểm số bị mất", "Ưu tiên chuyên đề yếu nhất", "Dự báo mức tăng điểm tiềm năng"],
-              image: "/pic2.png",
-              reverse: true,
-              color: "bg-red-500"
-            },
-            {
-              tag: "Giai đoạn 3",
-              title: "Luyện tập đúng trọng tâm theo lộ trình cá nhân hoá",
-              desc: "Mọi đề luyện đều được cá nhân hóa. Hệ thống tự động bỏ qua 80% câu hỏi thừa, bạn dành trọn 100% sức lực vào nơi tạo ra sự thay đổi điểm số.",
-              features: ["Tự động bỏ qua phần đã vững", "Cá nhân hóa 100% đề thi", "Tăng 1.4đ sau 4 tuần luyện tập"],
-              image: "/pic3.png",
-              color: "bg-green-500"
-            }
-          ].map((item, i) => (
-            <SolutionItem key={i} item={item} index={i} />
-          ))}
+          <div className="flex flex-col -mt-10">
+            {[
+              {
+                tag: "Giai đoạn 1",
+                title: "Chụp X-Quang lỗ hổng kiến thức",
+                desc: "Na phân tích bài thi qua 5 cấp độ tư duy: Nhận biết, Thông hiểu, Vận dụng, Vận dụng cao. Phát hiện ngay tầng kiến thức nào đang 'âm thầm' kéo điểm số của bạn xuống.",
+                features: ["Phân tích 5 cấp độ nhận thức", "Báo cáo radar điểm mạnh/yếu", "Kết luận lộ trình ngay lập tức"],
+                image: "/pic1.png",
+                color: "bg-blue-500",
+                bgLight: "bg-[#f8faff]"
+              },
+              {
+                tag: "Giai đoạn 2",
+                title: "Xác định rõ 'kẻ trộm điểm số'",
+                desc: "Không chỉ biết sai ở đâu, Na lượng hóa tầm quan trọng của lỗi sai: Nếu sửa dạng Hàm số này, bạn gỡ lại ngay +1.5đ thâm hụt so với mục tiêu.",
+                features: ["Lượng hóa điểm số bị mất", "Ưu tiên chuyên đề yếu nhất", "Dự báo mức tăng điểm tiềm năng"],
+                image: "/pic2.png",
+                reverse: true,
+                color: "bg-red-500",
+                bgLight: "bg-[#fffafa]"
+              },
+              {
+                tag: "Giai đoạn 3",
+                title: "Luyện tập đúng trọng tâm theo lộ trình cá nhân hoá",
+                desc: "Mọi đề luyện đều được cá nhân hóa. Hệ thống tự động bỏ qua 80% câu hỏi thừa, bạn dành trọn 100% sức lực vào nơi tạo ra sự thay đổi điểm số.",
+                features: ["Tự động bỏ qua phần đã vững", "Cá nhân hóa 100% đề thi", "Tăng 1.4đ sau 4 tuần luyện tập"],
+                image: "/pic3.png",
+                color: "bg-green-500",
+                bgLight: "bg-[#f7fff9]"
+              }
+            ].map((item, i) => (
+              <SolutionCardWrapper key={i} item={item} index={i} />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -467,6 +472,30 @@ export default function LandingPage() {
   );
 }
 
+function SolutionCardWrapper({ item, index: i }: any) {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
+
+  return (
+    <motion.div
+      ref={containerRef}
+      style={{ 
+        scale,
+        top: 80 + (i * 32),
+        zIndex: i 
+      }}
+      className="sticky mb-32"
+    >
+      <SolutionItem item={item} index={i} />
+    </motion.div>
+  );
+}
+
 function SolutionItem({ item, index: i }: any) {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -483,12 +512,13 @@ function SolutionItem({ item, index: i }: any) {
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "solution-item-row grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center mb-16 md:mb-20",
-        item.reverse ? "lg:flex-row-reverse" : ""
+        "solution-item-row grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center mb-0 p-10 md:p-20 rounded-[3rem] shadow-[0_-20px_50px_rgba(0,0,0,0.05)] border border-gray-100",
+        item.reverse ? "lg:flex-row-reverse" : "",
+        item.bgLight
       )}
     >
       {/* Text Content */}
-      <div className={cn("order-2 lg:order-none", item.reverse ? "lg:order-2" : "lg:order-1")}>
+      <div className={cn("order-2 lg:col-span-5", item.reverse ? "lg:order-2" : "lg:order-1")}>
         <motion.div
           initial={{ opacity: 0, x: item.reverse ? 20 : -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -532,19 +562,19 @@ function SolutionItem({ item, index: i }: any) {
         whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.2 + (i * 0.1), ease: [0.22, 1, 0.36, 1] }}
-        className={cn("order-1 lg:order-none relative h-full flex items-center justify-center", item.reverse ? "lg:order-1" : "lg:order-2")}
+        className={cn("order-1 lg:col-span-7 relative h-full flex items-center justify-center", item.reverse ? "lg:order-1" : "lg:order-2")}
       >
-        <div className="relative w-full max-w-[600px] aspect-[4/3] rounded-[3rem] bg-white p-4 shadow-2xl border-4 border-white overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
+        <div className="relative w-full aspect-[4/3] rounded-[3rem] bg-white p-2 shadow-2xl border-4 border-white overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
           <div className="absolute inset-0 opacity-10"><AnimatedGridPattern /></div>
 
           <div className="relative h-full w-full rounded-[2.2rem] overflow-hidden bg-gray-50 flex items-center justify-center border border-gray-100">
             <motion.img
-              initial={{ scale: 1.1 }}
-              whileInView={{ scale: 1 }}
+              initial={{ scale: 1.2 }}
+              whileInView={{ scale: 1.05 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
               src={item.image}
               alt={item.title}
-              className="w-full h-full object-contain p-4 md:p-8"
+              className="w-full h-full object-cover"
             />
           </div>
 
