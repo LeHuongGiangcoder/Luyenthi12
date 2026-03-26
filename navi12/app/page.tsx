@@ -103,7 +103,7 @@ export default function LandingPage() {
               Làm sao tăng{" "}
               <span className="relative inline-block px-1">
                 <span className="relative z-10 font-bold not-italic">1-2 điểm</span>
-                <motion.span 
+                <motion.span
                   initial={{ width: 0 }}
                   whileInView={{ width: "100%" }}
                   viewport={{ once: true }}
@@ -162,7 +162,6 @@ export default function LandingPage() {
                 id: "01",
                 title: "Không có chiến lược",
                 desc: "Thời gian còn lại rất ngắn, cần xác định đúng năng lực và mục tiêu để có lộ trình ôn tập thực sự hiệu quả và đúng trọng tâm.",
-                icon: <Zap className="h-8 w-8 text-red-500" />,
                 color: "border-red-100",
                 accent: "bg-red-500"
               },
@@ -170,7 +169,6 @@ export default function LandingPage() {
                 id: "02",
                 title: "Ôn tập lan man",
                 desc: "Cái gì cũng ôn, cái gì cũng làm nhưng thiếu tập trung vào những lỗ hổng thực sự đang 'đốt' điểm của bạn mỗi ngày.",
-                icon: <X className="h-8 w-8 text-orange-500" />,
                 color: "border-orange-100",
                 accent: "bg-orange-500"
               },
@@ -178,7 +176,6 @@ export default function LandingPage() {
                 id: "03",
                 title: "Lao vào học quá nhiều",
                 desc: "Giờ là lúc cần tĩnh tâm, dành nhiều thời gian tự luyện tập và lấp lỗ hổng hơn là nạp thêm kiến thức mới một cách mù quáng.",
-                icon: <Clock className="h-8 w-8 text-blue-500" />,
                 color: "border-blue-100",
                 accent: "bg-blue-500"
               }
@@ -188,20 +185,21 @@ export default function LandingPage() {
                 className="trap-card relative shrink-0 w-[85vw] md:w-[600px] h-[480px] bg-white rounded-[3rem] border-2 p-12 md:p-14 shadow-2xl flex flex-col justify-between group transition-shadow"
                 style={{ borderColor: `rgba(243, 244, 246, 0.5)` }}
               >
-                <div className="absolute top-0 right-0 p-10 text-8xl font-black text-gray-50/50 select-none font-montserrat">
+                <div className="absolute top-0 right-0 p-8 text-[12rem] font-black text-gray-100/40 select-none font-montserrat leading-none tracking-tighter">
                   {card.id}
                 </div>
 
-                <div className="relative z-10">
-                  <div className="mb-10 h-20 w-20 flex items-center justify-center rounded-[1.5rem] bg-white shadow-xl shadow-gray-100 border border-gray-50">
-                    {card.icon}
+                <div className="relative z-10 pt-8">
+                  <div className="min-h-[100px] mb-4">
+                    <h3 className="text-3xl md:text-[2.5rem] font-bold font-montserrat tracking-tight text-gray-900 leading-[1.2]">
+                      {card.title}
+                    </h3>
                   </div>
-                  <h3 className="mb-6 text-3xl md:text-4xl font-black font-montserrat tracking-tight text-gray-900 leading-tight">
-                    {card.title}
-                  </h3>
-                  <p className="text-lg leading-relaxed text-gray-500 font-medium">
-                    {card.desc}
-                  </p>
+                  <div className="min-h-[140px]">
+                    <p className="text-lg md:text-xl leading-relaxed text-gray-500 font-medium font-primary max-w-[95%]">
+                      {card.desc}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="relative z-10 flex items-center gap-4 text-[10px] font-black text-gray-400">
@@ -300,66 +298,66 @@ export default function LandingPage() {
 
           <div className="relative mt-8 py-10">
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 perspective-1000">
-            {[
-              {
-                name: "Lê Hoàng Nam",
-                school: "THPT Chuyên Hà Nội - Amsterdam",
-                gap: "Lỗ hổng: Hình học & VDC",
-                result: "+1.6đ",
-                metric: "7.2 → 8.8",
-                quote: "Navi chỉ ra mình mất 1.5đ ở đúng 2 dạng bài. Thay vì cày liên tục, mình chỉ cần luyện sâu 2 chuyên đề đó là đủ.",
-                color: "text-blue-600 bg-blue-50"
-              },
-              {
-                name: "Nguyễn Minh Thư",
-                school: "THPT Lê Quý Đôn, TP.HCM",
-                gap: "Lỗ hổng: Sai ngu & Xác suất",
-                result: "+1.7đ",
-                metric: "6.5 → 8.2",
-                quote: "Mình từng học rất nhiều nhưng không lên. Navi bắt đúng bệnh chỗ mình mất điểm ngu và giúp mình cải thiện trong 1 tháng.",
-                color: "text-purple-600 bg-purple-50"
-              },
-              {
-                name: "Trần Đức Anh",
-                school: "THPT Phan Châu Trinh, Đà Nẵng",
-                gap: "Lỗ hổng: Hàm số & Tích phân",
-                result: "+1.4đ",
-                metric: "8.0 → 9.4",
-                quote: "NaviEdu giúp mình giải quyết thứ mình đang kẹt nhất. Nếu có thời gian thì mình luyện mỗi ngày, bận quá thì 1 tuần 2-3 lần là thấy chắc hơn rồi.",
-                color: "text-green-600 bg-green-50"
-              },
-              {
-                name: "Hồ Bảo Khánh",
-                school: "THPT Chuyên Lý Tự Trọng, Cần Thơ",
-                gap: "Lỗ hổng: Tiệm cận & Mũ log",
-                result: "+1.2đ",
-                metric: "6.8 → 8.0",
-                quote: "Lần đầu mình có tự tin khi tự ôn luyện như thế",
-                color: "text-orange-600 bg-orange-50"
-              },
-              {
-                name: "Đặng Hà My",
-                school: "THPT Chuyên Phan Bội Châu, Nghệ An",
-                gap: "Lỗ hổng: Oxyz & Số phức",
-                result: "+1.5đ",
-                metric: "7.5 → 9.0",
-                quote: "15 phút mỗi ngày nhưng hiệu quả hơn 3 tiếng mình tự cày đề. Mình đã đạt mục tiêu 9+.",
-                color: "text-pink-600 bg-pink-50"
-              },
-              {
-                name: "Vũ Gia Huy",
-                school: "THPT Thái Phiên, Hải Phòng",
-                gap: "Lỗ hổng: Bài toán thực tế",
-                result: "+1.3đ",
-                metric: "6.0 → 7.3",
-                quote: "Điểm mình lên sau 1 tháng chỉ làm bài trên lớp và ôn luyện trên Navi",
-                color: "text-cyan-600 bg-cyan-50"
-              }
-            ].map((t, idx) => (
-              <TestimonialCard key={idx} t={t} idx={idx} />
-            ))}
-          </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 perspective-1000">
+              {[
+                {
+                  name: "Lê Hoàng Nam",
+                  school: "THPT Chuyên Hà Nội - Amsterdam",
+                  gap: "Lỗ hổng: Hình học & VDC",
+                  result: "+1.6đ",
+                  metric: "7.2 → 8.8",
+                  quote: "Navi chỉ ra mình mất 1.5đ ở đúng 2 dạng bài. Thay vì cày liên tục, mình chỉ cần luyện sâu 2 chuyên đề đó là đủ.",
+                  color: "text-blue-600 bg-blue-50"
+                },
+                {
+                  name: "Nguyễn Minh Thư",
+                  school: "THPT Lê Quý Đôn, TP.HCM",
+                  gap: "Lỗ hổng: Sai ngu & Xác suất",
+                  result: "+1.7đ",
+                  metric: "6.5 → 8.2",
+                  quote: "Mình từng học rất nhiều nhưng không lên. Navi bắt đúng bệnh chỗ mình mất điểm ngu và giúp mình cải thiện trong 1 tháng.",
+                  color: "text-purple-600 bg-purple-50"
+                },
+                {
+                  name: "Trần Đức Anh",
+                  school: "THPT Phan Châu Trinh, Đà Nẵng",
+                  gap: "Lỗ hổng: Hàm số & Tích phân",
+                  result: "+1.4đ",
+                  metric: "8.0 → 9.4",
+                  quote: "NaviEdu giúp mình giải quyết thứ mình đang kẹt nhất. Nếu có thời gian thì mình luyện mỗi ngày, bận quá thì 1 tuần 2-3 lần là thấy chắc hơn rồi.",
+                  color: "text-green-600 bg-green-50"
+                },
+                {
+                  name: "Hồ Bảo Khánh",
+                  school: "THPT Chuyên Lý Tự Trọng, Cần Thơ",
+                  gap: "Lỗ hổng: Tiệm cận & Mũ log",
+                  result: "+1.2đ",
+                  metric: "6.8 → 8.0",
+                  quote: "Lần đầu mình có tự tin khi tự ôn luyện như thế",
+                  color: "text-orange-600 bg-orange-50"
+                },
+                {
+                  name: "Đặng Hà My",
+                  school: "THPT Chuyên Phan Bội Châu, Nghệ An",
+                  gap: "Lỗ hổng: Oxyz & Số phức",
+                  result: "+1.5đ",
+                  metric: "7.5 → 9.0",
+                  quote: "15 phút mỗi ngày nhưng hiệu quả hơn 3 tiếng mình tự cày đề. Mình đã đạt mục tiêu 9+.",
+                  color: "text-pink-600 bg-pink-50"
+                },
+                {
+                  name: "Vũ Gia Huy",
+                  school: "THPT Thái Phiên, Hải Phòng",
+                  gap: "Lỗ hổng: Bài toán thực tế",
+                  result: "+1.3đ",
+                  metric: "6.0 → 7.3",
+                  quote: "Điểm mình lên sau 1 tháng chỉ làm bài trên lớp và ôn luyện trên Navi",
+                  color: "text-cyan-600 bg-cyan-50"
+                }
+              ].map((t, idx) => (
+                <TestimonialCard key={idx} t={t} idx={idx} />
+              ))}
+            </div>
 
           </div>
 
@@ -440,10 +438,10 @@ function TestimonialCard({ t, idx }: any) {
       initial={{ opacity: 0, y: 80, rotateX: 15, scale: 0.9 }}
       whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ 
-        duration: 1, 
+      transition={{
+        duration: 1,
         delay: (idx % 3) * 0.15,
-        ease: [0.22, 1, 0.36, 1] 
+        ease: [0.22, 1, 0.36, 1]
       }}
       className="flex flex-col justify-between bg-white rounded-[2.5rem] p-10 shadow-xl shadow-gray-200/50 border border-gray-100 w-full shrink-0 transition-transform active:scale-95 hover:shadow-2xl hover:-translate-y-2 duration-500"
     >
@@ -457,11 +455,11 @@ function TestimonialCard({ t, idx }: any) {
             onClick={() => setIsStarred(!isStarred)}
             className="group/star"
           >
-            <Star 
+            <Star
               className={cn(
-                "h-6 w-6 transition-all duration-300", 
+                "h-6 w-6 transition-all duration-300",
                 isStarred ? "text-yellow-400 fill-current scale-125" : "text-gray-200 group-hover/star:text-yellow-200"
-              )} 
+              )}
             />
           </motion.button>
         </div>
@@ -502,10 +500,10 @@ function SolutionCardWrapper({ item, index: i }: any) {
   return (
     <motion.div
       ref={containerRef}
-      style={{ 
+      style={{
         scale,
         top: 80 + (i * 32),
-        zIndex: i 
+        zIndex: i
       }}
       className="sticky mb-32"
     >
