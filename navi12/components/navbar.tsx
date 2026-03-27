@@ -2,8 +2,18 @@
 
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
+  const [isWaitlistMode, setIsWaitlistMode] = useState(process.env.NEXT_PUBLIC_WAITLIST_MODE === "true");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("mode") === "app") {
+      setIsWaitlistMode(false);
+    }
+  }, []);
+  
   return (
     <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-gray-100 bg-white/80 px-4 py-3 backdrop-blur-md md:px-12">
       <Link href="/" className="flex items-center gap-2">
@@ -14,9 +24,13 @@ export default function Navbar() {
       </Link>
       
       <div className="hidden items-center gap-8 md:flex">
-        <Link href="/thi-thu" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Thi thử</Link>
-        <Link href="/luyen-tap" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Phòng luyện chuyên sâu</Link>
-        <Link href="/sprint-60" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Lộ trình của tôi</Link>
+        {!isWaitlistMode && (
+          <>
+            <Link href="/thi-thu" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Thi thử</Link>
+            <Link href="/luyen-tap" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Phòng luyện chuyên sâu</Link>
+            <Link href="/sprint-60" className="text-sm font-medium text-gray-700 hover:text-[#0e56fa]">Lộ trình của tôi</Link>
+          </>
+        )}
         <Link href="/login" className="text-sm font-bold text-gray-700 hover:text-[#0e56fa] transition-colors">
           Đăng nhập
         </Link>

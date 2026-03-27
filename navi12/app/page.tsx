@@ -22,6 +22,14 @@ export default function LandingPage() {
   const solutionSectionRef = useRef<HTMLDivElement>(null);
   const solutionStickyRef = useRef<HTMLDivElement>(null);
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
+  const [isWaitlistMode, setIsWaitlistMode] = useState(process.env.NEXT_PUBLIC_WAITLIST_MODE === "true");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("mode") === "app") {
+      setIsWaitlistMode(false);
+    }
+  }, []);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -123,7 +131,8 @@ export default function LandingPage() {
 
           <div className="mt-12 flex flex-col items-center gap-6">
             <InteractiveButton
-              onClick={() => setIsWaitlistOpen(true)}
+              href={!isWaitlistMode ? "/thi-thu" : undefined}
+              onClick={isWaitlistMode ? () => setIsWaitlistOpen(true) : undefined}
               className="rounded-2xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 hover:bg-blue-700"
             >
               Tìm chỗ mất điểm
@@ -442,7 +451,8 @@ export default function LandingPage() {
             transition={{ duration: 0.6, delay: 0.5, type: "spring", stiffness: 200 }}
           >
             <InteractiveButton
-              onClick={() => setIsWaitlistOpen(true)}
+              href={!isWaitlistMode ? "/thi-thu" : undefined}
+              onClick={isWaitlistMode ? () => setIsWaitlistOpen(true) : undefined}
               className="rounded-2xl bg-white px-12 py-6 text-xl font-black text-[#0e56fa] shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center gap-3"
             >
               Kiểm tra ngay
