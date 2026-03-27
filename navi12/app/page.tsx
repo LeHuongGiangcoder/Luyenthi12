@@ -122,7 +122,7 @@ export default function LandingPage() {
           </p>
 
           <div className="mt-12 flex flex-col items-center gap-6">
-            <InteractiveButton 
+            <InteractiveButton
               onClick={() => setIsWaitlistOpen(true)}
               className="rounded-2xl bg-[#0e56fa] px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-blue-200 transition-all hover:scale-105 active:scale-95 hover:bg-blue-700"
             >
@@ -149,7 +149,11 @@ export default function LandingPage() {
       </section>
 
       {/* Trap Section - SMOOTH HORIZONTAL STICKY SCROLL */}
-      <section ref={trapSectionRef} className="relative bg-[#fafbff] overflow-hidden min-h-screen flex flex-col justify-center py-20">
+      <section ref={trapSectionRef} className="relative bg-[#ffffff] overflow-hidden min-h-screen flex flex-col justify-center py-20">
+        {/* Modern Background Enhancement */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#f0f4ff_0%,#ffffff_100%)] opacity-70" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-100 to-transparent" />
+
         <div className="relative z-10 w-full text-center px-4 mb-12">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-red-50 px-4 py-1.5 text-xs font-black text-red-600 border border-red-100 uppercase tracking-widest">
             CẢNH BÁO GIAI ĐOẠN CUỐI
@@ -219,9 +223,18 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section ref={solutionSectionRef} className="relative bg-white py-24 md:py-32 overflow-hidden font-montserrat">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-12 flex flex-col">
+      <section ref={solutionSectionRef} className="relative bg-[#ffffff] py-24 md:py-32 overflow-hidden font-montserrat">
+        {/* Subtle Background Elements for Solution Section */}
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-50/40 rounded-full blur-[120px] -z-0 pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-pink-50/30 rounded-full blur-[150px] -z-0 pointer-events-none" />
 
+        {/* Light Grid Pattern for Texture */}
+        <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,white,transparent)] opacity-[0.03] pointer-events-none">
+          <div className="h-full w-full bg-[size:40px_40px] bg-[link-image:radial-gradient(circle_at_1px_1px,black_1px,transparent_1px)]"
+            style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #000 1px, transparent 1px)' }} />
+        </div>
+
+        <div className="max-w-[1400px] mx-auto px-4 md:px-12 flex flex-col relative z-10">
           {/* Main Header - Centered & Consistent */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -230,7 +243,7 @@ export default function LandingPage() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col items-center text-center mx-auto max-w-4xl mb-12"
           >
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black text-blue-600 border border-blue-100 uppercase tracking-widest">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-50/80 px-4 py-1.5 text-xs font-black text-blue-600 border border-blue-100 uppercase tracking-widest backdrop-blur-sm">
               GIẢI PHÁP ĐỘT PHÁ CỦA NAVIEDU
             </div>
             <h2 className="text-4xl md:text-6xl font-extrabold font-montserrat tracking-tight text-gray-900 leading-[1.1]">
@@ -281,10 +294,13 @@ export default function LandingPage() {
 
 
       {/* Testimonials Section - High Impact Results */}
-      <section className="relative bg-[#fafbff] py-16 md:py-20 overflow-hidden border-t border-gray-100">
+      <section className="relative bg-[#ffffff] py-16 md:py-20 overflow-hidden border-t border-gray-100">
+        {/* Professional Mesh Gradient Background */}
+        <div className="absolute inset-0 bg-[radial-gradient(at_top_right,rgba(14,86,250,0.05),transparent_50%),radial-gradient(at_bottom_left,rgba(236,72,153,0.03),transparent_50%)] pointer-events-none" />
+
         {/* Abstract Background Decoration */}
-        <div className="absolute top-0 right-0 p-32 opacity-10 pointer-events-none grayscale"><TrendingUp className="h-64 w-64" /></div>
-        <div className="absolute -bottom-24 -left-24 h-96 w-96 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 right-0 p-32 opacity-[0.03] pointer-events-none grayscale select-none"><TrendingUp className="h-64 w-64" /></div>
+        <div className="absolute -bottom-24 -left-24 h-96 w-96 bg-blue-500/10 blur-[130px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 md:px-12 relative z-10">
           {/* Section Header */}
@@ -425,7 +441,7 @@ export default function LandingPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5, type: "spring", stiffness: 200 }}
           >
-            <InteractiveButton 
+            <InteractiveButton
               onClick={() => setIsWaitlistOpen(true)}
               className="rounded-2xl bg-white px-12 py-6 text-xl font-black text-[#0e56fa] shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center gap-3"
             >
