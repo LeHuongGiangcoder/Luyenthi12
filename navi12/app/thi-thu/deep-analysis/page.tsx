@@ -10,7 +10,8 @@ export default function DeepAnalysis() {
   const [countdown, setCountdown] = useState(4);
   const [currentIdx, setCurrentIdx] = useState(1);
   const [marked, setMarked] = useState<number[]>([2, 7]);
-  const [answered, setAnswered] = useState<number[]>([1, 2, 3, 4]);
+  const [answered, setAnswered] = useState<number[]>([]);
+  const [userAnswers, setUserAnswers] = useState<Record<number, number>>({});
   const totalQuestions = 12;
 
   useEffect(() => {
@@ -78,7 +79,7 @@ export default function DeepAnalysis() {
   const getStatusColor = (num: number) => {
     if (num === currentIdx) return "bg-blue-600 text-white shadow-lg shadow-blue-200 border-blue-600";
     if (marked.includes(num)) return "bg-orange-100 text-orange-600 border-orange-200";
-    if (answered.includes(num)) return "bg-blue-50 text-blue-600 border-blue-200";
+    if (answered.includes(num) || userAnswers[num] !== undefined) return "bg-blue-50 text-blue-600 border-blue-200";
     return "bg-white text-gray-400 border-gray-100 hover:border-gray-200";
   };
 
@@ -112,7 +113,7 @@ export default function DeepAnalysis() {
 
            {/* Adaptive Levels Bar */}
            <div className="flex flex-wrap items-center gap-3 px-2">
-                 {[
+              {[
                 { label: "Level 1", status: "completed", level: 1 },
                 { label: "Level 2", status: "completed", level: 2 },
                 { label: "Level 3", status: "current", level: 3 },
@@ -172,18 +173,24 @@ export default function DeepAnalysis() {
                   ].map((option, i) => (
                     <button 
                       key={i}
+                      onClick={() => {
+                        setUserAnswers(prev => ({...prev, [currentIdx]: i}));
+                        if (!answered.includes(currentIdx)) {
+                          setAnswered(prev => [...prev, currentIdx]);
+                        }
+                      }}
                       className={cn(
                         "flex items-center gap-4 w-full p-4 md:p-5 text-left rounded-2xl border transition-all duration-200 group",
-                        i === 0 
+                        userAnswers[currentIdx] === i 
                           ? "bg-level-2 border-level-2 text-white shadow-lg shadow-level-2/20 ring-4 ring-level-2/5" 
                           : "bg-white border-gray-100 text-gray-600 hover:border-level-2 hover:bg-level-2/5"
                       )}
                     >
                       <div className={cn(
                         "h-7 w-7 rounded-full border-2 flex items-center justify-center text-[10px] font-black",
-                        i === 0 ? "bg-white border-white text-level-2" : "border-gray-100 text-gray-300 group-hover:border-level-2"
+                        userAnswers[currentIdx] === i ? "bg-white border-white text-level-2" : "border-gray-100 text-gray-300 group-hover:border-level-2"
                       )}>
-                        {i === 0 ? <Check className="h-4 w-4" /> : String.fromCharCode(65 + i)}
+                        {userAnswers[currentIdx] === i ? <Check className="h-4 w-4" /> : String.fromCharCode(65 + i)}
                       </div>
                       <span className="font-bold text-sm md:text-base">{option}</span>
                     </button>

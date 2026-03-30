@@ -354,9 +354,6 @@ export default function ExamRoom() {
 
               <div className="flex flex-col gap-4 mb-2 max-w-md mx-auto relative z-10">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                   <div className="h-6 w-6 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shadow-sm border border-blue-100">
-                      <Sparkles className="h-3.5 w-3.5 fill-current" />
-                   </div>
                    <span className="text-[10px] font-black text-[#0e56fa] uppercase tracking-[0.4em]">QUYẾT TÂM TĂNG ĐIỂM</span>
                 </div>
                 <h3 className="text-2xl md:text-3xl font-black font-montserrat text-gray-900 leading-tight">
