@@ -203,20 +203,20 @@ export default function LuyenTap() {
             // Determine current level and color
             let levelColor = "bg-level-1";
             let textColor = "text-level-1";
-            let levelName = "Level 1: Nhận biết";
+            let levelName = "Level 1";
 
             if (topic.mastery >= 90) {
               levelColor = "bg-level-4";
               textColor = "text-level-4";
-              levelName = "Level 4: VDC";
+              levelName = "Level 4";
             } else if (topic.mastery >= 60) {
               levelColor = "bg-level-3";
               textColor = "text-level-3";
-              levelName = "Level 3: Vận dụng";
+              levelName = "Level 3";
             } else if (topic.mastery >= 30) {
               levelColor = "bg-level-2";
               textColor = "text-level-2";
-              levelName = "Level 2: Thông hiểu";
+              levelName = "Level 2";
             }
 
             // Determine 3 States
@@ -342,15 +342,14 @@ export default function LuyenTap() {
                     {isStarted && <span className={cn("text-[11px] font-black tracking-widest", textColor)}>{topic.mastery}%</span>}
                   </div>
 
-                  <div className="grid grid-cols-4 gap-2">
-                    {[
-                      { label: "NB", val: isStarted ? Math.min(100, topic.mastery * 4) : 0, active: topic.mastery >= 10, color: "bg-level-1", text: "text-level-1" },
-                      { label: "TH", val: isStarted ? Math.max(0, Math.min(100, (topic.mastery - 25) * 4)) : 0, active: topic.mastery >= 35, color: "bg-level-2", text: "text-level-2" },
-                      { label: "VD", val: isStarted ? Math.max(0, Math.min(100, (topic.mastery - 50) * 4)) : 0, active: topic.mastery >= 60, color: "bg-level-3", text: "text-level-3" },
-                      { label: "VDC", val: isStarted ? Math.max(0, Math.min(100, (topic.mastery - 75) * 4)) : 0, active: topic.mastery >= 90, color: "bg-level-4", text: "text-level-4" }
-                    ].map((lvl, i) => (
-                      <div key={i} className="flex flex-col gap-2">
-                        <div className="h-2 w-full bg-gray-50 rounded-full overflow-hidden relative">
+                    <div className="grid grid-cols-4 gap-2">
+                      {[
+                        { label: "NB", val: isStarted ? Math.min(100, topic.mastery * 4) : 0, active: topic.mastery >= 10, color: "bg-level-1", text: "text-level-1" },
+                        { label: "TH", val: isStarted ? Math.max(0, Math.min(100, (topic.mastery - 25) * 4)) : 0, active: topic.mastery >= 35, color: "bg-level-2", text: "text-level-2" },
+                        { label: "VD", val: isStarted ? Math.max(0, Math.min(100, (topic.mastery - 50) * 4)) : 0, active: topic.mastery >= 60, color: "bg-level-3", text: "text-level-3" },
+                        { label: "VDC", val: isStarted ? Math.max(0, Math.min(100, (topic.mastery - 75) * 4)) : 0, active: topic.mastery >= 90, color: "bg-level-4", text: "text-level-4" }
+                      ].map((lvl, i) => (
+                        <div key={i} className="h-2 w-full bg-gray-50 rounded-full overflow-hidden relative">
                           <div
                             className={cn(
                               "h-full rounded-full transition-all duration-1000",
@@ -359,13 +358,8 @@ export default function LuyenTap() {
                             style={{ width: `${lvl.val || (isAnalyzed ? 100 : 0)}%`, opacity: isAnalyzed && !isStarted ? 0.3 : 1 }}
                           />
                         </div>
-                        <span className={cn(
-                          "text-[8px] font-black text-center transition-colors",
-                          lvl.active ? textColor : "text-gray-300"
-                        )}>{lvl.label}</span>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
                 </div>
 
                 <div className={cn("flex items-center justify-between", view === "grid" ? "mt-auto pt-6 border-t border-gray-50" : "shrink-0 ml-auto gap-8")}>

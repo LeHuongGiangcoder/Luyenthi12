@@ -112,11 +112,11 @@ export default function DeepAnalysis() {
 
            {/* Adaptive Levels Bar */}
            <div className="flex flex-wrap items-center gap-3 px-2">
-              {[
-                { label: "Nhận biết", status: "completed", level: 1 },
-                { label: "Thông hiểu", status: "completed", level: 2 },
-                { label: "Vận dụng", status: "current", level: 3 },
-                { label: "Vận dụng cao", status: "pending", level: 4 }
+                 {[
+                { label: "Level 1", status: "completed", level: 1 },
+                { label: "Level 2", status: "completed", level: 2 },
+                { label: "Level 3", status: "current", level: 3 },
+                { label: "Level 4", status: "pending", level: 4 }
               ].map((step, i) => (
                 <div 
                   key={i} 
@@ -141,7 +141,7 @@ export default function DeepAnalysis() {
                 <div className="mb-4 flex items-start justify-between">
                    <div>
                       <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-level-3/10 text-level-3 text-[10px] font-black uppercase tracking-widest mb-4 border border-level-3/20">
-                         Vận dụng · Khoảng đơn điệu
+                         Level 3 · Khoảng đơn điệu
                       </span>
                       <h2 className="text-xl md:text-2xl font-bold font-montserrat text-gray-900 leading-tight md:leading-relaxed max-w-2xl">
                          Hàm số <span className="italic">f(x) = (x² - 2x + 3) / (x - 1)</span> đồng biến trên khoảng nào sau đây?
@@ -263,10 +263,10 @@ export default function DeepAnalysis() {
                   
                   <div className="space-y-6">
                     {[
-                      { label: "Nhận biết", val: "Vững 95%", progress: 95, color: "bg-level-1", text: "text-level-1" },
-                      { label: "Thông hiểu", val: "Vững 82%", progress: 82, color: "bg-level-2", text: "text-level-2" },
-                      { label: "Vận dụng", val: "Đang đo...", progress: 45, color: "bg-level-3", text: "text-level-3", isPulse: true },
-                      { label: "Vận dụng cao", val: "Chưa đến", progress: 0, color: "bg-gray-100", text: "text-gray-400" }
+                      { label: "Level 1", val: "Vững 95%", progress: 95, color: "bg-level-1", text: "text-level-1" },
+                      { label: "Level 2", val: "Vững 82%", progress: 82, color: "bg-level-2", text: "text-level-2" },
+                      { label: "Level 3", val: "Đang đo...", progress: 45, color: "bg-level-3", text: "text-level-3", isPulse: true },
+                      { label: "Level 4", val: "Chưa đến", progress: 0, color: "bg-gray-100", text: "text-gray-400" }
                     ].map((metric, i) => (
                       <div key={i} className="flex flex-col gap-3">
                          <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">

@@ -96,31 +96,31 @@ function DeepAnalysisResultsContent() {
                             { 
                                name: "Tính đơn điệu của hàm số", 
                                value: 85, 
-                               avg: "Level 3 (VD)",
+                               avg: "Level 3",
                                suggested: ["Bài toán tham số m m", "Đồ thị hàm hợp nâng cao", "Hàm số chứa giá trị tuyệt đối"]
                             },
                             { 
                                name: "Cực trị của hàm số", 
                                value: 62, 
-                               avg: "Level 2 (TH)",
+                               avg: "Level 2",
                                suggested: ["Cực trị hàm bậc 3, bậc 4", "Tìm m để hàm có n cực trị", "Đồ thị f'(x)"]
                             },
                             { 
                                name: "GTLN - GTNN của hàm số", 
                                value: 92, 
-                               avg: "Level 4 (VDC)",
+                               avg: "Level 4",
                                suggested: ["Bất đẳng thức trong Hàm số", "Min-Max hàm nhiều biến", "Ứng dụng thực tế tối ưu"]
                             },
                             { 
                                name: "Tiệm cận của đồ thị hàm số", 
                                value: 48, 
-                               avg: "Level 2 (TH)",
+                               avg: "Level 2",
                                suggested: ["Tiệm cận chứa căn thức", "Tiệm cận của hàm phân thức", "Tiệm cận hàm ẩn"]
                             },
                             { 
                                name: "Ứng dụng đạo hàm thực tế", 
                                value: 35, 
-                               avg: "Level 1 (NB)",
+                               avg: "Level 1",
                                suggested: ["Bài toán vật lý (Vận tốc)", "Bài toán tăng trưởng", "Tối ưu hóa diện tích/thể tích"]
                             }
                          ].map((sub, i) => (
@@ -150,27 +150,22 @@ function DeepAnalysisResultsContent() {
                                   </span>
                                </div>
                                
-                               <div className="flex flex-col gap-2">
-                                  <div className="h-2.5 w-full bg-gray-100 rounded-full overflow-hidden relative border border-gray-100/50">
-                                     <div className="absolute inset-0 flex">
-                                        <div className="flex-1 border-r border-gray-200/20" />
-                                        <div className="flex-1 border-r border-gray-200/20" />
-                                        <div className="flex-1 border-r border-gray-200/20" />
-                                        <div className="flex-1" />
+                                  <div className="flex flex-col gap-2">
+                                     <div className="h-2.5 w-full bg-gray-100 rounded-full overflow-hidden relative border border-gray-100/50">
+                                        <div className="absolute inset-0 flex">
+                                           <div className="flex-1 border-r border-gray-200/20" />
+                                           <div className="flex-1 border-r border-gray-200/20" />
+                                           <div className="flex-1 border-r border-gray-200/20" />
+                                           <div className="flex-1" />
+                                        </div>
+                                        <div 
+                                           className={cn("h-full transition-all duration-1000 shadow-sm", 
+                                              sub.value >= 90 ? "bg-level-4" : sub.value >= 70 ? "bg-level-3" : sub.value >= 40 ? "bg-level-2" : "bg-level-1"
+                                           )}
+                                           style={{ width: `${sub.value}%` }}
+                                        />
                                      </div>
-                                     <div 
-                                        className={cn("h-full transition-all duration-1000 shadow-sm", 
-                                           sub.value >= 90 ? "bg-level-4" : sub.value >= 70 ? "bg-level-3" : sub.value >= 40 ? "bg-level-2" : "bg-level-1"
-                                        )}
-                                        style={{ width: `${sub.value}%` }}
-                                     />
                                   </div>
-                                  <div className="flex justify-between px-1">
-                                     {["NB", "TH", "VD", "VDC"].map(lvl => (
-                                        <span key={lvl} className="text-[7px] font-black text-gray-400 uppercase tracking-widest">{lvl}</span>
-                                     ))}
-                                  </div>
-                               </div>
 
                                <AnimatePresence>
                                   {expandedTopic === i && (
