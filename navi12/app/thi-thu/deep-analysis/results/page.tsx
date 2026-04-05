@@ -7,7 +7,6 @@ import { getDaysRemaining } from "@/lib/exam-date";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Clock } from "lucide-react";
 
 function DeepAnalysisResultsContent() {
    const [expandedTopic, setExpandedTopic] = useState<number | null>(null);
@@ -31,12 +30,11 @@ function DeepAnalysisResultsContent() {
             </div>
 
             <div className="flex flex-col gap-16">
-               {/* Section 1: Phân tích chuyên sâu (Card duy nhất chứa Radar và Detail) */}
+               {/* Section 1: Phân tích chuyên sâu */}
                <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col gap-10 overflow-hidden text-left w-full">
                   
-                  {/* Radar Section with Intelligence Sidebar */}
+                  {/* Radar Section */}
                   <div className="flex flex-col xl:flex-row items-center gap-16 py-6">
-                     {/* Left: Radar Chart */}
                      <div className="relative h-80 w-full xl:w-1/2 flex items-center justify-center bg-gray-50/10 rounded-full">
                         <svg className="h-full w-full max-w-[340px]" viewBox="-40 -40 180 180">
                            {[0.25, 0.5, 0.75, 1].map((scale) => {
@@ -59,7 +57,6 @@ function DeepAnalysisResultsContent() {
                         </svg>
                      </div>
 
-                     {/* Right: Intelligence Sidebar */}
                      <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {[
                            { label: "Điểm mạnh nhất", value: "GTLN - GTNN", sub: "Level 4 (Mastery)", icon: <Award className="h-5 w-5 text-indigo-600" />, color: "bg-indigo-50 border-indigo-100" },
@@ -85,124 +82,92 @@ function DeepAnalysisResultsContent() {
                   </div>
 
                   {/* Section 1.2: Chi tiết năng lực */}
-                  <div className="pt-10 border-t border-gray-100 flex flex-col gap-10">
-                     <div className="flex flex-col gap-2">
-                        <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">Chi tiết năng lực</span>
-                        <h3 className="text-2xl font-black font-montserrat text-gray-900 leading-tight">Kết quả từng đơn vị kiến thức</h3>
+                  <div className="pt-10 border-t border-gray-100 flex flex-col gap-12 text-left">
+                     
+                     {/* Subsection 1.2.1: Kết quả từng đơn vị kiến thức */}
+                     <div className="flex flex-col gap-10">
+                        <div className="flex flex-col gap-2">
+                           <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">Chi tiết năng lực</span>
+                           <h3 className="text-2xl font-black font-montserrat text-gray-900 leading-tight">Kết quả từng đơn vị kiến thức</h3>
+                        </div>
+
+                        <div className="flex flex-col gap-4">
+                           {[
+                              { name: "Tính đơn điệu của hàm số", value: 85, avg: "Level 3", color: "text-level-3", bg: "bg-level-3", suggested: ["Bài toán tham số m m", "Đồ thị hàm hợp nâng cao", "Hàm số chứa giá trị tuyệt đối"] },
+                              { name: "Cực trị của hàm số", value: 62, avg: "Level 2", color: "text-level-2", bg: "bg-level-2", suggested: ["Cực trị hàm bậc 3, bậc 4", "Tìm m để hàm có n cực trị", "Đồ thị f'(x)"] },
+                              { name: "GTLN - GTNN của hàm số", value: 92, avg: "Level 4", color: "text-level-4", bg: "bg-level-4", suggested: ["Bất đẳng thức trong Hàm số", "Min-Max hàm nhiều biến", "Ứng dụng thực tế tối ưu"] },
+                              { name: "Tiệm cận của đồ thị hàm số", value: 48, avg: "Level 2", color: "text-level-2", bg: "bg-level-2", suggested: ["Tiệm cận chứa căn thức", "Tiệm cận của hàm phân thức", "Tiệm cận hàm ẩn"] },
+                              { name: "Ứng dụng đạo hàm thực tế", value: 35, avg: "Level 1", color: "text-level-1", bg: "bg-level-1", suggested: ["Bài toán vật lý (Vận tốc)", "Bài toán tăng trưởng", "Tối ưu hóa diện tích/thể tích"] }
+                           ].map((sub, i) => (
+                              <div key={i} className={cn("flex flex-col gap-3 p-5 px-8 rounded-[1.5rem] border transition-all cursor-pointer group", expandedTopic === i ? "bg-gray-50/50 border-blue-200 shadow-sm" : "bg-white border-gray-50 hover:bg-gray-50/80")} onClick={() => setExpandedTopic(expandedTopic === i ? null : i)}>
+                                 <div className="flex justify-between items-center">
+                                    <h4 className="text-[15px] font-bold text-gray-800 leading-tight flex items-center gap-2 pr-4 flex-1">
+                                       {sub.name}
+                                       <ChevronRight className={cn("h-3 w-3 text-gray-300 transition-transform", expandedTopic === i && "rotate-90")} />
+                                    </h4>
+                                    <span className={cn("text-[10px] font-black uppercase tracking-[0.2em] whitespace-nowrap", sub.color, sub.value >= 90 && "animate-pulse")}>
+                                       {sub.avg}
+                                    </span>
+                                 </div>
+                                 <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden relative border border-gray-100/30">
+                                    <div className={cn("h-full transition-all duration-1000", sub.bg)} style={{ width: `${sub.value}%` }} />
+                                 </div>
+                                 <AnimatePresence>
+                                    {expandedTopic === i && (
+                                       <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+                                          <div className="pt-4 mt-1 border-t border-gray-100 flex flex-col gap-3">
+                                             <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Gợi ý dạng bài trọng tâm:</span>
+                                             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                                {sub.suggested.map((item, idx) => (
+                                                   <div key={idx} className="flex items-center justify-between p-3 bg-white rounded-xl border border-gray-100 shadow-sm hover:border-blue-200 transition-colors">
+                                                      <span className="text-[11px] font-bold text-gray-700">{item}</span>
+                                                      <ChevronRight className="h-3 w-3 text-gray-300" />
+                                                   </div>
+                                                ))}
+                                             </div>
+                                          </div>
+                                       </motion.div>
+                                    )}
+                                 </AnimatePresence>
+                              </div>
+                           ))}
+                        </div>
                      </div>
 
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
-                         {[
-                            { 
-                               name: "Tính đơn điệu của hàm số", 
-                               value: 85, 
-                               avg: "Level 3",
-                               suggested: ["Bài toán tham số m m", "Đồ thị hàm hợp nâng cao", "Hàm số chứa giá trị tuyệt đối"]
-                            },
-                            { 
-                               name: "Cực trị của hàm số", 
-                               value: 62, 
-                               avg: "Level 2",
-                               suggested: ["Cực trị hàm bậc 3, bậc 4", "Tìm m để hàm có n cực trị", "Đồ thị f'(x)"]
-                            },
-                            { 
-                               name: "GTLN - GTNN của hàm số", 
-                               value: 92, 
-                               avg: "Level 4",
-                               suggested: ["Bất đẳng thức trong Hàm số", "Min-Max hàm nhiều biến", "Ứng dụng thực tế tối ưu"]
-                            },
-                            { 
-                               name: "Tiệm cận của đồ thị hàm số", 
-                               value: 48, 
-                               avg: "Level 2",
-                               suggested: ["Tiệm cận chứa căn thức", "Tiệm cận của hàm phân thức", "Tiệm cận hàm ẩn"]
-                            },
-                            { 
-                               name: "Ứng dụng đạo hàm thực tế", 
-                               value: 35, 
-                               avg: "Level 1",
-                               suggested: ["Bài toán vật lý (Vận tốc)", "Bài toán tăng trưởng", "Tối ưu hóa diện tích/thể tích"]
-                            }
-                         ].map((sub, i) => (
-                            <div 
-                              key={i} 
-                              className={cn(
-                                 "flex flex-col gap-4 p-6 rounded-[2rem] border transition-all cursor-pointer group",
-                                 expandedTopic === i ? "bg-gray-50/50 border-blue-200 shadow-sm" : "bg-white border-transparent hover:bg-gray-50/80"
-                              )}
-                              onClick={() => setExpandedTopic(expandedTopic === i ? null : i)}
-                            >
-                               <div className="flex justify-between items-end">
-                                  <div className="flex flex-col gap-1.5 flex-1 pr-4">
-                                     <h4 className="text-[13px] font-bold text-gray-800 leading-tight flex items-center gap-2">
-                                        {sub.name}
-                                        <ChevronRight className={cn("h-3 w-3 text-gray-300 transition-transform", expandedTopic === i && "rotate-90")} />
-                                     </h4>
-                                  </div>
-                                  <span className={cn(
-                                     "text-[10px] font-black uppercase tracking-widest whitespace-nowrap",
-                                     sub.value >= 90 ? "text-level-4 animate-pulse" : 
-                                     sub.value >= 70 ? "text-level-3" : 
-                                     sub.value >= 40 ? "text-level-2" : 
-                                     "text-level-1"
-                                  )}>
-                                     {sub.avg}
-                                  </span>
-                               </div>
-                               
-                                  <div className="flex flex-col gap-2">
-                                     <div className="h-2.5 w-full bg-gray-100 rounded-full overflow-hidden relative border border-gray-100/50">
-                                        <div className="absolute inset-0 flex">
-                                           <div className="flex-1 border-r border-gray-200/20" />
-                                           <div className="flex-1 border-r border-gray-200/20" />
-                                           <div className="flex-1 border-r border-gray-200/20" />
-                                           <div className="flex-1" />
-                                        </div>
-                                        <div 
-                                           className={cn("h-full transition-all duration-1000 shadow-sm", 
-                                              sub.value >= 90 ? "bg-level-4" : sub.value >= 70 ? "bg-level-3" : sub.value >= 40 ? "bg-level-2" : "bg-level-1"
-                                           )}
-                                           style={{ width: `${sub.value}%` }}
-                                        />
-                                     </div>
-                                  </div>
+                     {/* Subsection 1.2.2: YCCĐ cần hỗ trợ */}
+                     <div className="flex flex-col gap-10">
+                        <div className="flex flex-col gap-2">
+                           <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">Gợi ý bứt phá</span>
+                           <h3 className="text-2xl font-black font-montserrat text-gray-900 leading-tight">YCCĐ cần hỗ trợ để không mất điểm</h3>
+                        </div>
 
-                               <AnimatePresence>
-                                  {expandedTopic === i && (
-                                     <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: "auto", opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                                        className="overflow-hidden"
-                                     >
-                                        <div className="pt-4 mt-2 border-t border-gray-100 flex flex-col gap-3">
-                                           <div className="flex items-center gap-2 mb-1">
-                                              <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Gợi ý dạng bài trọng tâm:</span>
-                                           </div>
-                                           <div className="flex flex-col gap-2">
-                                              {sub.suggested.map((item, idx) => (
-                                                 <div key={idx} className="flex items-center justify-between p-3 bg-white rounded-xl border border-gray-100 shadow-sm hover:border-blue-200 transition-colors">
-                                                    <span className="text-xs font-bold text-gray-700">{item}</span>
-                                                    <ChevronRight className="h-3 w-3 text-gray-300" />
-                                                 </div>
-                                              ))}
-                                           </div>
-                                        </div>
-                                     </motion.div>
-                                  )}
-                               </AnimatePresence>
-                            </div>
-                         ))}
+                        <div className="flex flex-col gap-4">
+                           {[
+                              { name: "Tìm GTLN/GTNN hàm số có điều kiện", gain: "+0.75đ", color: "bg-red-50/20 border-red-100/50 text-red-700", dotColor: "bg-red-500" },
+                              { name: "Phân tích cực trị hàm hợp", gain: "+0.75đ", color: "bg-red-50/20 border-red-100/50 text-red-700", dotColor: "bg-red-500" },
+                              { name: "Khoảng đơn điệu hàm phân thức", gain: "+0.25đ", color: "bg-amber-50/20 border-amber-100/50 text-amber-700", dotColor: "bg-amber-500" }
+                           ].map((item, idx) => (
+                              <div key={idx} className={cn("flex flex-col md:flex-row items-center justify-between p-5 px-8 rounded-[1.5rem] border transition-all hover:scale-[1.01] shadow-sm group", item.color)}>
+                                 <div className="flex items-center gap-5 text-left">
+                                    <div className={cn("h-2.5 w-2.5 rounded-full group-hover:scale-125 transition-transform", item.dotColor)} />
+                                    <span className="text-[15px] font-bold font-montserrat tracking-tight text-gray-800">{item.name}</span>
+                                 </div>
+                                 <div className="flex items-baseline gap-2 mt-3 md:mt-0 text-right opacity-80">
+                                    <span className="text-[9px] font-bold uppercase tracking-widest opacity-40">Gain potential:</span>
+                                    <span className="text-xl font-black font-montserrat tracking-tighter leading-none">{item.gain}</span>
+                                 </div>
+                              </div>
+                           ))}
+                        </div>
                      </div>
-                  </div>
 
-                  <div className="p-8 md:p-10 bg-blue-50/30 rounded-[2rem] border border-blue-100/50">
-                     <p className="text-lg font-medium text-gray-700 leading-relaxed text-left">
-                        <span className="font-black text-blue-600 leading-relaxed italic block mb-3 underline decoration-blue-200 decoration-4">KẾT LUẬN MỤC TIÊU {targetScore}:</span>
-                        Kỹ năng cơ bản của bạn ổn, nhưng để chạm mốc {targetScore}, bạn cần ưu tiên hoàn thiện <span className="text-red-500 font-bold underline decoration-red-100 italic">Ứng dụng đạo hàm thực tế, cực trị và tiệm cận.</span>
-                        <br /> Dưới đây là lộ trình giúp bạn lấy lại <span className="font-black text-blue-600">1.5 điểm</span> còn thiếu ngay hôm nay.
-                     </p>
+                     <div className="p-8 md:p-10 bg-blue-50/30 rounded-[1.5rem] border border-blue-100/50">
+                        <p className="text-base md:text-lg font-medium text-gray-700 leading-relaxed text-left">
+                           <span className="font-black text-blue-600 leading-relaxed italic block mb-3 underline decoration-blue-200 decoration-2 text-left">KẾT LUẬN MỤC TIÊU {targetScore}:</span>
+                           Kỹ năng cơ bản của bạn ổn, nhưng để chạm mốc {targetScore}, bạn cần ưu tiên hoàn thiện <span className="text-red-500 font-bold underline decoration-red-100 italic">Ứng dụng đạo hàm thực tế, cực trị và tiệm cận.</span>
+                           <br /> Dưới đây là lộ trình giúp bạn lấy lại <span className="font-black text-blue-600">1.5 điểm</span> còn thiếu ngay hôm nay.
+                        </p>
+                     </div>
                   </div>
                </div>
 
@@ -211,16 +176,9 @@ function DeepAnalysisResultsContent() {
                   <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-[100px] opacity-40 -mr-32 -mt-32" />
                   
                   <div className="relative z-10 w-full flex flex-col items-center">
-                     <div className="inline-flex px-4 py-1.5 bg-[#0e56fa] text-white rounded-full text-[10px] font-black uppercase tracking-widest mb-6 relative w-fit mx-auto">
-                        Lộ trình cá nhân hóa - Sprint 60
-                     </div>
-                     
-                     <h2 className="text-3xl md:text-5xl font-black font-montserrat text-gray-900 leading-tight mb-4 max-w-2xl mx-auto">
-                        Gỡ trọn 1.5 điểm Hàm số & Chinh phục mốc {targetScore}
-                     </h2>
-                     <p className="text-sm font-bold text-gray-400 mb-12">
-                        Thiết kế riêng cho các chuyên đề bạn đang mất điểm.
-                     </p>
+                     <div className="inline-flex px-4 py-1.5 bg-[#0e56fa] text-white rounded-full text-[10px] font-black uppercase tracking-widest mb-6 relative w-fit mx-auto">Lộ trình cá nhân hóa - Sprint 60</div>
+                     <h2 className="text-3xl md:text-5xl font-black font-montserrat text-gray-900 leading-tight mb-4 max-w-2xl mx-auto">Gỡ trọn 1.5 điểm Hàm số & Chinh phục mốc {targetScore}</h2>
+                     <p className="text-sm font-bold text-gray-400 mb-12">Thiết kế riêng cho các chuyên đề bạn đang mất điểm.</p>
 
                      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 w-full max-w-5xl">
                         {[
@@ -229,9 +187,7 @@ function DeepAnalysisResultsContent() {
                            { step: "Stage 03", title: "Rèn phản xạ, tối ưu thời gian làm bài", desc: "Mẹo giải nhanh các câu đồ thị phức tạp & tham số.", icon: <TrendingUp className="h-6 w-6 text-white" /> }
                         ].map((item, i) => (
                            <div key={i} className="flex flex-col items-center gap-5 p-8 rounded-[2rem] bg-blue-50/50 hover:bg-blue-50 transition-all border border-blue-100/50 hover:scale-[1.02] shadow-sm">
-                              <div className="h-14 w-14 shrink-0 rounded-2xl bg-[#0e56fa] flex items-center justify-center shadow-lg shadow-blue-200">
-                                 {item.icon}
-                              </div>
+                              <div className="h-14 w-14 shrink-0 rounded-2xl bg-[#0e56fa] flex items-center justify-center shadow-lg shadow-blue-200">{item.icon}</div>
                               <div className="flex flex-col gap-2">
                                  <span className="text-[11px] font-black text-blue-400 uppercase tracking-[0.2em]">{item.step}</span>
                                  <h4 className="text-base font-black text-gray-900 font-montserrat">{item.title}</h4>
@@ -256,17 +212,13 @@ function DeepAnalysisResultsContent() {
 
                {/* Section 3: Tiếp tục đánh giá */}
                <div className="bg-white p-10 md:p-14 rounded-[2.5rem] border border-amber-100 shadow-sm relative overflow-hidden text-left w-full">
-                  <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
-                     <TrendingUp className="h-40 w-40 text-amber-600" />
-                  </div>
-                  <div className="border-l-4 border-amber-400 pl-6 mb-10">
+                  <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none text-left"><TrendingUp className="h-40 w-40 text-amber-600" /></div>
+                  <div className="border-l-4 border-amber-400 pl-6 mb-10 text-left">
                      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-500 mb-3 block">TIẾP TỤC ĐÁNH GIÁ</span>
                      <h3 className="text-3xl font-black font-montserrat text-gray-900 leading-tight">Các chuyên đề gây mất điểm còn lại</h3>
                   </div>
-                  <p className="text-xl text-gray-500 font-medium leading-relaxed mb-12 max-w-3xl text-left">
-                     Số điểm bạn đang bị mất còn lại (khoảng 1.5đ nữa) đang nằm ở những chuyên đề NaviEdu chưa có đủ dữ liệu để đo đạc.
-                  </p>
-                  <div className="flex flex-wrap gap-4">
+                  <p className="text-xl text-gray-500 font-medium leading-relaxed mb-12 max-w-3xl text-left">Số điểm bạn đang bị mất còn lại (khoảng 1.5đ nữa) đang nằm ở những chuyên đề NaviEdu chưa có đủ dữ liệu để đo đạc.</p>
+                  <div className="flex flex-wrap gap-4 text-left">
                      {[
                         { label: "Hàm số", status: "Đã đo", color: "bg-blue-50 border-blue-100 text-blue-600" },
                         { label: "Hình học KG", status: "Chưa đo", color: "bg-amber-50 border-amber-100 text-amber-600" },
@@ -280,7 +232,6 @@ function DeepAnalysisResultsContent() {
                      ))}
                   </div>
                </div>
-
             </div>
          </div>
       </main>
@@ -290,7 +241,7 @@ function DeepAnalysisResultsContent() {
 export default function DeepAnalysisResults() {
    return (
       <Suspense fallback={<div className="min-h-screen flex items-center justify-center font-black animate-pulse text-gray-300 uppercase tracking-widest">Đang tải phân tích chuyên sâu...</div>}>
-         <DeepAnalysisResultsContent />
+         < DeepAnalysisResultsContent />
       </Suspense>
    );
 }
