@@ -164,8 +164,8 @@ function DeepAnalysisResultsContent() {
                      <div className="p-8 md:p-10 bg-blue-50/30 rounded-[1.5rem] border border-blue-100/50">
                         <p className="text-base md:text-lg font-medium text-gray-700 leading-relaxed text-left">
                            <span className="font-black text-blue-600 leading-relaxed italic block mb-3 underline decoration-blue-200 decoration-2 text-left">KẾT LUẬN MỤC TIÊU {targetScore}:</span>
-                           Kỹ năng cơ bản của bạn ổn, nhưng để chạm mốc {targetScore}, bạn cần ưu tiên hoàn thiện <span className="text-red-500 font-bold underline decoration-red-100 italic">Ứng dụng đạo hàm thực tế, cực trị và tiệm cận.</span>
-                           <br /> Dưới đây là lộ trình giúp bạn lấy lại <span className="font-black text-blue-600">1.5 điểm</span> còn thiếu ngay hôm nay.
+                           Bạn đang nắm tốt phần cơ bản. Điểm đang bị kéo xuống bởi tầng <span className="text-red-500 font-bold underline decoration-red-100 italic">VDC - chính xác là tầng quyết định điểm 8–9–10</span>. 
+                           <br /> Chỉ cần gỡ 3 YCCĐ trên là bạn có thể lấy thêm <span className="font-black text-blue-600">~1.75 điểm</span> và tiến gần hơn tới mục tiêu {targetScore} của mình.
                         </p>
                      </div>
                   </div>
