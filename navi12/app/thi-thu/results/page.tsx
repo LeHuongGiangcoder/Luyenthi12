@@ -112,93 +112,115 @@ function ExamResultsContent() {
           {[
             {
               title: "Hàm số",
-              skill: "Phân tích cực trị — Vận dụng cao",
+              skill: "PHÂN TÍCH CỰC TRỊ VDC · TÌM GTLN/GTNN",
               score: "-1.5đ",
-              detail: "sai 3/4 câu VDC",
+              detail: "SAI 3/4 CÂU VDC",
               progress: 35,
-              status: "YẾU NHẤT - CẦN ƯU TIÊN KHẮC PHỤC",
+              status: "ĐIỂM YẾU NGHIÊM TRỌNG CẦN ƯU TIÊN",
+              scoreColor: "text-red-600",
               color: "bg-red-500",
               isCritical: true,
-              cta: "Bắt đầu đánh giá sâu"
+              suggestion: "Đánh giá sâu chuyên đề Hàm số để biết chính xác YCCĐ nào cần luyện → luyện đúng dạng đang kéo điểm xuống",
+              buttonText: "Test chuyên đề",
+              buttonHref: "/thi-thu/deep-analysis",
+              buttonColor: "bg-red-600 hover:bg-red-700",
+              suggestionBg: "bg-red-50/50",
+              suggestionText: "text-red-900"
             },
             {
               title: "Hình học không gian",
-              skill: "Khoảng cách điểm đến mặt phẳng",
+              skill: "KHOẢNG CÁCH ĐIỂM ĐẾN MẶT PHẲNG",
               score: "-1.0đ",
-              detail: "sai 2/3 câu",
+              detail: "SAI 2/3 CÂU",
               progress: 52,
-              status: "CẦN THÊM LUYỆN TẬP",
-              color: "bg-orange-400"
+              status: "CẦN LUYỆN TẬP THÊM",
+              scoreColor: "text-amber-600",
+              color: "bg-amber-500",
+              isCritical: false,
+              suggestion: "Bạn được miễn phí 1 lần Test chuyên đề — dùng cho Hàm số trước. Unlock Hình học không gian khi nâng cấp Sprint 60",
+              buttonText: "Unlock ngay",
+              buttonHref: "/pricing",
+              buttonColor: "bg-amber-600 hover:bg-amber-700",
+              suggestionBg: "bg-amber-50/50",
+              suggestionText: "text-amber-900"
             },
             {
               title: "Xác suất",
-              skill: "Tổ hợp xác suất có điều kiện",
+              skill: "TỔ HỢP XÁC SUẤT CÓ ĐIỀU KIỆN",
               score: "-0.5đ",
-              detail: "sai 1/2 câu",
+              detail: "SAI 1/2 CÂU",
               progress: 60,
               status: "CẦN KIỂM TRA THÊM",
-              color: "bg-amber-600"
+              scoreColor: "text-amber-600",
+              color: "bg-amber-500",
+              isCritical: false,
+              suggestion: "Chuyên đề này cần thêm dữ liệu để đánh giá chính xác. Đề thi chỉ có 2 câu — chưa đủ. Unlock để Test đầy đủ.",
+              buttonText: "",
+              buttonHref: "",
+              buttonColor: "",
+              suggestionBg: "bg-amber-50/50",
+              suggestionText: "text-amber-900"
             }
           ].map((item, i) => (
             <div
               key={i}
               className={cn(
                 "bg-white rounded-[2.5rem] border transition-all duration-300 relative overflow-hidden",
-                item.isCritical
-                  ? "border-red-500 shadow-xl shadow-red-100/50"
+                item.isCritical 
+                  ? "border-red-100 shadow-xl shadow-red-100/20" 
                   : "border-gray-100 shadow-sm hover:shadow-md"
               )}
             >
               <div className="p-8 md:p-10 flex flex-col gap-6">
-                {/* Top Row: Title, Badge, and Score */}
+                {/* Header Row: Title & Score */}
                 <div className="flex items-start justify-between">
-                  <div className="flex flex-col gap-2 text-left">
+                  <div className="flex flex-col gap-2">
                     {item.isCritical && (
-                      <span className="inline-flex items-center gap-1.5 w-fit px-3 py-1 bg-red-500 text-white rounded-lg text-[10px] font-black uppercase tracking-widest mb-1">
+                      <div className="flex items-center gap-2 px-2.5 py-1 bg-red-500 text-white rounded-lg w-fit">
                         <Zap className="h-3 w-3 fill-white" />
-                        Trọng tâm
-                      </span>
+                        <span className="text-[9px] font-black uppercase tracking-[0.2em] leading-none">TRỌNG TÂM</span>
+                      </div>
                     )}
-                    <h3 className={cn("font-montserrat text-gray-900 leading-none", item.isCritical ? "text-3xl font-black" : "text-2xl font-extrabold")}>
-                      {item.title}
-                    </h3>
-                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{item.skill}</p>
+                    <h3 className="text-3xl font-black font-montserrat text-gray-900 tracking-tight">{item.title}</h3>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em]">{item.skill}</p>
                   </div>
-                  <div className="flex flex-col items-end shrink-0">
-                    <span className="text-4xl font-black font-montserrat text-red-500 leading-none">{item.score}</span>
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">{item.detail}</span>
+                  <div className="text-right">
+                    <span className={cn("text-4xl font-black font-montserrat leading-none block", item.scoreColor)}>{item.score}</span>
+                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-2 block">{item.detail}</span>
                   </div>
                 </div>
 
-                {/* Progress Bar Area */}
-                <div className="flex flex-col gap-3 text-left">
-                  <div className="h-2.5 w-full bg-gray-50 rounded-full overflow-hidden">
+                {/* Progress Bar & Mastery Status */}
+                <div className="flex flex-col gap-3">
+                  <div className="h-2 w-full bg-gray-50 rounded-full overflow-hidden">
                     <div
-                      className={cn("h-full transition-all duration-700", item.color)}
+                      className={cn("h-full transition-all duration-1000", item.color)}
                       style={{ width: `${item.progress}%` }}
                     />
                   </div>
-                  <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-[0.1em] text-gray-400">
-                    <span>Mức thành thạo hiện tại ~{item.progress}%</span>
-                    <span className={cn("font-black", item.isCritical ? "text-red-500" : "text-gray-900")}>— {item.status}</span>
+                  <div className="flex justify-between items-center text-[9px] font-black uppercase tracking-[0.3em]">
+                    <span className="text-gray-400">MỨC THÀNH THẠO HIỆN TẠI ~{item.progress}%</span>
+                    <span className={cn("font-black", item.scoreColor)}>
+                      — MASTERY ~{item.progress}% — {item.status}
+                    </span>
                   </div>
                 </div>
 
-                {/* Refined CTA Link for Critical Weakness */}
-                {item.cta && (
-                  <div className="pt-2 flex flex-col items-center gap-4">
-                    <Link
-                      href="/thi-thu/deep-analysis"
-                      className="inline-flex items-center justify-center gap-2 w-full py-3.5 bg-gray-900 hover:bg-black text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-gray-100"
+                {/* Suggestion Box */}
+                <div className={cn("mt-2 p-6 rounded-[1.5rem] flex flex-col md:flex-row items-center justify-between gap-6 transition-all", item.suggestionBg)}>
+                  <p className={cn("text-xs font-bold leading-relaxed max-w-xl", item.suggestionText)}>
+                    <span className="font-black uppercase tracking-widest mr-2 underline decoration-current">Gợi ý:</span>
+                    {item.suggestion}
+                  </p>
+                  {item.buttonText && (
+                    <Link 
+                      href={item.buttonHref}
+                      className={cn("whitespace-nowrap px-6 py-3 rounded-xl text-white text-[10px] font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-lg", item.buttonColor)}
                     >
-                      {item.cta}
-                      <ArrowRight className="h-4 w-4" />
+                      {item.buttonText} →
                     </Link>
-                    <p className="text-[10px] font-bold text-blue-300 uppercase tracking-[0.2em] opacity-80">
-                      12 CÂU — 8 PHÚT · TỰ ĐỘNG CHỈ RA LỖ HỔNG KIẾN THỨC
-                    </p>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           ))}
