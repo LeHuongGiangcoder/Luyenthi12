@@ -261,16 +261,31 @@ function ExamResultsContent() {
           </div>
         </div>
 
-        {/* Final Roadmap CTA */}
-        <div className="bg-[#0e56fa] p-10 rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-8 mb-8 shadow-2xl shadow-blue-200 text-left">
-          <div className="text-white text-left">
-            <h3 className="text-2xl font-extrabold font-montserrat mb-3">Xem lộ trình cá nhân hoá giúp tăng điểm tối đa dành cho bạn</h3>
-            <p className="text-blue-100 text-xs font-bold opacity-80 max-w-md leading-relaxed">
-              Cá nhân hóa theo đúng điểm yếu của bạn · 15 phút mỗi ngày · Cải thiện hiệu quả ngay sau 4 tuần ôn tập.
-            </p>
+        {/* Final Action Section */}
+        <div className="flex flex-col gap-6 mb-12">
+          {/* Primary CTA: Deep Analysis */}
+          <div className="bg-[#0e56fa] p-10 rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-blue-200 text-left">
+            <div className="text-white text-left">
+              <h3 className="text-2xl md:text-3xl font-black font-montserrat mb-4 tracking-tight leading-loose">
+                Đánh giá chuyên sâu chuyên đề Hàm số — Miễn phí (1 lần)
+              </h3>
+              <p className="text-blue-100 text-sm font-bold opacity-90 max-w-xl leading-relaxed">
+                12 câu · ~8 phút · Hệ thống xác định chính xác bạn đang yếu ở YCCĐ nào, mức nào — từ đó biết cần luyện gì để gỡ điểm hiệu quả nhất.
+              </p>
+            </div>
+            <Link href="/thi-thu/deep-analysis" className="whitespace-nowrap px-10 py-5 bg-white text-blue-600 font-black rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center text-base">
+              Đừng để điểm rơi →
+            </Link>
           </div>
-          <Link href="/pricing" className="whitespace-nowrap px-10 py-5 bg-white text-blue-600 font-black rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center">
-            Đừng để điểm rơi →
+
+          {/* Secondary CTA: Roadmap */}
+          <Link 
+            href="/pricing" 
+            className="w-full py-6 bg-white border border-gray-100 rounded-[2rem] shadow-sm hover:shadow-md transition-all text-center flex items-center justify-center gap-2 group"
+          >
+            <span className="text-gray-500 font-bold tracking-wide group-hover:text-blue-600 transition-colors">
+              Xem lộ trình gỡ điểm Sprint 60 →
+            </span>
           </Link>
         </div>
       </div>
