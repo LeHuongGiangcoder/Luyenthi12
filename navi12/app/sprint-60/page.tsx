@@ -7,6 +7,8 @@ import {
   Calendar,
   CheckCircle2,
   ChevronRight,
+  ChevronLeft,
+  Flag,
   Target,
   TrendingUp,
   Zap,
@@ -129,46 +131,42 @@ export default function Sprint60() {
           </div>
 
           {/* Master Journey Progress Bar */}
-          <div className="flex-[1.2] w-full max-w-2xl bg-white p-8 md:p-10 pb-16 rounded-[3rem] border border-gray-100 shadow-xl shadow-gray-200/30 relative overflow-hidden group">
-            <div className="absolute top-0 left-0 w-2 h-full bg-blue-600" />
+          <div className="flex-[1.2] w-full max-w-2xl bg-white p-8 pb-10 rounded-[2.5rem] border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.04)] relative overflow-hidden group transition-all">
+            <div className="absolute top-0 left-0 w-1.5 h-full bg-[#0e56fa]" />
 
-            <div className="flex items-center justify-between mb-16">
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Tiến độ hành trình cá nhân</span>
-              <div className="flex items-center gap-1.5 bg-green-50 px-3 py-1 rounded-full border border-green-100/50">
-                <TrendingUp className="h-3.5 w-3.5 text-green-600" />
-                <span className="text-[10px] font-black text-green-600 uppercase tracking-widest">Đã tiến bộ +1.2đ</span>
+            <div className="flex items-center justify-between mb-10 relative z-10">
+              <span className="text-[10px] font-black text-gray-300 uppercase tracking-[0.2em]">Hành trình cá nhân</span>
+              <div className="flex items-center gap-2 bg-emerald-50/50 px-3 py-1 rounded-full border border-emerald-100/30">
+                <TrendingUp className="h-3 w-3 text-emerald-600" />
+                <span className="text-[9px] font-black text-emerald-600 uppercase tracking-widest">+1.2đ</span>
               </div>
             </div>
 
-            <div className="relative mt-8 mb-4 px-2">
-              <div className="h-3.5 w-full bg-gray-50 rounded-full border border-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.03)]" />
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: "40%" }}
-                transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-                className="absolute top-0 left-0 h-3.5 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full shadow-lg shadow-blue-100"
-              />
-              <div className="absolute top-full left-0 pt-5 flex flex-col items-start lg:translate-x-[-10px]">
-                <div className="h-3 w-[2px] bg-gray-200 mb-2" />
-                <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Bắt đầu</span>
+            <div className="relative mt-8 mb-2 px-2">
+              <div className="h-2.5 w-full bg-gray-50 rounded-full border border-gray-100 relative overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: "40%" }}
+                  transition={{ duration: 1.8, ease: "circOut", delay: 0.3 }}
+                  className="absolute top-0 left-0 h-full bg-[#0e56fa] rounded-full shadow-[0_2px_10px_rgba(14,86,250,0.2)]"
+                />
               </div>
-              <div className="absolute top-full right-0 pt-5 flex flex-col items-end lg:translate-x-[10px]">
-                <div className="h-3 w-[2px] bg-blue-600 mb-2" />
-                <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest">Mục tiêu</span>
+
+              {/* Goal Flag */}
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 flex flex-col items-center">
+                <Flag className="h-4 w-4 text-[#0e56fa] fill-current shadow-lg" />
               </div>
+
+              {/* Current Status Bubble Only */}
               <motion.div
                 initial={{ left: 0, opacity: 0 }}
                 animate={{ left: "40%", opacity: 1 }}
-                transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-                className="absolute top-0 -translate-x-1/2 flex flex-col items-center"
+                transition={{ duration: 1.8, ease: "circOut", delay: 0.3 }}
+                className="absolute top-[-10px] -translate-x-1/2 flex flex-col items-center pointer-events-none"
               >
-                <div className="absolute bottom-[28px] bg-blue-600 text-white px-4 py-1.5 rounded-xl text-[12px] font-black shadow-lg shadow-blue-200 whitespace-nowrap">
-                  Hiện tại 7.4
-                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-blue-600 rotate-45 rounded-sm" />
-                </div>
-                <div className="h-7 w-7 bg-white border-4 border-blue-600 rounded-full shadow-xl flex items-center justify-center -translate-y-1.5 relative z-10">
-                  <div className="h-1.5 w-1.5 bg-blue-600 rounded-full" />
-                </div>
+                 <div className="bg-[#0e56fa] px-3.5 py-1.5 rounded-xl">
+                    <span className="text-sm font-black font-montserrat text-white leading-none">7.4</span>
+                 </div>
               </motion.div>
             </div>
           </div>
