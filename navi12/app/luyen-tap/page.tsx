@@ -382,7 +382,7 @@ export default function LuyenTap() {
                         Hàm số – {task.name}
                       </h4>
                     </div>
-                    <Link href="/luyen-tap/ham-so" className="w-10 h-10 bg-gray-50 text-gray-400 hover:bg-[#0e56fa] hover:text-white rounded-xl flex items-center justify-center transition-all hover:scale-110 active:scale-95">
+                    <Link href="/luyen-tap/ham-so" className="w-10 h-10 bg-[#0e56fa] text-white shadow-xl shadow-blue-100/50 rounded-xl flex items-center justify-center transition-all hover:scale-110 active:scale-95 shrink-0">
                       <ArrowRight className="h-4 w-4 stroke-[3px]" />
                     </Link>
                   </div>
@@ -428,19 +428,19 @@ export default function LuyenTap() {
             </div>
 
             <div className="flex items-center bg-gray-50/50 p-1 rounded-2xl gap-1 border border-gray-100">
-              <button 
-                onClick={() => setView("grid")} 
+              <button
+                onClick={() => setView("grid")}
                 className={cn(
-                  "w-10 h-10 flex items-center justify-center rounded-xl transition-all", 
+                  "w-10 h-10 flex items-center justify-center rounded-xl transition-all",
                   view === "grid" ? "bg-white text-[#0e56fa] shadow-sm" : "text-gray-400 hover:text-gray-600"
                 )}
               >
                 <LayoutGrid className="h-4 w-4" />
               </button>
-              <button 
-                onClick={() => setView("list")} 
+              <button
+                onClick={() => setView("list")}
                 className={cn(
-                  "w-10 h-10 flex items-center justify-center rounded-xl transition-all", 
+                  "w-10 h-10 flex items-center justify-center rounded-xl transition-all",
                   view === "list" ? "bg-white text-[#0e56fa] shadow-sm" : "text-gray-400 hover:text-gray-600"
                 )}
               >
