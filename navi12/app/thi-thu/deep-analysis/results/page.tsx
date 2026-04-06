@@ -21,29 +21,29 @@ function DeepAnalysisResultsContent() {
             {/* Header Section */}
             <div className="mb-16 text-left border-l-4 border-[#0e56fa] pl-8 relative animate-fade-in">
                <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-4 block">PHÂN TÍCH CHUYÊN SÂU — MỤC TIÊU {targetScore} ĐIỂM</span>
-               <h1 className="text-4xl md:text-6xl font-black font-montserrat tracking-tight text-gray-900 mb-6 leading-[1.1] max-w-4xl">
+               <h1 className="text-4xl md:text-5xl font-black font-montserrat tracking-tight text-gray-900 mb-6 leading-[1.1] max-w-4xl">
                   Bạn có thể "ăn trọn" <br /> <span className="text-[#0e56fa]">1.5 điểm nữa</span> từ chuyên đề Hàm số
                </h1>
                <p className="max-w-2xl text-lg md:text-xl text-gray-500 font-medium leading-relaxed">
-                  Dựa trên 12 câu hỏi chắt lọc, NaviEdu xác định bạn cần tập trung luyện <span className="text-gray-900 font-black underline decoration-blue-100 underline-offset-4">Ứng dụng đạo hàm thực tế</span> để giành lại điểm đang hụt mất.
+                  Dựa trên 12 câu hỏi chắt lọc, NaviEdu xác định bạn cần tập trung luyện <span className="text-gray-900 font-black underline decoration-blue-100 underline-offset-4">Vận dụng cao</span> để giành lại điểm đang hụt mất.
                </p>
             </div>
 
             <div className="flex flex-col gap-16">
                {/* Section 1: Phân tích chuyên sâu */}
                <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col gap-10 overflow-hidden text-left w-full">
-                  
+
                   {/* Radar Section */}
                   <div className="flex flex-col xl:flex-row items-center gap-16 py-6">
                      <div className="relative h-80 w-full xl:w-1/2 flex items-center justify-center bg-gray-50/10 rounded-full">
                         <svg className="h-full w-full max-w-[340px]" viewBox="-40 -40 180 180">
                            {[0.25, 0.5, 0.75, 1].map((scale) => {
                               const r = 50 * scale;
-                              const pts = [`50,${50-r}`, `${50+r*0.951},${50-r*0.309}`, `${50+r*0.587},${50+r*0.809}`, `${50-r*0.587},${50+r*0.809}`, `${50-r*0.951},${50-r*0.309}`].join(" ");
+                              const pts = [`50,${50 - r}`, `${50 + r * 0.951},${50 - r * 0.309}`, `${50 + r * 0.587},${50 + r * 0.809}`, `${50 - r * 0.587},${50 + r * 0.809}`, `${50 - r * 0.951},${50 - r * 0.309}`].join(" ");
                               return <polygon key={scale} points={pts} fill="none" stroke="#f1f5f9" strokeWidth="1" />;
                            })}
                            {[
-                              { x: 50, y: 0 }, { x: 50+50*0.951, y: 50-50*0.309 }, { x: 50+50*0.587, y: 50+50*0.809 }, { x: 50-50*0.587, y: 50+50*0.809 }, { x: 50-50*0.951, y: 50-50*0.309 }
+                              { x: 50, y: 0 }, { x: 50 + 50 * 0.951, y: 50 - 50 * 0.309 }, { x: 50 + 50 * 0.587, y: 50 + 50 * 0.809 }, { x: 50 - 50 * 0.587, y: 50 + 50 * 0.809 }, { x: 50 - 50 * 0.951, y: 50 - 50 * 0.309 }
                            ].map((pt, i) => (
                               <line key={i} x1="50" y1="50" x2={pt.x} y2={pt.y} stroke="#f1f5f9" strokeWidth="1" strokeDasharray="1 1" />
                            ))}
@@ -69,7 +69,7 @@ function DeepAnalysisResultsContent() {
                                  <div className="h-10 w-10 rounded-xl bg-white shadow-sm flex items-center justify-center">
                                     {stat.icon}
                                  </div>
-                                 <span className="text-[9px] font-black uppercase tracking-widest text-gray-400">Insight #{i+1}</span>
+                                 <span className="text-[9px] font-black uppercase tracking-widest text-gray-400">Insight #{i + 1}</span>
                               </div>
                               <div className="flex flex-col">
                                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">{stat.label}</span>
@@ -83,7 +83,7 @@ function DeepAnalysisResultsContent() {
 
                   {/* Section 1.2: Chi tiết năng lực */}
                   <div className="pt-10 border-t border-gray-100 flex flex-col gap-12 text-left">
-                     
+
                      {/* Subsection 1.2.1: Kết quả từng đơn vị kiến thức */}
                      <div className="flex flex-col gap-10">
                         <div className="flex flex-col gap-2">
@@ -164,7 +164,7 @@ function DeepAnalysisResultsContent() {
                      <div className="p-8 md:p-10 bg-blue-50/30 rounded-[1.5rem] border border-blue-100/50">
                         <p className="text-base md:text-lg font-medium text-gray-700 leading-relaxed text-left">
                            <span className="font-black text-blue-600 leading-relaxed italic block mb-3 underline decoration-blue-200 decoration-2 text-left">KẾT LUẬN MỤC TIÊU {targetScore}:</span>
-                           Bạn đang nắm tốt phần cơ bản. Điểm đang bị kéo xuống bởi tầng <span className="text-red-500 font-bold underline decoration-red-100 italic">VDC - chính xác là tầng quyết định điểm 8–9–10</span>. 
+                           Bạn đang nắm tốt phần cơ bản. Điểm đang bị kéo xuống bởi tầng <span className="text-red-500 font-bold underline decoration-red-100 italic">VDC - chính xác là tầng quyết định điểm 8–9–10</span>.
                            <br /> Chỉ cần gỡ 3 YCCĐ trên là bạn có thể lấy thêm <span className="font-black text-blue-600">~1.75 điểm</span> và tiến gần hơn tới mục tiêu {targetScore} của mình.
                         </p>
                      </div>
@@ -174,7 +174,7 @@ function DeepAnalysisResultsContent() {
                {/* Section 2: Lộ trình cá nhân hoá */}
                <div className="bg-white rounded-[2.5rem] border-2 border-blue-100 shadow-2xl shadow-blue-100/30 p-10 md:p-14 text-center relative overflow-hidden flex flex-col items-center gap-12 transition-all hover:shadow-blue-200/40 w-full">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-[100px] opacity-40 -mr-32 -mt-32" />
-                  
+
                   <div className="relative z-10 w-full flex flex-col items-center">
                      <div className="inline-flex px-4 py-1.5 bg-[#0e56fa] text-white rounded-full text-[10px] font-black uppercase tracking-widest mb-6 relative w-fit mx-auto">Lộ trình cá nhân hóa - Sprint 60</div>
                      <h2 className="text-3xl md:text-5xl font-black font-montserrat text-gray-900 leading-tight mb-4 max-w-2xl mx-auto">Gỡ trọn 1.5 điểm Hàm số & Chinh phục mốc {targetScore}</h2>
