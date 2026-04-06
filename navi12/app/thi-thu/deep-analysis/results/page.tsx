@@ -19,10 +19,10 @@ function DeepAnalysisResultsContent() {
 
          <div className="mx-auto w-full max-w-7xl px-4 md:px-12">
             {/* Header Section */}
-            <div className="mb-16 text-left border-l-4 border-blue-600 pl-8">
-               <span className="text-xs font-black text-blue-600 uppercase tracking-widest mb-4 block">PHÂN TÍCH CHUYÊN SÂU — MỤC TIÊU {targetScore} ĐIỂM</span>
+            <div className="mb-16 text-left border-l-4 border-[#0e56fa] pl-8 relative animate-fade-in">
+               <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-4 block">PHÂN TÍCH CHUYÊN SÂU — MỤC TIÊU {targetScore} ĐIỂM</span>
                <h1 className="text-4xl md:text-6xl font-black font-montserrat tracking-tight text-gray-900 mb-6 leading-[1.1] max-w-4xl">
-                  Bạn có thể "ăn trọn" <span className="text-[#0e56fa]">1.5 điểm nữa</span> từ chuyên đề Hàm số
+                  Bạn có thể "ăn trọn" <br /> <span className="text-[#0e56fa]">1.5 điểm nữa</span> từ chuyên đề Hàm số
                </h1>
                <p className="max-w-2xl text-lg md:text-xl text-gray-500 font-medium leading-relaxed">
                   Dựa trên 12 câu hỏi chắt lọc, NaviEdu xác định bạn cần tập trung luyện <span className="text-gray-900 font-black underline decoration-blue-100 underline-offset-4">Ứng dụng đạo hàm thực tế</span> để giành lại điểm đang hụt mất.

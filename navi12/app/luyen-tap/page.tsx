@@ -274,37 +274,8 @@ export default function LuyenTap() {
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 md:px-12">
 
-        {/* Global Controls */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12 animate-fade-in pt-4">
-          <div className="w-full md:w-auto text-left">
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">TRANG CHỦ {'>'} LUYỆN TẬP</span>
-          </div>
-
-          <div className="flex items-center gap-4 w-full md:w-auto">
-            <div className="relative flex-1 md:w-[400px]">
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Bạn muốn tìm chuyên đề nào?"
-                className="w-full pl-14 pr-6 py-4 bg-white border border-gray-100 rounded-2xl text-sm font-semibold focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400 transition-all outline-none shadow-xl shadow-gray-100"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </div>
-
-            <div className="flex items-center bg-gray-50/50 p-1 rounded-2xl gap-1 border border-gray-100">
-              <button onClick={() => setView("grid")} className={cn("w-10 h-10 flex items-center justify-center rounded-xl transition-all", view === "grid" ? "bg-white text-blue-600 shadow-sm" : "text-gray-400 hover:text-gray-600")}>
-                <LayoutGrid className="h-4 w-4" />
-              </button>
-              <button onClick={() => setView("list")} className={cn("w-10 h-10 flex items-center justify-center rounded-xl transition-all", view === "list" ? "bg-white text-blue-600 shadow-sm" : "text-gray-400 hover:text-gray-600")}>
-                <List className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-        </div>
-
         {/* Header Section */}
-        <div className="mb-16 border-l-4 border-blue-600 pl-8 relative animate-fade-in text-left">
+        <div className="mt-12 mb-20 border-l-4 border-blue-600 pl-8 relative animate-fade-in text-left">
           <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-4 block">HỆ THỐNG LUYỆN TẬP ADAPTIVE</span>
           <h1 className="text-4xl md:text-6xl font-black font-montserrat tracking-tight text-gray-900 mb-6 leading-[1.1] max-w-4xl">
             Luyện theo chuyên đề <br /> <span className="text-blue-600">tầm soát chuyên sâu</span>
@@ -438,6 +409,43 @@ export default function LuyenTap() {
                   Hệ thống sẽ đề xuất Test lại năng lực chuyên đề Hàm số để đo mức độ thấu hiểu (Mastery) mới nhất của bạn.
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Global Controls - Moved Below Tasks */}
+        <div className="flex flex-col md:flex-row items-center justify-end gap-6 mb-12 animate-fade-in relative z-10">
+          <div className="flex items-center gap-4 w-full md:w-auto">
+            <div className="relative flex-1 md:w-[400px]">
+              <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Bạn muốn tìm chuyên đề nào?"
+                className="w-full pl-14 pr-6 py-4 bg-white border border-gray-100 rounded-2xl text-sm font-semibold focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400 transition-all outline-none shadow-sm"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+
+            <div className="flex items-center bg-gray-50/50 p-1 rounded-2xl gap-1 border border-gray-100">
+              <button 
+                onClick={() => setView("grid")} 
+                className={cn(
+                  "w-10 h-10 flex items-center justify-center rounded-xl transition-all", 
+                  view === "grid" ? "bg-white text-[#0e56fa] shadow-sm" : "text-gray-400 hover:text-gray-600"
+                )}
+              >
+                <LayoutGrid className="h-4 w-4" />
+              </button>
+              <button 
+                onClick={() => setView("list")} 
+                className={cn(
+                  "w-10 h-10 flex items-center justify-center rounded-xl transition-all", 
+                  view === "list" ? "bg-white text-[#0e56fa] shadow-sm" : "text-gray-400 hover:text-gray-600"
+                )}
+              >
+                <List className="h-4 w-4" />
+              </button>
             </div>
           </div>
         </div>

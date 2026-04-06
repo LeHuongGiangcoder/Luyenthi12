@@ -99,12 +99,12 @@ export default function MockTestRoom() {
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 md:px-12">
         {/* Header Section */}
-        <div className="mb-12 animate-fade-in">
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-3 block">PHÒNG THI THỬ</span>
-          <h1 className="text-4xl font-extrabold md:text-5xl font-montserrat tracking-tight mb-4 text-gray-900">
-            Thi thử — biết ngay mất điểm ở đâu
+        <div className="mb-16 border-l-4 border-[#0e56fa] pl-8 relative animate-fade-in text-left">
+          <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-4 block">HỆ THỐNG PHÒNG THI THỬ</span>
+          <h1 className="text-4xl md:text-5xl font-black font-montserrat tracking-tight text-gray-900 leading-[1.1] mb-6">
+            Thi thử — <br /> <span className="text-blue-600">biết ngay mất điểm ở đâu</span>
           </h1>
-          <p className="max-w-3xl text-gray-500 font-medium leading-relaxed">
+          <p className="max-w-2xl text-lg md:text-xl text-gray-500 font-medium leading-relaxed">
             Một bài thi không đủ biết chính xác bạn đang yếu ở đâu nhưng là bước đầu để NaviEdu dẫn bạn tới nơi bạn có thể gỡ điểm.
           </p>
         </div>

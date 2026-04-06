@@ -16,9 +16,14 @@ function ExamResultsContent() {
       <div className="mx-auto w-full max-w-5xl px-4 md:px-12">
         {/* Top Header Section */}
         <div className="flex flex-col md:flex-row items-end justify-between mb-10 gap-6">
-          <div className="text-left">
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">ĐỀ SỐ 1 · 19/3/2026</span>
-            <h1 className="text-4xl md:text-5xl font-black font-montserrat tracking-tight text-gray-900">Kết quả của bạn</h1>
+          <div className="border-l-4 border-[#0e56fa] pl-8 relative text-left">
+            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-4 block">KẾT QUẢ TỔNG QUÁT</span>
+            <h1 className="text-4xl md:text-5xl font-black font-montserrat tracking-tight text-gray-900 leading-[1.1]">
+              Kết quả <span className="text-[#0e56fa]">của bạn</span>
+            </h1>
+            <p className="max-w-xl text-lg text-gray-500 font-medium leading-relaxed mt-6">
+              Bản phân tích đa chiều giúp bạn hiểu rõ mức độ thực tế so với mục tiêu đề ra.
+            </p>
           </div>
           <div className="flex items-center gap-3 w-full md:w-auto">
             <Link href="/thi-thu/room" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3 border border-gray-100 bg-white rounded-2xl text-gray-400 font-bold hover:bg-gray-50 transition-colors text-sm">
@@ -96,11 +101,10 @@ function ExamResultsContent() {
           </Link>
         </div>
 
-        {/* Analysis Heading Section - HIGH ATTENTION */}
-        <div className="mb-12 px-2 text-left border-l-4 border-blue-600 pl-6">
-          <span className="text-xs font-black uppercase tracking-[0.3em] text-[#0e56fa] mb-4 block">PHÂN TÍCH MỤC TIÊU {targetScore} ĐIỂM</span>
-          <h2 className="text-3xl md:text-5xl font-black font-montserrat text-gray-900 mb-6 tracking-tight leading-tight">
-            Bạn cần thêm <span className="text-red-500">{(parseFloat(targetScore) - 7.0).toFixed(1)} điểm</span> nữa
+        <div className="mb-16 border-l-4 border-blue-600 pl-8 relative animate-fade-in text-left">
+          <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-4 block">PHÂN TÍCH MỤC TIÊU {targetScore} ĐIỂM</span>
+          <h2 className="text-4xl md:text-6xl font-black font-montserrat text-gray-900 mb-6 tracking-tight leading-[1.1]">
+            Bạn có thể <span className="text-blue-600">"ăn trọn" {(parseFloat(targetScore) - 6.5).toFixed(1)} điểm</span> <br /> nữa từ chuyên đề Hàm số
           </h2>
           <p className="max-w-2xl text-lg md:text-xl text-gray-500 font-medium leading-relaxed">
             Hệ thống đánh giá năng lực hiện tại của bạn đang đạt <span className="font-black text-gray-900">7.0 điểm</span>.
