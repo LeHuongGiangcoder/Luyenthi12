@@ -124,8 +124,10 @@ function ExamResultsContent() {
               buttonText: "Test chuyên đề",
               buttonHref: "/thi-thu/deep-analysis",
               buttonColor: "bg-red-600 hover:bg-red-700",
-              suggestionBg: "bg-red-50/50",
-              suggestionText: "text-red-900"
+              suggestionBg: "bg-red-50/30",
+              suggestionText: "text-gray-700 text-left",
+              tagBg: "bg-red-100",
+              tagText: "text-red-600"
             },
             {
               title: "Hình học không gian",
@@ -141,8 +143,10 @@ function ExamResultsContent() {
               buttonText: "Unlock ngay",
               buttonHref: "/pricing",
               buttonColor: "bg-amber-600 hover:bg-amber-700",
-              suggestionBg: "bg-amber-50/50",
-              suggestionText: "text-amber-900"
+              suggestionBg: "bg-amber-50/30",
+              suggestionText: "text-gray-700 text-left",
+              tagBg: "bg-amber-100",
+              tagText: "text-amber-600"
             },
             {
               title: "Xác suất",
@@ -158,16 +162,18 @@ function ExamResultsContent() {
               buttonText: "",
               buttonHref: "",
               buttonColor: "",
-              suggestionBg: "bg-amber-50/50",
-              suggestionText: "text-amber-900"
+              suggestionBg: "bg-amber-50/30",
+              suggestionText: "text-gray-700 text-left",
+              tagBg: "bg-amber-100",
+              tagText: "text-amber-600"
             }
           ].map((item, i) => (
             <div
               key={i}
               className={cn(
                 "bg-white rounded-[2.5rem] border transition-all duration-300 relative overflow-hidden",
-                item.isCritical 
-                  ? "border-red-100 shadow-xl shadow-red-100/20" 
+                item.isCritical
+                  ? "border-red-100 shadow-xl shadow-red-100/20"
                   : "border-gray-100 shadow-sm hover:shadow-md"
               )}
             >
@@ -206,16 +212,16 @@ function ExamResultsContent() {
                   </div>
                 </div>
 
-                {/* Suggestion Box */}
-                <div className={cn("mt-2 p-6 rounded-[1.5rem] flex flex-col md:flex-row items-center justify-between gap-6 transition-all", item.suggestionBg)}>
-                  <p className={cn("text-xs font-bold leading-relaxed max-w-xl", item.suggestionText)}>
-                    <span className="font-black uppercase tracking-widest mr-2 underline decoration-current">Gợi ý:</span>
+                {/* Suggestion Box - CLEAN REDESIGN */}
+                <div className={cn("mt-2 p-6 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-6 transition-all border border-gray-50", item.suggestionBg)}>
+                  <p className={cn("text-[13px] font-bold leading-relaxed max-w-2xl italic opacity-90", item.suggestionText)}>
+                    <span className={cn("font-black uppercase tracking-widest mr-2", item.tagText)}>Gợi ý:</span>
                     {item.suggestion}
                   </p>
                   {item.buttonText && (
                     <Link 
                       href={item.buttonHref}
-                      className={cn("whitespace-nowrap px-6 py-3 rounded-xl text-white text-[10px] font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-lg", item.buttonColor)}
+                      className={cn("whitespace-nowrap px-8 py-3.5 rounded-2xl text-white text-[11px] font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-xl shadow-blue-900/5", item.buttonColor)}
                     >
                       {item.buttonText} →
                     </Link>
@@ -279,8 +285,8 @@ function ExamResultsContent() {
           </div>
 
           {/* Secondary CTA: Roadmap */}
-          <Link 
-            href="/pricing" 
+          <Link
+            href="/pricing"
             className="w-full py-6 bg-white border border-gray-100 rounded-[2rem] shadow-sm hover:shadow-md transition-all text-center flex items-center justify-center gap-2 group"
           >
             <span className="text-gray-500 font-bold tracking-wide group-hover:text-blue-600 transition-colors">
