@@ -103,7 +103,7 @@ function ExamResultsContent() {
 
         <div className="mb-16 border-l-4 border-blue-600 pl-8 relative animate-fade-in text-left">
           <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-4 block">PHÂN TÍCH MỤC TIÊU {targetScore} ĐIỂM</span>
-          <h2 className="text-4xl md:text-6xl font-black font-montserrat text-gray-900 mb-6 tracking-tight leading-[1.1]">
+          <h2 className="text-3xl md:text-4xl font-black font-montserrat text-gray-900 mb-6 tracking-tight leading-[1.1]">
             Bạn có thể <span className="text-blue-600">"ăn trọn" {(parseFloat(targetScore) - 6.5).toFixed(1)} điểm</span> <br /> nữa từ chuyên đề Hàm số
           </h2>
           <p className="max-w-2xl text-lg md:text-xl text-gray-500 font-medium leading-relaxed">
@@ -237,10 +237,10 @@ function ExamResultsContent() {
         </div>
 
         {/* Insights Alert Section - UNIFIED STYLE */}
-        <div className="mb-20 px-2 text-left border-l-4 border-amber-400 pl-6">
-          <span className="text-xs font-black uppercase tracking-[0.3em] text-amber-500 mb-4 block">CẢNH BÁO TỪ HỆ THỐNG</span>
-          <h2 className="text-3xl md:text-5xl font-black font-montserrat text-gray-900 mb-6 tracking-tight leading-tight">
-            Và đây chỉ là những gì <span className="text-[#0e56fa]">bài thi này lộ ra được</span>
+        <div className="mb-20 px-2 text-left border-l-4 border-amber-400 pl-8 relative">
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-500 mb-4 block">CẢNH BÁO TỪ HỆ THỐNG</span>
+          <h2 className="text-2xl md:text-4xl font-black font-montserrat text-gray-900 mb-6 tracking-tight leading-[1.1]">
+            Và đây chỉ là những gì <span className="text-amber-500">bài thi này lộ ra được</span>
           </h2>
           <p className="text-gray-500 text-lg md:text-xl font-medium leading-relaxed mb-10 max-w-3xl">
             Một đề 22 câu không thể kiểm tra hết toàn bộ chương trình. Trong chính chuyên đề Hàm số — còn 3 dạng khác bạn chưa gặp hôm nay. Và các chuyên đề như Tích phân, Mũ logarit, Số phức chỉ xuất hiện 1—2 câu — chưa đủ để biết bạn thực sự nắm hay chỉ may mắn làm đúng.
