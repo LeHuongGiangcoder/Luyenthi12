@@ -34,7 +34,7 @@ export default function Navbar() {
         <Link href="/login" className="text-sm font-bold text-gray-700 hover:text-[#0e56fa] transition-colors">
           Đăng nhập
         </Link>
-        <Link href="/register" className="rounded-xl bg-[#0e56fa] px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-200">
+        <Link href="/register" className="rounded-xl bg-[#0e56fa] px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-100">
           Mở tài khoản
         </Link>
       </div>
