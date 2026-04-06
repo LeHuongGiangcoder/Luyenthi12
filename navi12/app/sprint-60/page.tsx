@@ -42,6 +42,19 @@ const topicsMastery = [
 export default function Sprint60() {
   const [activeTab, setActiveTab] = useState<"tasks" | "progress">("tasks");
   const [hoveredTopic, setHoveredTopic] = useState<any>(null);
+  const closeTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnterTooltip = (topic: any) => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    setHoveredTopic(topic);
+  };
+
+  const handleMouseLeaveTooltip = () => {
+    closeTimerRef.current = setTimeout(() => {
+      setHoveredTopic(null);
+    }, 100);
+  };
+
   const [expandedMetric, setExpandedMetric] = useState<string | null>("gain");
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -473,8 +486,8 @@ export default function Sprint60() {
                     <h2 className="text-3xl md:text-4xl font-black font-montserrat text-gray-900 tracking-tight">Na-Radar Analytics</h2>
                   </div>
 
-                  <div className="relative w-full aspect-square max-w-[550px] animate-fade-in">
-                    <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-2xl">
+                  <div className="relative w-full aspect-square max-w-[550px] animate-fade-in flex items-center justify-center">
+                    <svg viewBox="-25 -25 150 150" className="w-full h-full drop-shadow-2xl overflow-visible">
                       {[20, 40, 60, 80, 100].map(r => (
                         <circle key={r} cx="50" cy="50" r={r / 2} fill="none" stroke="#f1f5f9" strokeWidth="0.5" strokeDasharray={r === 100 ? "0" : "2 2"} />
                       ))}
@@ -483,15 +496,15 @@ export default function Sprint60() {
                         const angle = (i * (360 / topicsMastery.length) - 90) * Math.PI / 180;
                         const x2 = 50 + 50 * Math.cos(angle);
                         const y2 = 50 + 50 * Math.sin(angle);
-                        const lx = 50 + 60 * Math.cos(angle);
-                        const ly = 50 + 60 * Math.sin(angle);
+                        const lx = 50 + 62 * Math.cos(angle);
+                        const ly = 50 + 62 * Math.sin(angle);
 
                         return (
                           <g key={i}>
                             <line x1="50" y1="50" x2={x2} y2={y2} stroke="#f1f5f9" strokeWidth="0.5" />
                             <text
                               x={lx} y={ly}
-                              className="text-[2.2px] font-black fill-gray-400 uppercase tracking-[0.2em]"
+                              className="text-[3px] font-black fill-gray-400 uppercase tracking-[0.2em]"
                               textAnchor="middle" dominantBaseline="middle"
                             >
                               {topic.name}
@@ -530,7 +543,7 @@ export default function Sprint60() {
                         const x = 50 + r * Math.cos(angle);
                         const y = 50 + r * Math.sin(angle);
                         return (
-                          <g key={i} className="cursor-pointer group/point" onMouseEnter={() => setHoveredTopic(t)} onMouseLeave={() => setHoveredTopic(null)}>
+                          <g key={i} className="cursor-pointer group/point" onMouseEnter={() => handleMouseEnterTooltip(t)} onMouseLeave={handleMouseLeaveTooltip}>
                             <circle cx={x} cy={y} r="1.5" className="fill-blue-600 transition-all group-hover/point:r-2 shadow-lg" />
                             <circle cx={x} cy={y} r="4" className="fill-transparent" />
                           </g>
@@ -544,33 +557,55 @@ export default function Sprint60() {
                           initial={{ opacity: 0, scale: 0.9, y: 10 }}
                           animate={{ opacity: 1, scale: 1, y: 0 }}
                           exit={{ opacity: 0, scale: 0.9 }}
-                          className="absolute z-50 pointer-events-none"
+                          className="absolute z-50 pointer-events-auto"
+                          onMouseEnter={() => handleMouseEnterTooltip(hoveredTopic)}
+                          onMouseLeave={handleMouseLeaveTooltip}
                           style={{
                             left: `${50 + (hoveredTopic.value / 2) * Math.cos((topicsMastery.findIndex(t => t.name === hoveredTopic.name) * (360 / topicsMastery.length) - 90) * Math.PI / 180)}%`,
                             top: `${50 + (hoveredTopic.value / 2) * Math.sin((topicsMastery.findIndex(t => t.name === hoveredTopic.name) * (360 / topicsMastery.length) - 90) * Math.PI / 180)}%`,
                             transform: 'translate(-50%, -120%)'
                           }}
                         >
-                          <div className="bg-white/95 backdrop-blur-xl p-6 rounded-[2.5rem] border border-white shadow-2xl w-64 pointer-events-auto text-left">
-                            <div className="flex justify-between items-start mb-4">
-                              <h4 className="font-black text-gray-900 font-montserrat">{hoveredTopic.name}</h4>
-                              <span className="text-[10px] font-black text-green-600 px-3 py-1 bg-green-50 rounded-lg">+{hoveredTopic.potential}đ</span>
+                          <div className="bg-white/95 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white shadow-2xl w-72 pointer-events-auto text-left flex flex-col gap-6">
+                            <div className="flex justify-between items-start">
+                              <div className="flex flex-col gap-1">
+                                <h4 className="font-black text-gray-900 font-montserrat text-xl leading-tight">{hoveredTopic.name}</h4>
+                                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none">Phân tích thực tế</span>
+                              </div>
+                              <span className="text-[11px] font-black text-blue-600 px-3 py-1 bg-blue-50 rounded-lg shrink-0">+{hoveredTopic.potential}đ</span>
                             </div>
-                            <div className="grid grid-cols-4 gap-1.5 mb-6">
-                              {[
-                                { label: "NB", color: "bg-red-500", active: hoveredTopic.value >= 10 },
-                                { label: "TH", color: "bg-amber-500", active: hoveredTopic.value >= 35 },
-                                { label: "VD", color: "bg-[#0e56fa]", active: hoveredTopic.value >= 60 },
-                                { label: "VDC", color: "bg-green-500", active: hoveredTopic.value >= 85 }
-                              ].map((lvl, idx) => (
-                                <div key={idx} className="flex flex-col gap-1">
-                                  <div className={cn("h-1.5 w-full rounded-full transition-all", lvl.active ? lvl.color : "bg-gray-100")} />
-                                  <span className={cn("text-[7px] font-black text-center", lvl.active ? "text-gray-900" : "text-gray-300 uppercase")}>{lvl.label}</span>
-                                </div>
-                              ))}
+
+                            <div className="flex flex-col gap-5">
+                               <div className="flex items-end justify-between">
+                                  <span className={cn(
+                                    "text-[11px] font-black uppercase tracking-[0.1em]",
+                                    hoveredTopic.value >= 90 ? "text-level-4" : hoveredTopic.value >= 60 ? "text-level-3" : hoveredTopic.value >= 30 ? "text-level-2" : "text-level-1"
+                                  )}>
+                                    {hoveredTopic.value >= 90 ? "Level 4" : hoveredTopic.value >= 60 ? "Level 3" : hoveredTopic.value >= 30 ? "Level 2" : "Level 1"}
+                                  </span>
+                                  <span className="text-sm font-black text-gray-900 font-montserrat">{hoveredTopic.value}%</span>
+                               </div>
+
+                               <div className="grid grid-cols-4 gap-2">
+                                  {[1, 2, 3, 4].map((i) => {
+                                    const levelColor = hoveredTopic.value >= 90 ? "bg-level-4" : hoveredTopic.value >= 60 ? "bg-level-3" : hoveredTopic.value >= 30 ? "bg-level-2" : "bg-level-1";
+                                    const isReached = hoveredTopic.value >= (i-1)*25 + 10;
+                                    const isFull = hoveredTopic.value >= i*25;
+                                    const width = isFull ? "100%" : (hoveredTopic.value >= (i-1)*25 ? `${(hoveredTopic.value % 25) * 4}%` : "0%");
+                                    
+                                    return (
+                                      <div key={i} className="flex flex-col gap-2">
+                                        <div className="h-2 w-full bg-gray-50 rounded-full overflow-hidden relative shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] border border-gray-100/50">
+                                          <div className={cn("h-full rounded-full transition-all duration-700", isReached ? levelColor : "bg-gray-100")} style={{ width }} />
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                               </div>
                             </div>
-                            <Link href="/luyen-tap/ham-so" className="w-full py-3.5 bg-gray-900 rounded-xl flex items-center justify-center text-white transition-all hover:bg-[#0e56fa] active:scale-95 shadow-lg shadow-gray-200 group-hover:shadow-blue-200">
-                              <ArrowRight className="h-4 w-4 stroke-[3px]" />
+
+                            <Link href="/luyen-tap" className="w-11 h-11 bg-gray-900 hover:bg-[#0e56fa] text-white rounded-2xl flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-xl shadow-gray-200 self-end shrink-0">
+                              <ArrowRight className="h-5 w-5 stroke-[3px]" />
                             </Link>
                           </div>
                           <div className="absolute left-1/2 -bottom-1 -translate-x-1/2 w-3 h-3 bg-white rotate-45 border-r border-b border-gray-100/50" />
