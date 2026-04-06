@@ -277,7 +277,7 @@ export default function LuyenTap() {
         {/* Header Section */}
         <div className="mt-12 mb-20 border-l-4 border-blue-600 pl-8 relative animate-fade-in text-left">
           <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-4 block">HỆ THỐNG LUYỆN TẬP ADAPTIVE</span>
-          <h1 className="text-4xl md:text-6xl font-black font-montserrat tracking-tight text-gray-900 mb-6 leading-[1.1] max-w-4xl">
+          <h1 className="text-4xl md:text-5xl font-black font-montserrat tracking-tight text-gray-900 mb-6 leading-[1.1] max-w-4xl">
             Luyện theo chuyên đề <br /> <span className="text-blue-600">tầm soát chuyên sâu</span>
           </h1>
           <p className="max-w-2xl text-lg md:text-xl text-gray-500 font-medium leading-relaxed">
