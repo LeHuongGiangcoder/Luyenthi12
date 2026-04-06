@@ -20,13 +20,12 @@ export default function ExamReview() {
   };
 
   const getStatusColor = (num: number) => {
-    if (num === currentIdx) return "bg-blue-600 text-white shadow-lg shadow-blue-200 border-blue-600";
     const res = results[num as keyof typeof results];
     if (res) {
-      return res.correct ? "bg-green-500 text-white border-green-500" : "bg-red-500 text-white border-red-500";
+      return res.correct ? "bg-green-500 text-white border-green-500 shadow-green-100" : "bg-red-500 text-white border-red-500 shadow-red-100";
     }
     // Default for mock
-    return (num % 3 === 0) ? "bg-red-500 text-white border-red-500" : "bg-green-500 text-white border-green-500";
+    return (num % 3 === 0) ? "bg-red-500 text-white border-red-500 shadow-red-100" : "bg-green-500 text-white border-green-500 shadow-green-100";
   };
 
   const currentResult = results[currentIdx as keyof typeof results] || { correct: true, userChoice: 2, correctChoice: 2 };
@@ -140,14 +139,17 @@ export default function ExamReview() {
              <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 flex flex-col gap-6">
                 <span className="text-xs font-black text-gray-900 font-montserrat tracking-tight uppercase">Danh sách câu hỏi</span>
                 
-                <div className="grid grid-cols-5 gap-2 max-h-[400px] overflow-y-auto pr-1">
+                <div className="grid grid-cols-5 gap-3 max-h-[400px] overflow-y-auto p-4 -m-4 pr-3 custom-scrollbar">
                   {Array.from({ length: totalQuestions }).map((_, i) => (
                     <button 
                        key={i + 1}
                        onClick={() => setCurrentIdx(i + 1)}
                        className={cn(
-                         "h-10 w-full rounded-lg flex items-center justify-center text-[10px] font-black border transition-all",
-                         getStatusColor(i + 1)
+                         "h-10 w-full rounded-xl flex items-center justify-center text-[11px] font-black border transition-all duration-300",
+                         getStatusColor(i + 1),
+                         currentIdx === i + 1 
+                           ? "ring-2 ring-white ring-offset-[3px] scale-[1.12] z-10 shadow-[0_15px_25px_-5px_rgba(0,0,0,0.15)] opacity-100" 
+                           : "opacity-80 hover:opacity-100 hover:scale-[1.05]"
                        )}
                     >
                        {i + 1}
